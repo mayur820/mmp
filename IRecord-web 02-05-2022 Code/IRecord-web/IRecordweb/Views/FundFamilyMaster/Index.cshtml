@@ -1,0 +1,121 @@
+﻿@model IEnumerable<IRecordweb.Models.FUNDFAMILY>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h4 class="mb-0">Fund Family Master</h4>
+
+        <div class="page-title-right">
+            <input type="submit" class="btn btn-primary add-on" value="Add Fund Family" onclick="location.href='@Url.Action("SaveFundFamily", "FundFamilyMaster")'" />
+            @*@if (Session["RoleId"] != null)
+            {
+                if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ADVISOR")
+                {
+                    <input type="submit" class="btn btn-primary add-on" value="Add Fund Family" onclick="location.href='@Url.Action("SaveFundFamily", "FundFamilyMaster")'" />
+                  
+                }
+                else if (Session["RoleName"].ToString() == "OPERATOR")   
+                {
+                    <input type="submit" class="btn btn-primary isdisabled" value="Add Fund Family" onclick="location.href='@Url.Action("SaveFundFamily", "FundFamilyMaster")'" />
+                }
+            }*@
+        </div>
+
+    </div>
+</div>
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "SaveFundFamily")
+    </p>*@
+
+<div class="card fundfamily_par">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Action")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        var Active = item.Active == true ? "Active" : "Inanctive";
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td class="whitespace_nowrap">
+                            @Html.ActionLink(" ", "UpdateFundFamily", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                            @Html.ActionLink(" ", "FundFamilyDetails", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                            @Html.ActionLink(" ", "DeleteFundFamily", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                        </td>
+                        @*@if (Session["RoleId"] != null)
+                        {
+                            if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "ADVISOR")
+                            {
+
+                            }
+                            else
+                            {
+                                <td class="whitespace_nowrap">
+                                    @Html.ActionLink(" ", "UpdateFundFamily", new { id = item.MutualFundID }, new { @class = "isdisabled px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                                    @if (Session["RoleName"].ToString() == "OPERATOR")
+                                    {
+                                        @Html.ActionLink(" ", "FundFamilyDetails", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                                    }
+                                    @Html.ActionLink(" ", "DeleteFundFamily", new { id = item.MutualFundID }, new { @class = "isdisabled px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                                </td>
+                            }
+                        }*@
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

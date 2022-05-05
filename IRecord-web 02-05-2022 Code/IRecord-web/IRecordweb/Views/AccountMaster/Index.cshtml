@@ -1,0 +1,151 @@
+﻿@model IRecordweb.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+
+
+
+<link rel="stylesheet" href="style.css" />
+<div class="display_adds display_adds_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Account Master</h1>
+
+        <div class="page-title-right">
+            @*@if (Session["RoleId"] != null)
+                {
+                    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ADVISOR")
+                    {*@
+            @*<input type="submit" class="btn btn-primary add-on" value="Add Account" onclick="location.href='@Url.Action("SaveAccountMaster", "AccountMaster")'" />*@
+            @*}
+                else
+                {*@
+            <input type="submit" class="btn btn-primary  add-on" value="Add Account" onclick="location.href='@Url.Action("SaveAccountMaster", "AccountMaster")'" />
+            @*}
+                }*@
+        </div>
+    </div>
+</div>
+@*@Html.Raw(TempData["Message"])*@
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">
+    <div class="card account_master_par">
+        <div class="card-body">
+            <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                <div class="float-sm-end">
+                    <uib-pagination class="pagination MYPAGECSS" total-items="Info.length" ng-model="page"
+                                    ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                </div>
+            </div>
+            <div class="table-responsive">
+
+                <table id="mytable" class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+
+                        <tr>
+                            <th>#</th>
+                            <th>Account Name <input type="text" class="form-control " ng-model="search.Name" placeholder="Account Name"></th>
+                            <th>Opening Balance <input type="text" class="form-control " ng-model="search.OpeningBalance" placeholder="Opening Balance"></th>
+                            <th>Group Name <input type="text" class="form-control " ng-model="search.GroupName" placeholder="Group Name"></th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in Info | filter:search | limitTo:10:10*(page-1)">
+                            <td>{{$index+1}}</td>
+                            <td>{{data.Name}}</td>
+                            <td>{{data.OpeningBalance}}</td>
+                            <td>{{data.GroupName}}</td>
+                            <td class="whitespace_nowrap">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="/AccountMaster/Detailaccount?Id={{data.AccountId}}" class="px-2 btn btn-outline-primary"><i class="las la-search font-size-18"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/AccountMaster/EditAccount?Id={{data.AccountId}}&&Status=Edit" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                    </li>
+                                    <div ng-switch="data.InternalEntry" class="switch">
+                                        <div ng-switch-when="0">
+                                            <li class="list-inline-item">
+                                                <a href="/AccountMaster/DeleteAccount?Id={{data.AccountId}}&&Status=Delete"
+                                                   class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                            </li>
+                                        </div>
+                                    </div>
+            </ul>
+            </td>
+            </tr>
+
+            @*<td class="whitespace_nowrap">
+                    @Html.ActionLink(" ", "EditAccount", new { id = item.AccountId }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                    @Html.ActionLink(" ", "Detailaccount", new { id = item.AccountId }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                    @Html.ActionLink(" ", "DeleteAccount", new { id = item.AccountId }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                </td>*@
+
+            <tbody>
+                </table>
+
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+    function loaddt() {
+
+
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $('#mytable').DataTable();
+        });
+    }
+
+</script>
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["Message"]');
+                window.location.href = "/AccountMaster/Index";
+            };
+    </script>
+}
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/AccountList.js"></script>

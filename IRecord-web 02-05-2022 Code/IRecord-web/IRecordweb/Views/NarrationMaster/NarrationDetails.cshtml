@@ -1,0 +1,84 @@
+﻿@model IRecordweb.Models.NARRATION
+
+@{
+    ViewBag.Title = "NarrationDetails";
+}
+
+
+@*<style>
+        .isdisabled {
+            color: currentColor;
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>*@
+
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Narration Master</h1>
+
+                <div class="page-title-right">
+                    @*@Html.ActionLink("Edit", "NarrationUpdate", new { id = Model.NarrationID }, new { @class = "btn btn-primary" })*@
+                    @*@if (Session["RoleId"] != null)
+                        {
+                        if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+                            {
+                           
+                            }
+                        else
+                            {
+                            @Html.ActionLink("Edit", "NarrationUpdate", new { id = Model.NarrationID }, new { @class = "isdisabled btn btn-primary disabled" })
+                            }
+                        }*@
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @{
+            bool status = Model.Active;
+            string Active = status == true ? "Active" : "Inanctive";
+        }
+
+        <div class="card narration_par">
+            <div class="card-body">
+                <div class="row form_2 view_mode">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Name)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.Name)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Code)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.Code)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Active)</label>
+                        <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>

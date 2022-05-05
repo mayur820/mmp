@@ -1,0 +1,389 @@
+﻿@model IRecordweb.Models.SCRIPT
+
+@{
+    ViewBag.Title = "ScriptEdit";
+}
+
+<link href="~/Content/chosen.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+@*<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" integrity="sha512-DJ1SGx61zfspL2OycyUiXuLtxNqA3GxsXNinUX3AnvnwxbZ+YQxBARtX8G/zHvWRG9aFZz+C7HxcWMB0+heo3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link href="~/Content/Multiselect.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Scripts/Multiselect.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<style>
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 600px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+</style>
+
+
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Script Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "ScriptIndex", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card scriptmaster_par">
+                <div class="card-body">
+                    <div class="row form_2" id="page">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ScriptID)
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ScriptName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.ScriptName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.ScriptName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.BSECode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.BSECode, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.BSECode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.NSECode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.NSECode, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.NSECode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.GroupName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+
+                            <label class="control-label col-md-2" for="IndustryID">Industry</label>
+                            <div class="w-100">
+                                @*@Html.DropDownList("IndustryID", ViewBag.IndustryID as SelectList, ViewBag.DefaultBrand, new { @class = "form-control"})*@
+                                @*@Html.DropDownList("IndustryID", ViewBag.IndustryID as SelectList, ViewBag.DefaultBrand as string,  new { @class = "form-control", @readonly = true })*@
+                                @Html.DropDownListFor(m => m.IndustryID, ViewBag.DefaultBrand as SelectList, htmlAttributes: new { @class = "form-control disabled selected", @readonly = true, @disabled = "disabled" })
+                                @*@Html.EditorFor(m=>m.IndustryID,  new { htmlAttributes = new { @class = "form-control", @readonly = true } })*@
+                                @Html.ValidationMessageFor(model => model.IndustryID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.SectorName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(m => m.SectorName, ViewBag.DefaultSectorID as SelectList, htmlAttributes: new { @class = "form-control selected select2" })
+                                @*@Html.DropDownList("SectorName", (SelectList)ViewBag.SectorName, new { @class = "form-control" })*@
+                                @*@Html.DropDownListFor(m => m.SectorName, ViewBag.SectorName as SelectList, "Select Sector", htmlAttributes: new { @class = "form-control" })*@
+                                @*@Html.DropDownListFor(m => m.SectorName, Model.SectorID.SelectedValue(), new { @class = "form-control", style = "Width:50%" , @selected=true})*@
+                                @Html.ValidationMessageFor(model => model.SectorName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                @Html.LabelFor(model => model.InvestmentType, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="w-100">
+                                    @Html.EditorFor(model => model.InvestmentType, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.InvestmentType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.InvestmentType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @*@Html.DropDownListFor(m => m.InvestmentType, ViewBag.InvestmentType as SelectList, "Select Investment Type", htmlAttributes: new { @class = "form-control" })*@
+                                @*@Html.ListBoxFor(m => m.scriptlist, ViewBag.InvestmentType as SelectList, new { @class = "form-control chosen select", id = "Multiselect", placeholder = "Select Investment Type", @multiple = "Multiple" })*@             @*Final Code*@
+                                @*@Html.ListBoxFor(m => m.scriptlist, ViewBag.InvestmentType as SelectList, new { @class = "form-control chosen select2", id = "Multiselect", placeholder = "Select Investment Type", @multiple = "Multiple" })*@
+                                @{
+                                    string InvestmentType = "";
+                                    foreach (var idata in ViewBag.InvestmentType as SelectList)
+                                    {
+                                        InvestmentType += idata.Text.ToString() + " ,";
+                                    }
+                                }
+                                @InvestmentType
+                                @*@Html.ListBoxFor(m => m.scriptlist, ViewBag.InvestmentType as SelectList, new { @class = "form-control chosen select", id = "Multiselect", placeholder = "Select Investment Type", @multiple = "Multiple", @SelectionMode = "Multiple" })*@
+                                @Html.ValidationMessageFor(model => model.InvestmentType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FaceValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.FaceValue, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.FaceValue, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ISIN, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.ISIN, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.ISIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ListType, htmlAttributes: new { @class = "control-label col-md-2", @readonly = true })
+                            <div class="w-100">
+                                @if (Model.ListType != null)
+                                {
+                                    <select id="ListType" name="ListType" class="form-control selected disabled" readonly=true, disabled="disabled">
+                                        <option value="">Select List Type</option>
+                                        @*<option value="listed">listed</option>
+                                            <option value="Unlisted">Unlisted</option>*@
+                                        @if (Model.ListType == "listed")
+                                        {
+                                            <option value="listed" selected>listed</option>
+                                            <option value="Unlisted">Unlisted</option>
+                                        }
+                                        else if (Model.ListType == "Unlisted")
+                                        {
+                                            <option value="listed">listed</option>
+                                            <option value="Unlisted" selected>Unlisted</option>
+                                        }
+
+                                    </select>
+                                }
+                                @Html.ValidationMessageFor(model => model.ListType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+                            <input type="submit" value="Update" class="btn btn-primary" data-bs-target="#myModal" data-bs-toggle="modal" />
+                        </div>
+                        @*</div>
+                            }*@
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Script Master </h4>
+                            <div class="btn-close" data-bs-dismiss="modal"></div>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Record Updated Successfully..!
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="OK" name="OK" class="btn btn-danger">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+
+    <!-- <link href="~/Content/bootstrap.css" rel="stylesheet" /> -->
+    <link href="~/Content/chosen.css" rel="stylesheet" />
+    <link href="~/Content/Multiselect.css" rel="stylesheet" />
+    <link href="~/Content/chosen.css" rel="stylesheet" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />.
+    <script>
+
+        $(document).ready(function () {
+
+            $("#SectorName").focus();
+            
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+            $(".select2-hide_search").select2({
+                minimumResultsForSearch: Infinity
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var data = document.getElementById('Multiselect1').value;
+            //  alert(data);
+
+            $("#Multiselect1 option:selected").text();
+
+            $('#Multiselect1').chosen();
+            var d = '@ViewBag.InvestmentType';
+
+            //  alert(d);
+        });
+    </script>
+    <script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $('#Multiselect').multiselect({
+                placeholder: 'Select options',
+                buttonWidth: '5000px',
+                includeSelectAllOption: true
+
+            });
+            //  $('#Multiselect option').prop('selected', true);
+
+            //$("#Multiselect > option").prop("selected", true);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            //  alert(111);
+         //   $('select#Multiselect option').attr('selected', true).parent().trigger('change')
+           // $('select#Multiselect > option').prop('selected', 'selected');
+            var ScriptInvestment = '@ViewBag.InvestmentType';
+            document.getElementById('Multiselect1').value = ScriptInvestment;
+            //  alert(data);
+            // alert(ScriptInvestment);
+            //$("#page").load(function () {
+            $('#ScriptInvestment')
+              .empty() //empty select
+              .append($("<option/>") //add option tag in select
+                .val("20") //set value for option to post it
+                .text("MCX")) //set a text for show in select
+              .val("20") //select option of select2
+              .trigger("change"); //apply to select2
+            //});
+        });
+    </script>
+}
+
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/select2.full.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+       // alert("@ViewBag.IndustryID.ToString()");
+            $('#Multiselect').multiselect();
+
+        });
+</script>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+       // alert("")
+
+        $("#SectorName").val("@Session["SectorID"]");
+        //$(".select2").select2();
+        debugger;
+        var selectedInvestment = @Html.Raw(Json.Encode(ViewBag.InvestmentType as SelectList));
+       // alert(selectedInvestment);
+        var Investmentlist = @Html.Raw(Json.Encode(ViewBag.AllInvestmentTypelist as SelectList));
+
+        var data = $('#SectorName').val();
+
+        if (Investmentlist != null && Investmentlist != "") {
+            debugger;
+            var Ids;
+            for(var i=0;i<selectedInvestment.length;i++)
+            {
+                if(i==0)
+                {
+                    Ids=selectedInvestment[i].Value;
+                }
+                else{
+                    Ids= Ids+','+selectedInvestment[i].Value;
+                }
+
+            }
+            var students =Ids.split(',');
+
+            var index = '';
+            var TempStr = "<option value=''>Select Investment</option>";
+            for (var i = 0; i < Investmentlist.length; i++) {
+
+
+                index = students.indexOf(Investmentlist[i].Value.toString());
+
+                if (index == -1) {
+                    TempStr += "<option  value=" + Investmentlist[i].Value + ">" + (Investmentlist[i].Text) + "</option>";
+                }
+                else {
+                    TempStr += "<option selected value=" + Investmentlist[i].Value + ">" + (Investmentlist[i].Text) + "</option>";
+                }
+            }
+            $("#Multiselect").html(TempStr);
+        }
+        else {
+            var str1 = '<option value="-1" >Select Investment</option>'
+            $("#Multiselect").html(str1);
+        }
+        $("#Multiselect option:selected").text();
+
+        //$('#Multiselect').chosen();
+        $('#Multiselect').multiselect();
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // alert(1010);
+        var values = "Test,Prof,Off, Mutual Fund";
+        $.each(values.split(","), function (i, e) {
+            $("#scriptlist option[value='" + e + "']").prop("selected", true);
+        });
+    });
+</script>
+
+
+
+<!-- <script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script> -->

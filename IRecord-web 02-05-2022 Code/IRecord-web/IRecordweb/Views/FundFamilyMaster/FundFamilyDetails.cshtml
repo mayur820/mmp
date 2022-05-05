@@ -1,0 +1,62 @@
+﻿@model IRecordweb.Models.FUNDFAMILY
+
+@{
+    ViewBag.Title = "FundFamilyDetails";
+}
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Fund Family Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Edit", "UpdateFundFamily", new { id = Model.MutualFundID }, new { @class = "btn btn-primary mr-1" })
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @{
+            bool status = Model.Active;
+            string Active = status == true ? "Active" : "Inanctive";
+        }
+
+        <div class="card fundfamily_par">
+            <div class="card-body">
+                <div class="row form_2 view_mode">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Name)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.Name)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Code)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.Code)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Active)</label>
+                        <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,311 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+    /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<link rel="stylesheet" href="style.css" />
+
+<div ng-app="myApp">
+    <div ng-controller="myctrn" ng-init="PageLoad()">
+        <div class="display_adds display_adds_top text-center mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="">
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Operator Master</h4>
+                    @{
+                        if (Session["Add_Rights"].ToString() == "1")
+                        {
+                            <div class="page-title-right">
+                                <a href="#modal_add" data-bs-toggle="modal" id="addpopopen" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <!-- Working Area Start -->
+        <div class="card">
+            <div class="card-body">
+
+                @*<div class="pagination_box w-100 mb-3">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div>
+                                    <p class="mb-sm-0">Showing 1 to 10 of 12 entries</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="float-sm-end">
+                                    <ul class="pagination mb-sm-0">
+                                        <li class="page-item disabled">
+                                            <a href="#" class="page-link"><i class="las la-angle-double-left"></i></a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a href="#" class="page-link"><i class="las la-angle-left"></i></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link">1</a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a href="#" class="page-link">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link"><i class="las la-angle-right"></i></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link"><i class="las la-angle-double-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                    <div class="float-sm-end">
+                        <uib-pagination class="pagination MYPAGECSS" total-items="Info.length" ng-model="page"
+                                        ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Operator Name <input type="text" class="form-control " ng-model="search.OperatorName" placeholder="Operator Name"></th>
+                                <th>Mobile <input type="text" class="form-control " ng-model="search.Mobile" placeholder="Mobile No"></th>
+                                <th>Email <input type="text" class="form-control " ng-model="search.Email" placeholder="Email"></th>
+                                @*<th>Password</th>*@
+                                @*<th>Date of Creation</th>*@
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="details in AllOperator | filter:search | limitTo:10:10*(page-1)">
+
+                                <th scope="row">{{$index+1}}</th>
+                                <td class="text-uppercase">{{details.OperatorName}}</td>
+                                <td class="text-uppercase">{{details.Mobile}}</td>
+                                <td class="text-uppercase">{{details.Email}}</td>
+                                @*<td class="text-uppercase">{{details.Password}}</td>*@
+                                @*<td class="text-uppercase">{{details.Createddate}}</td>*@
+                                <td class="whitespace_nowrap">
+                                    <ul class="list-inline mb-0">
+                                        @{
+                                            if (Session["View_Rights"].ToString() == "1")
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="#modal_view" data-bs-toggle="modal" class="px-2 btn btn-outline-primary" ng-click="EDITData(details)"><i class="las la-search font-size-18"></i></a>
+                                                </li>
+                                            }
+                                        }
+                                        @{
+                                            if (Session["Edit_Rights"].ToString() == "1")
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="#modal_addedit" data-bs-toggle="modal" class="px-2 btn btn-outline-primary" ng-click="EDITData(details)"><i class="las la-pencil-alt font-size-18"></i></a>
+                                                </li>
+                                            }
+                                        }
+
+                                        @{
+                                            if (Session["Delete_Rights"].ToString() == "1")
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:void(0);" onclick="myFunction()" class="px-2 btn btn-outline-danger" ng-click="DeleteData(details)"><i class="las la-trash-alt font-size-18"></i></a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- Working Area End -->
+        <!-- Modal 1 -->
+        <div class="modal fade" id="modal_view" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">View Operator Master</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2 view_mode">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Operator Name *:</label>
+                                <span class="form-control">{{EditDetails.OperatorName}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Mobile *:</label>
+                                <span class="form-control">{{EditDetails.Mobile}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Email *:</label>
+                                <span class="form-control">{{EditDetails.Email}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Password *:</label>
+                                <span class="form-control">{{EditDetails.Password}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Date of Creation:</label>
+                                <span class="form-control">{{EditDetails.Createddate}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 2 -->
+        <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Operator Master</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Operator Name<span class="text-danger">*</span>:</label>
+                                <input type="text" id="Operator_name" name="member_name" ng-model="Operator_name" class="form-control" placeholder="Enter Operator Name" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Mobile<span class="text-danger">*</span>:</label>
+                                <input type="text" id="Mobile" name="member_of_family" ng-model="Mobile" class="form-control" placeholder="Enter Mobile no" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Email*:</label>
+                                <input type="text" id="Email" name="addressLine_1" ng-model="Email" class="form-control" placeholder="Enter Email Address" />
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Password:</label>
+                                <input type="password" id="Password" name="Password" ng-model="Password" class="form-control" placeholder="Enter Password" />
+                                @*<input type="checkbox" class="align-content-lg-center align-items-lg-center" title="Show/Hide Password" onclick="showhidepass()">*@
+                                </div>
+                            </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary" id="ApproveNowUpload" ng-click="SubmitData()">Save</button>
+                        @*<input type="button" text="Save" class="btn btn-primary" id="ApproveNowUpload" ng-click="SubmitData()" data-bs-dismiss="modal" />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_addedit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Operator Master</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Operator Name<span class="text-danger">*</span>:</label>
+                                <input type="text" id="Operator_name" name="member_name" ng-model="UpdateDetails.OperatorName" class="form-control" placeholder="Enter Operator Name" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Mobile<span class="text-danger">*</span>:</label>
+                                <input type="text" id="Mobile" name="member_of_family" ng-model="UpdateDetails.Mobile" class="form-control" placeholder="Enter Mobile no" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Email*:</label>
+                                <input type="text" id="Email" name="addressLine_1" ng-model="UpdateDetails.Email" class="form-control" placeholder="Enter Email Address" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Password:</label>
+                                <input type="text" id="Password" name="Password" ng-model="UpdateDetails.Password" class="form-control" placeholder="Enter Password" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                            <button type="button" class="btn btn-primary" id="ApproveNowUpload1" ng-click="UpdateData(UpdateDetails)" data-bs-dismiss="modal">Update</button>
+                            @*<input type="button" text="Save" class="btn btn-primary" id="ApproveNowUpload" ng-click="SubmitData()" data-bs-dismiss="modal" />*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+
+<script>
+    function myFunction() {
+        var txt;
+        var r = confirm("Do you want to delete record?");
+    }
+    function showhidepass() {
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/OperatorMaster.js"></script>
+

@@ -1,0 +1,868 @@
+﻿@{
+    ViewBag.Title = "BRDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.v4.css" />
+    <link rel="stylesheet" href="~/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="~/css/select2.min.css" />
+    <link rel="stylesheet" href="~/css/theme-color.css" />
+    <link rel="stylesheet" href="~/css/app.min.css" />
+    <link rel="stylesheet" href="~/css/custom-body.css" />
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>
+    <script src="~/AngScripts/ngStorage.min.js"></script>
+    <link rel="stylesheet" href="~/css/loader-1.css">
+    <title>Cash Segment Broker Bill :: iRecord</title>
+    <style>
+        .max_height_tbl_edit {
+            max-height: 387px !important;
+            overflow-y: auto;
+        }
+    </style>
+    <style>
+        .displayNO {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="inner_body">
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="">
+        <div id="layout-wrapper">
+            @{
+
+                if (Request.QueryString["TrnsNo"] != null)
+                {///if in Update Case
+
+                }
+            }
+
+            <!-- Left Sidebar End -->
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+
+
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">{{Info.txt_invstyp}}  Segment Broker Bill</h4>
+
+                            <div class="page-title-right">
+                                <a href="/BrokerBillEntry/BrokerBillList" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to Index</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <!-- Working Area Start -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row form_2 view_mode">
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Segment:</label>
+                                <select id="ddlInvestmentType" ng-model="Info.invstyp" class="form-select select2">
+
+                                    <option value="" selected="selected">Select Segment Type</option>
+                                    <option value="0">Equity</option>
+                                    <option value="1"> F & O</option>
+                                    <option value="3">MCX</option>
+                                    <option value="4">Currency</option>
+                                    <option value="5">NCDEX</option>
+
+
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Date:</label>
+                                <input type="text" class="form-control datepicker" ng-model="Info.Date" placeholder="DD-MM-YYYY" />
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Broker Name:</label>
+                                @*<input type="text" class="form-control" ng-model="Info.BrokerName" placeholder="Broker Name" />*@
+                                <label>{{Info.BrokerName}}</label>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Demat:</label>
+                                <div class="input-group tbl_int_grp">
+                                    <select id="Demat_Ac_Id" ng-model="Info.Demat_Ac_Id" class="form-select select2">
+
+                                        <option ng-option value="">Select Demat A/c</option>
+                                        <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                                    </select>
+                                    @*<a style="min-width: 80px;" href="#modal_add_demat" class="btn btn-outline-primary" data-bs-toggle="modal">
+                                            <i class="la la-plus"></i> Add
+                                        </a>*@
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Settlement No:</label>
+                                <input type="text" class="form-control" id="SettlementNo" ng-model="Info.SettlementNo" placeholder="Settlement No" />
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex">
+                                <label class="mb-0">Bill No:</label>
+                                <input type="text" class="form-control" id="BillNo" ng-model="Info.BillNo" placeholder="Bill No" />
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex align-items-center">
+                                <label class="mb-0">Holding Type:</label>
+                                <select id="ddlHoldingType" ng-model="Info.HoldingTypeCode" class="form-control">
+                                    <option value="-1">Select Holding Type</option>
+                                    <option value="0">I-Share Invenstment</option>
+                                    <option value="1">T-Stock In Trade</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mb-2 d-flex align-items-center">
+                                <label class="mb-0">Consultant Name:</label>
+                                <div class="input-group tbl_int_grp">
+                                    <select id="ddlConsultant" ng-model="Info.ConsultantCode" class="form-control">
+                                        <option ng-option value="">Select Consultant</option>
+                                        <option data-ng-repeat="con in  Consultants" class="option" value="{{con.ID}}">{{con.NAME}}</option>
+                                    </select>
+
+                                    @*<a style="min-width: 80px;" href="#modal_add" class="btn btn-outline-primary" data-bs-toggle="modal">
+                                            <i class="la la-plus"></i> Add
+                                        </a>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-small max_height_tbl_edit mt-3">
+                            <table id="tbl_Equity" style="
+    table-layout: fixed;
+    width: 1790px;
+" class="table defaultTable sar-table table-hover table-bordered mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 11%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Delete Record</span>
+                                        </th>
+                                        <th style="width: 40%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Consultant</span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <div class="text-center intra_center top_padding">
+                                                <span class="w-100">Intra Day?</span>
+                                                <div class="form-check ps-0">
+                                                    <input class="form-check-input" type="checkbox" id="id_intraday" />
+                                                    <label class="form-check-label" for="id_intraday"></label>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Type</span>
+                                        </th>
+                                        <th style="width: 69%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Script Name</span>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Qty.</span>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Gross Rate</span>
+                                        </th>
+                                        <th style="width: 17%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Gross Amt.</span>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Brokerage Per Unit.</span>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Brokerage Amt.</span>
+                                        </th>
+                                        <th style="width: 18%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Net Rate</span>
+                                        </th>
+                                        <th style="width: 15%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Net Amt.</span>
+                                        </th>
+                                        <th style="width: 39%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Holding Type</span>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                    <tr ng-repeat="detail in details">
+                                        <td>
+                                            <a href="javascript:;" ng-click="FndeleteItems(detail)">
+                                                <i class="la la-trash font-size-18 btn btn-sm btn-outline-danger"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="input-group tbl_int_grp ">
+
+                                                <select id="ddlConsultant" ng-model="detail.ConsultantCode" class="form-select">
+                                                    <option ng-option value="">Select Consultant</option>
+                                                    <option data-ng-repeat="con in  Consultants" class="option" value="{{con.ID}}">{{con.NAME}}</option>
+                                                </select>
+                                                @*<select class="form-select select2 wd_scrt_nm">
+                                                        <option>-- Select Consultant --</option>
+                                                        <option>Consultant 1</option>
+                                                        <option>Consultant 2</option>
+                                                        <option>Consultant 3</option>
+                                                    </select>*@
+                                                <a href="javascript:;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_add">
+                                                    <i class="la la-plus"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="intra_center">
+                                            <div class="form-check ps-0">
+                                                <input class="form-check-input" ng-model="detail.IntraDay" type="checkbox" id="id_e_1" />
+                                                <label class="form-check-label" for="id_e_1"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select id="ddlType" ng-model="detail.Type" ng-change="CalcaluteAlltotal()" class="form-control form-select select2 wd_buy_sell select2-hide_search">
+                                                <option ng-option value="">Select Type</option>
+                                                <option ng-option value="Bought">Bought</option>
+                                                <option ng-option value="Sold">Sold</option>
+                                            </select>
+
+                                        </td>
+                                        <td style="color: {{detail.Script_color}};">
+                                            <a style="color: {{detail.Script_color}};" ng-click="ngscriptmapping(detail)"> {{detail.ScriptName}}</a>
+                                            @*<select class="form-control select2 wd_scrt_nm">
+                                                    <option>Script 1</option>
+                                                    <option>Script 2</option>
+                                                    <option>Script 3</option>
+                                                </select>*@
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.Qty" placeholder="Qty" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.GrossRate" placeholder="Gross Rate" />
+                                        </td>
+                                        <td class="wd_buy_sell whitespace_nowrap">
+                                            {{detail.GrossAmt}}
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_per_unit" ng-change="CalcaluteAlltotal()" ng-model="detail.brkpunit" placeholder="Brokerage per Unit" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.BrokAmt" placeholder="Brokerage Amount" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.Rate" placeholder="Net Rate" />
+                                        </td>
+                                        <td class="wd_buy_sell whitespace_nowrap">
+                                            {{detail.Amount}}
+                                        </td>
+                                        <td>
+                                            <select id="ddlHoldingType" ng-model="detail.HoldingType" ng-change="CalcaluteAlltotal()" class="form-select wd_scrt_nm select2-hide_search">
+                                                <option ng-option value="">Select Holding Type</option>
+                                                <option ng-option value="0">I-Share Invenstment</option>
+                                                <option ng-option value="1">T-Stock In Trade</option>
+
+
+                                            </select>
+                                            @*<select class="form-select wd_scrt_nm select2-hide_search">
+                                                    <option>-- Select Holding Type --</option>
+                                                    <option>Share Invesment</option>
+                                                    <option>Cash</option>
+                                                </select>*@
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table id="tbl_fno" style="
+    table-layout: fixed;
+    width: 2285px;
+" class="table defaultTable sar-table table-hover table-bordered mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 7%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Delete Record</span>
+                                        </th>
+                                        <th style="width: 26%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Consultant</span>
+                                        </th>
+                                        <th style="width: 12%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Type</span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Stock Type</span>
+                                        </th>
+                                        <th style="width: 14%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Option Type</span>
+                                        </th>
+                                        <th style="width: 52%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Script Name</span>
+                                        </th>
+
+                                        <th style="width: 12%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Exprity Date</span>
+                                        </th>
+                                        <th style="width: 12%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Strike Price.</span>
+                                        </th>
+                                        <th style="width: 12%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Lot </span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Lot Qty</span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Qty.</span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Gross Rate</span>
+                                        </th>
+                                        <th style="width: 11%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Gross Amt.</span>
+                                        </th>
+                                        <th style="width: 11%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Brokerage Per Unit.</span>
+                                        </th>
+                                        <th style="width: 13%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Brokerage Amt.</span>
+                                        </th>
+                                        <th style="width: 14%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Net Rate</span>
+                                        </th>
+                                        <th style="width: 11%">
+                                            <div class="drag_div">
+                                                <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                            </div>
+                                            <span class="top_padding">Net Amt.</span>
+                                        </th>
+                                        @*<th>
+                                                <div class="drag_div">
+                                                    <svg width="16px" height="6px" viewBox="0 0 16 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>drag_handle</title> <desc>Created with Sketch.</desc> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded" transform="translate(-308.000000, -2023.000000)"> <g id="Editor" transform="translate(100.000000, 1960.000000)"> <g id="-Round-/-Editor-/-drag_handle" transform="translate(204.000000, 54.000000)"> <g> <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon> <path d="M19,9 L5,9 C4.45,9 4,9.45 4,10 C4,10.55 4.45,11 5,11 L19,11 C19.55,11 20,10.55 20,10 C20,9.45 19.55,9 19,9 Z M5,15 L19,15 C19.55,15 20,14.55 20,14 C20,13.45 19.55,13 19,13 L5,13 C4.45,13 4,13.45 4,14 C4,14.55 4.45,15 5,15 Z" class="svg_icon"></path> </g> </g> </g> </g> </g></svg>
+                                                </div>
+                                                <span class="top_padding">Holding Type</span>
+                                            </th>*@
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                    <tr ng-repeat="detail in details">
+                                        <td>
+                                            <a href="javascript:;" ng-click="FndeleteItems(detail)">
+                                                <i class="la la-trash font-size-18 btn btn-sm btn-outline-danger"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="input-group tbl_int_grp ">
+
+                                                <select id="ddlConsultant" ng-model="detail.ConsultantCode" class="form-select">
+                                                    <option ng-option value="">Select Consultant</option>
+                                                    <option data-ng-repeat="con in  Consultants" class="option" value="{{con.ID}}">{{con.NAME}}</option>
+                                                </select>
+                                                <a href="javascript:;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_add">
+                                                    <i class="la la-plus"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select id="ddlType" ng-model="detail.Type" ng-change="CalcaluteAlltotal()" class="form-control form-select select2 wd_buy_sell select2-hide_search">
+                                                <option ng-option value="">Select Type</option>
+                                                <option ng-option value="Bought">Bought</option>
+                                                <option ng-option value="Sold">Sold</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            @*<div class="form-control wd_buy_sell select2-hide_search">*@
+
+                                            <select id="ddlStockType" ng-model="detail.StockType" ng-change="CalcaluteAlltotal()" class="form-control form-select select2 wd_buy_sell select2-hide_search">
+                                                <option ng-option value=""></option>
+                                                <option ng-option value="BF">BF</option>
+                                                <option ng-option value="CF">CF</option>
+                                            </select>
+                                            @*</div>*@
+
+                                        </td>
+                                        <td>
+                                            @*<div class="form-control wd_buy_sell select2-hide_search">*@
+
+                                            <select id="ddlOptionType" ng-model="detail.OptionType" ng-change="CalcaluteAlltotal()" class="form-control form-select select2 wd_buy_sell select2-hide_search">
+                                                <option ng-option value=""></option>
+
+                                                <option ng-option value="CA - CALL">CA-CALL</option>
+                                                <option ng-option value="PA - PUT">PA-PUT</option>
+                                                <option ng-option value="CE - CALL">CE-CALL</option>
+                                                <option ng-option value="PE - PUT">PE-PUT</option>
+                                            </select>
+                                            @*</div>*@
+
+                                        </td>
+                                        <td style="color: {{detail.Script_color}};">
+                                            <a style="color: {{detail.Script_color}};" ng-click="ngscriptmapping(detail)"> {{detail.ScriptName}}</a>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-model="detail.ExpiryDate" placeholder="ExpiryDate" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.StrikePrice" placeholder="StrikePrice" />
+                                            @*{{detail.StrikePrice}}*@
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.Lott" placeholder="Lott" />
+                                            @*{{detail.Lott}}*@
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.LotQty" placeholder="LotQty" />@*{{detail.LotQty}}*@
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.Qty" placeholder="Qty" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.GrossRate" placeholder="Gross Rate" />
+                                        </td>
+                                        <td class="wd_buy_sell whitespace_nowrap">
+                                            {{detail.GrossAmt}}
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_per_unit" ng-change="CalcaluteAlltotal()" ng-model="detail.brkpunit" placeholder="Brokerage per Unit" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.BrokAmt" placeholder="Brokerage Amount" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control wd_buy_sell" ng-change="CalcaluteAlltotal()" ng-model="detail.Rate" placeholder="Net Rate" />
+                                        </td>
+                                        <td class="wd_buy_sell whitespace_nowrap">
+                                            {{detail.Amount}}
+                                        </td>
+                                        @*<td>
+                                                <select id="ddlHoldingType" ng-model="detail.HoldingType" class="form-select wd_scrt_nm select2-hide_search">
+                                                    <option ng-option value="">Select Holding Type</option>
+                                                    <option ng-option value="0">I-Share Invenstment</option>
+                                                    <option ng-option value="1">T-Stock In Trade</option>
+                                                </select>
+                                            </td>*@
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="row mt-5">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="table-responsive exp_addless">
+                                    <table class="table sar-table table-hover table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Expenses Name</th>
+                                                @*<th>Rate</th>*@
+                                                <th>Amount</th>
+                                                <th>
+                                                    Add/Less
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="Exp in  Exps">
+                                                <td class="whitespace_nowrap">{{Exp.expnm}}</td>
+                                                @*<td>
+                                                        <input type="text" class="form-control" placeholder="Rate" />
+                                                    </td>*@
+                                                <td>
+                                                    <input type="text" class="form-control" ng-change="Calculate_total_exp()" ng-model="Exp.ExpAmount" placeholder="Amount" />
+                                                </td>
+                                                <td class="d-flex justify-content-center">
+                                                    <i class="la la-plus"></i>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 final_label">
+                            <ul class="d-flex justify-content-center flex-wrap">
+                                <li id="Eqvar1" class="d-flex align-content-center"><span class="px-1">Share's Investment</span><strong>{{TotalInInvestment}}</strong></li>
+                                <li id="Eqvar2" class="d-flex align-content-center"><span class="px-1">Stock in Trade</span><strong>{{TotalInTrade}}</strong></li>
+                                <li class="d-flex align-content-center"><span class="px-1">Brokerage</span><strong>{{TotalOfBrokAmt}}</strong></li>
+                                <li class="d-flex align-content-center"><span class="px-1">Expenses</span><strong>{{TotalExpenses}}</strong></li>
+                                <li class="d-flex align-content-center"><span class="px-1">Gross Amount</span><strong>{{TotalGrossAmount}}</strong></li>
+                                <li class="d-flex align-content-center"><span class="px-1">Net Amount</span><strong>{{TotalOfNetAmount}}</strong></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-12 text-center mt-3">
+                            @{
+
+                                if (Request.QueryString["TrnsNo"] != null)
+                                {///if in Update Case
+                                    if (Request.QueryString["Status"].ToString() == "Edit")
+                                    {
+                                        <input type="submit" id="BTN_ACTION" ng-click="PostDeatils()" class="btn btn-primary" value="Update" />
+                                        <div style="display:none;" class="loader-wrapper" id="loader-1">
+                                            <div id="loader"></div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <input type="submit" id="BTN_ACTION" ng-click="PostDeatils()" class="btn btn-primary" value="{{btnsubmit}}" />
+                                    <div style="display:none;" class="loader-wrapper" id="loader-1">
+                                        <div id="loader"></div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Working Area End -->
+
+            </div> <!-- container-fluid -->
+            <!-- End Page-content -->
+            <div class="modal fade" id="modal_ScriptMapping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Script Mapping</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="col-sm-2">Name of Script:</div>
+                                <div class="col-sm-2">{{ScpritMappingedit.ScriptName}}</div>
+                                <div class="col-sm-2">Mapping of Script:</div>
+                                <div class="col-sm-4">
+                                    <select id="ddlScriptCode" ng-model="ScpritMappingedit.ScriptCode" ng-options="v.ID as v.NAME for v in scriptmaster" class="form-control">
+                                        <option ng-option value="Not Seleted">Not Seleted Script</option>
+                                    </select>
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+
+                            <button type="button" class="btn btn-secondary" ng-click="updateScriptmaster(ScpritMappingedit)" data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal_ScriptAllMapping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Script All Mapping</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name Of Script</th>
+                                            <th scope="col">Map Script</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="alldata in AllScriptMapModel track by $index">
+                                            <th scope="row">{{$index+1}}</th>
+                                            <td>{{alldata.ScriptName}}</td>
+                                            <td>
+                                                <select ui-select2 id="ddlAllScriptCode" class="MySeleted2" ng-model="alldata.MapScriptId" ng-options="v.ID as v.NAME for v in scriptmaster" class="form-control">
+                                                    <option ng-option value="Not Seleted">Not Seleted Script</option>
+                                                </select>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+
+                            <button type="button" class="btn btn-secondary" ng-click="SubmitAllScriptMap()" data-bs-dismiss="modal">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> <i class="las la-copyright"></i> iRecord.
+                        </div>
+                        <!-- <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://themesbrand.com/" target="_blank" class="text-reset">Themesbrand</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </footer>
+
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <a style="display:none" href="javascript:;" id="openModalButton" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_ScriptMapping">
+            <i class="la la-plus"></i>
+        </a>
+        <a style="display:none" href="javascript:;" id="openModalButtonAll" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_ScriptAllMapping">
+            <i class="la la-plus"></i>
+        </a>
+        <!-- Modal 1 -->
+        <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Consultant Master</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Consultant Name <span class="text-danger">*</span>:</label>
+                                <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Consultant Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2 -->
+        <div class="modal fade" id="modal_add_demat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Demat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Demat <span class="text-danger">*</span>:</label>
+                                <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Demat A/c Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.3.2.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/simplebar.min.js"></script>
+    <script src="~/js/app.js"></script>
+
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/jquery.dragtable.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+            $(".select2-hide_search").select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('.defaultTable').dragtable({
+                dragHandle: '.drag_div'
+            });
+
+            $('.datepicker').datepicker({
+                format: "dd-mm-yyyy",
+                autoclose: true,
+                todayHighlight: true
+            });
+            $('#datepicker6').datepicker({
+                // startDate: new Date(),
+                // startDate: '+1y',
+                startView: "year",
+                endDate: new Date(),
+                datesDisabled: '+1y',
+                viewMode: "years",
+                minViewMode: "years"
+            });
+        });
+    </script>
+
+    <script src="~/js/custom-script.js"></script>
+    <script type="text/javascript">
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                }
+            }
+        }
+        addLoadEvent(setmenu('7'));
+        addLoadEvent(setentrymenu('2'));
+    </script>
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/BRDetails.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

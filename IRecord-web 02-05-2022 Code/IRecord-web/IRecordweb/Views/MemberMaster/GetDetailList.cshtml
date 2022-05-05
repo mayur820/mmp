@@ -1,0 +1,91 @@
+﻿@model IRecordweb.Models.FINANCIALYEARTRANS
+
+@{
+    ViewBag.Title = "GetDetailList";
+  //  Layout = "~/Views/Shared/_Layout.cshtml";
+    var a = HttpContext.Current.Session["UserID"];
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+}
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Member Master Data</h1>
+
+        <div class="page-title-right">
+            
+        </div>
+
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+
+            <a href="#member_list" data-bs-toggle="modal" class="btn btn-primary">Select Member</a>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="member_list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Member</h4>
+                    <div class="btn-close" data-bs-dismiss="modal"></div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row form_2">
+                        @*<h4>FinancialYearTrans</h4>*@
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label mb-0" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(model => model.MemberID, ViewBag.MemberName as SelectList, "Select Member", htmlAttributes: new { @class = "form-select" })
+                                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FinancialYearID, htmlAttributes: new { @class = "control-label mb-0" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(model => model.FinancialYearID, ViewBag.FinancialYear as SelectList, "Select Financial Year", htmlAttributes: new { @class = "form-select" })
+                                @Html.ValidationMessageFor(model => model.FinancialYearID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3" style="display:none">
+                            <div class="d-flex flex-column">
+                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label mb-0" })
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @Checked = true })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <input type="submit" value="Next" class="btn btn-primary" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

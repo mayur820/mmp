@@ -1,0 +1,196 @@
+﻿@model IEnumerable<IRecordweb.Models.MENU>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+
+}
+
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+@*<div class="navigation">*@
+<!-- <link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script> -->
+
+
+@*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>*@
+
+<script>
+    $(document).ready(function () {
+        $('.nav li > .sub-menu').parent().hover(function () {
+            var submenu = $(this).children('.sub-menu');
+            if ($(submenu).is(':hidden')) {
+                $(submenu).slideDown(200);
+            } else {
+                $(submenu).slideUp(200);
+            }
+        });
+    })
+
+</script>
+@*<style>
+    .nav li {
+        list-style: none;
+        padding: 5px 10px;
+        width: 300px;
+    }
+
+    .nav > li {
+        float: left;
+    }
+
+    .nav .sub-menu {
+        display: none;
+    }
+</style>*@
+
+
+<!--<style>
+    .navigation1 {
+        overflow: hidden;
+        background-color: #3685BD;      /*#333*/
+        font-family: Arial;
+    }
+
+        .navigation1 a {
+            float: left;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+    .dropdown1 {
+        float: left;
+        overflow: hidden;
+    }
+
+        .dropdown1 .dropbtn1 {
+            font-size: 14px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+        }
+
+        .navigation1 a:hover, .dropdown1:hover .dropbtn1 {
+            background-color: #1a364a;      /*red*/     /*#37719a  -- Second color*/
+        }
+
+    .dropdown1-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown1-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .dropdown1-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown1:hover .dropdown1-content {
+        display: block;
+    }
+</style>-->
+
+
+
+
+
+
+
+
+@*<nav>
+        <ul class="nav">
+            @{
+                foreach (var item in Model)
+                    {
+                    var submenu = Model.Where(n => n.ParentMenuID == item.MenuID).ToList();
+                    <li>
+
+                        <a href="@item.url">@item.Name</a>
+                        @if (submenu.Count > 0)
+                       {
+                            <ul class="sub-menu">
+                            @foreach (var item2 in submenu)
+                            {
+                            <li><a href="@item2.url/">@item2.Name</a></li>
+                            }
+
+                        </ul>
+                        }
+                    </li>
+
+                    }
+            }
+        </ul>
+
+    </nav>*@
+
+
+<!-- <div class="navigation1"> -->
+@foreach (var m in Model)    //Model
+{
+    if (m.ParentMenuID.ToString() == "")
+    {
+        var submenu = Model.Where(n => n.ParentMenuID == m.MenuID).ToList();
+
+        //    var submenu = ViewBag.Menu;
+
+        if (submenu != null && submenu.Count > 0)
+        {
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="la la-sitemap"></i>
+                    <span>@m.Name</span>
+                </a>
+
+                <!-- <div class="dropdown1">
+                    <button class="dropbtn1">
+
+                        <i class="fa fa-caret-down"></i>
+                    </button>-->
+                <ul class="sub-menu pl-0" aria-expanded="false">
+                    @foreach (var e in submenu)
+                        {
+                        @*if (e.url.ToString() == "" && e.ParentMenuID.ToString() != "")
+                            {
+                            var submenu1 = Model.Where(n => n.MenuID == m.ParentMenuID).ToList();
+                            <li><a href="~/@e.url">@e.Name </a></li>
+                            }
+                        else
+                            {*@
+                        <li><a href="~/@e.url">@e.Name </a></li>
+                            @*}*@
+                        }
+                </ul>
+            </li>
+                <!-- </div>-->
+        }
+        else
+
+        {
+
+            //if parent menu does not have child menu
+            <li>
+                <a href="~/@m.url"><span>@m.Name</span></a>
+            </li>
+        }
+    }
+}
+<!-- </div> -->
+

@@ -1,0 +1,453 @@
+﻿@using System.Data
+@model DataTable
+@{
+    ViewBag.Title = "ViewImportTradefileContract";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Import Trade file Contract</h2>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="~/css/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="~/css/line-awesome.min.css" />
+<link rel="stylesheet" href="~/css/theme-color.css" />
+<link rel="stylesheet" href="~/css/app.min.css" />
+<link rel="stylesheet" href="~/css/custom-body.css" />
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<style>
+    body {
+        font-family: Arial;
+    }
+
+        body.inner_body {
+            background: repeating-linear-gradient( 45deg, #fff7f7, #fbfbfb00 100px);
+        }
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<body class="inner_body">
+
+
+
+    @* <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">*@
+
+
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="page-content">
+        <div class="container-fluid">
+            <!-- Working Area Start -->
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between" style="
+                     display none !important;
+                     ">
+                    <h4 class="mb-0">Trade File</h4>
+
+                    <div class="page-title-right">
+                        @*@if (Session["RoleId"] != null)
+                            {
+                            if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ADVISOR")
+                                {
+                                <input type="submit" class="btn btn-success add-on" value="Add New" name="Add" onclick="location.href='@Url.Action("Index", "ImportTradefileContract")'" />
+                                }
+                            else if (Session["RoleName"].ToString() == "OPERATOR")    /*|| Session["RoleName"].ToString() == "MEMBER"*/
+                                {
+                                <input type="submit" class="btn btn-success isdisabled" value="Add New" onclick="location.href='@Url.Action("Index", "ImportTradefileContract")'" />
+                                }
+                            }*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Equity')">Equity</button>
+            <button class="tablinks" onclick="openCity(event, 'F_N_O')">F&O</button>
+            <button class="tablinks" onclick="openCity(event, 'MCX')">MCX</button>
+            <button class="tablinks" onclick="openCity(event, 'Currency')">Currency</button>
+            <button class="tablinks" onclick="openCity(event, 'NCDEX')">NCDEX</button>
+
+
+
+        </div>
+        <div id="F_N_O" class="tabcontent">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row form_2 view_mode">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">From Date:</label>
+                            <span class="form-control"><label></label> {{Info.FromDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">To Date:</label>
+                            <span class="form-control"><label />{{Info.ToDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Contract Note Name:</label>
+
+                            <select id="fnoddl_id" ng-model="fno_id" ng-options="v.ID as v.NAME for v in fnoddl" class="form-control">
+                                <option ng-option value="">Select Contract Note</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat Ac Name:</label>
+                            <span class="form-control"><label />{{Info.Demat_Ac_Name}}</span>
+                            <input type="submit" style="
+                                   margin-right 4%;
+                                   " value="Update" name="Update" id="Update" class="btn btn-success" />
+                            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                            </div>*@
+                    </div>
+
+                    <div class="table-responsive table-small">
+                        <label style="color:red">  No Data Found !</label>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="MCX" class="tabcontent">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row form_2 view_mode">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">From Date:</label>
+                            <span class="form-control"><label></label> {{Info.FromDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">To Date:</label>
+                            <span class="form-control"><label />{{Info.ToDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Contract Note Name:</label>
+
+                            <select id="mcx_id" ng-model="mcx_id" ng-options="v.ID as v.NAME for v in mcxddl" class="form-control">
+                                <option ng-option value="">Select Contract Note</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat Ac Name:</label>
+                            <span class="form-control"><label />{{Info.Demat_Ac_Name}}</span>
+                            <input type="submit" style="
+                                   margin-right 4%;
+                                   " value="Update" name="Update" id="Update" class="btn btn-success" />
+                            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                            </div>*@
+                    </div>
+
+                    <div class="table-responsive table-small">
+                        <label style="color:red">  No Data Found !</label>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="Currency" class="tabcontent">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row form_2 view_mode">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">From Date:</label>
+                            <span class="form-control"><label></label> {{Info.FromDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">To Date:</label>
+                            <span class="form-control"><label />{{Info.ToDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Contract Note Name:</label>
+
+                            <select id="Currency_id" ng-model="Currency_id" ng-options="v.ID as v.NAME for v in Currencyddl" class="form-control">
+                                <option ng-option value="">Select Contract Note</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat Ac Name:</label>
+                            <span class="form-control"><label />{{Info.Demat_Ac_Name}}</span>
+                            <input type="submit" style="
+                                   margin-right 4%;
+                                   " value="Update" name="Update" id="Update" class="btn btn-success" />
+                            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                            </div>*@
+                    </div>
+
+                    <div class="table-responsive table-small">
+
+                        <label style="color:red">  No Data Found !</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="NCDEX" class="tabcontent">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row form_2 view_mode">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">From Date:</label>
+                            <span class="form-control"><label></label> {{Info.FromDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">To Date:</label>
+                            <span class="form-control"><label />{{Info.ToDate}}</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Contract Note Name:</label>
+
+                            <select id="NCDEXddl_id" ng-model="NCDEXddl_id" ng-options="v.ID as v.NAME for v in NCDEXddl" class="form-control">
+                                <option ng-option value="">Select Contract Note</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat Ac Name:</label>
+                            <span class="form-control"><label />{{Info.Demat_Ac_Name}}</span>
+                            <input type="submit" style="
+                                   margin-right 4%;
+                                   " value="Update" name="Update" id="Update" class="btn btn-success" />
+                            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                            </div>*@
+                    </div>
+
+                    <div class="table-responsive table-small">
+
+                        <label style="color:red">  No Data Found !</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+        </script>
+        <div id="Equity" class="tabcontent">
+            @using (Html.BeginForm("ViewImportTradefileContract", "ImportTradefileContract", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row form_2 view_mode">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">From Date:</label>
+                                <span class="form-control"><label></label> {{Info.FromDate}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">To Date:</label>
+                                <span class="form-control"><label />{{Info.ToDate}}</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Contract Note Name:</label>
+
+                                <select id="Equityddl_id" ng-model="Equityddl_id" ng-options="v.ID as v.NAME for v in Equityddl" class="form-control">
+                                    <option ng-option value="">Select Contract Note</option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Demat Ac Name:</label>
+                                <span class="form-control"><label />{{Info.Demat_Ac_Name}}</span>
+                                <input type="submit" style="
+                                       margin-right 4%;
+                                       " value="Update" name="Update" id="Update" class="btn btn-success" />
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                            </div>
+
+                            @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+                                </div>*@
+                        </div>
+
+                        <div class="table-responsive table-small">
+
+                            <table class="table defaultTable sar-table table-hover table-bordered mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("Delete Record")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Intra Day?")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Date")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Bill No")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Type")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Script Name")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Qty")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Gross Rate")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Gross Amt")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Brokerage Per Unit")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Brokerage Amt")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Net Rate")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Net Amt")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Holding Type")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Consultant")
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (Model.Rows != null)
+                                            {
+
+
+                                            foreach (DataRow dr in Model.Rows)
+
+                                                {
+                                                string IntraDay = (dr["IntraDay"].ToString() == "" ? "false" : dr["IntraDay"].ToString()) == "true" ? "Active" : "Inanctive";
+                                                <tr>
+                                                    <td></td>
+                                                    @if ((dr["IntraDay"].ToString() == "" ? "false" : dr["IntraDay"].ToString()) == "true")
+                                                        {
+                                                        <td>@Html.CheckBox((dr["IntraDay"].ToString() == "" ? "false" : dr["IntraDay"].ToString()), true)</td>
+                                                        }
+                                                    else
+                                                        {
+                                                        <td>@Html.CheckBox((dr["IntraDay"].ToString() == "" ? "false" : dr["IntraDay"].ToString()), false)</td>
+                                                        }
+                                                    <td>@dr["date"]</td>
+                                                    <td>@dr["bill_no"]</td>
+                                                    <td>@dr["type"]</td>
+                                                    <td>@dr["script_name"]</td>
+                                                    <td>@dr["qty"]</td>
+                                                    <td>@dr["gross_rate"]</td>
+                                                    <td>@dr["gross_amt"]</td>
+                                                    <td>@dr["brok_rate"]</td>
+                                                    <td>@dr["brok_amt"]</td>
+                                                    <td>@dr["net_rate"]</td>
+                                                    <td>@dr["NetAmount"]</td>
+                                                    <td>@dr["HoldingTypecode"]</td>
+                                                    <td>@dr["consultant"]</td>
+                                                </tr>
+                                                }
+                                            }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                                            }
+        </div>
+    </div>
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.3.2.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/simplebar.min.js"></script>
+    <script src="~/js/app.js"></script>
+
+    <script src="~/js/jquery.dragtable.js"></script>
+
+    @section Scripts {
+
+
+    }
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/ViewImportTradefileContract.js"></script>
+</body>

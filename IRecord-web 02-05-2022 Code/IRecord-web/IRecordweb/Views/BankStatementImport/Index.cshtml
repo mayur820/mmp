@@ -1,0 +1,238 @@
+﻿@model IRecordweb.Models.BankStatement_Index_Model
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="#">
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"> -->
+
+<!-- <link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+<link rel="stylesheet" href="~/css/select2.min.css">
+<link rel="stylesheet" href="~/css/style.css"> -->
+
+
+
+@*<script type="text/javascript" src="main.js"></script>*@
+<style>
+   /* footer.footer {
+        margin-bottom: -568px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #5b73e8 !important;
+        border-color: #5b73e8 !important;
+    } */
+</style>
+
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Bank Statement</h1>
+
+                @*<div class="page-title-right">
+                    @Html.ActionLink("Back to List", "ViewList", "", new { @class = "btn btn-dark" })
+                </div>*@
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Index", "BankStatementImport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+           
+            <div class="card member_master_par">
+                <div class="card-body">
+                    <div class="row form_2" id="data">
+                        @*<h4>Member</h4>*@
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label>
+                                Bank Name
+                            </label>
+                            <div class="w-100">
+                                @*ViewBag.BankNameId as SelectList*@
+                                @Html.DropDownListFor(model => model.BankNameId, ViewBag.BankNameId as SelectList, "--Select Bank--", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BankNameId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.BankConfig, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(model => model.BankConfig, null, "--Select Config--", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BankConfig, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @readonly = true, @placeholder = "DD-MM-YYYY", @Value = Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("dd-MMM-yyyy") } })
+                                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @readonly = true, @placeholder = "DD-MM-YYYY", @Value = Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("dd-MMM-yyyy") } })
+                                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FileUpload, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.TextBoxFor(model => model.FileUpload, htmlAttributes: new { @class = "form-control", type = "file", value = "FileName" })
+                                @Html.ValidationMessageFor(model => model.FileUpload, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Password", autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 text-center mt-3">
+                            <input type="submit" value="Reset" class="btn btn-secondary" />
+
+                            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-primary" onclick="Savebtn()" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $("#BankNameId").change(function () {
+
+            var ddlCustomers = $("#BankConfig");
+            ddlCustomers.empty();
+            ddlCustomers.append("<option value=''>--Please Select--</option>");
+
+            $.get("/BankStatementImport/ViewFormate", { BankId: $("#BankNameId").val() },
+                function (data) {
+
+                    $.each(data, function (index, row) {
+                        ddlCustomers.append("<option value='" + row.TypeId + "'>" + row.Name + "</option>")
+                    });
+                });
+
+
+            //$.ajax({    //create an ajax request to display.php
+            //    type: "GET",
+            //    url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(),
+            //    dataType: "json",   //expect html to be returned
+            //    success: function (response) {
+            //        alert(response);
+            //      //  $("#responsecontainer").html(response);
+            //        //alert(response);
+            //    }
+            //});
+
+
+
+            //$.ajax({
+            //    type: "get", url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(), dataType: "json", contentType: "application/json", success: function (res) {
+            //        $.each(res.d, function (data, value) {
+
+            //            ddlCustomers.append($("<option></option>").val(value.ID).html(value.NAME));
+            //        })
+            //    }
+
+            //});
+
+        });
+
+
+        // PopulateDropDownList();
+
+        function PopulateDropDownList() {
+            //Build an array containing Customer records.
+            var customers = [
+                { CustomerId: 1, Name: "John Hammond", Country: "United States" },
+                { CustomerId: 2, Name: "Mudassar Khan", Country: "India" },
+                { CustomerId: 3, Name: "Suzanne Mathews", Country: "France" },
+                { CustomerId: 4, Name: "Robert Schidner", Country: "Russia" }
+            ];
+
+            var ddlCustomers = $("#BankConfig");
+            ddlCustomers.empty();
+            ddlCustomers.append("<option value=''>--Please Select--</option>");
+            $(customers).each(function () {
+                var option = $("<option />");
+
+                //Set Customer Name in Text part.
+                option.html(this.Name);
+
+                //Set Customer CustomerId in Value part.
+                option.val(this.CustomerId);
+
+                //Add the Option element to DropDownList.
+                ddlCustomers.append(option);
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#BankNameId").focus();
+        });
+    </script>
+    <script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+
+            var StartDate =@Session["FinFromDate"].ToString();
+            var EndDate = @Session["FinToDate"].ToString();
+           // alert(EndDate);
+            $("#FromDate1").datepicker({
+                dateFormat: "dd-mm-yy",
+                minDate : StartDate,
+                maxDate : EndDate,
+                changeMonth: true,
+                changeYear: true
+            });
+            $("#ToDate1").datepicker({
+                dateFormat: "dd-mm-yy",
+                minDate : StartDate,
+                maxDate : EndDate,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}

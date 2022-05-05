@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'Poppins Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('../fonts/Poppins Regular'), url('../fonts/Poppins-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Poppins Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('../fonts/Poppins Medium'), url('../fonts/Poppins-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Poppins SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('../fonts/Poppins SemiBold'), url('../fonts/Poppins-SemiBold.woff') format('woff');
+}
+
+:root {
+    --bs-primary: 0,123,255;
+    --bs-primary-hover: 0,104,216;
+    --body_bg_l: 248,248,248;
+    --font_title: 'Poppins', sans-serif;
+    --font_w_4: 'Poppins Regular';
+	--font_w_5: 'Poppins Medium';
+	--font_w_6: 'Poppins SemiBold';
+}
+
+a{color: rgba(var(--bs-primary),1);}
+
+a:hover,
+a:focus,
+.header-item:hover i,
+.accordion-button:not(.collapsed){color: rgba(var(--bs-primary-hover),1);}
+
+
+.blue_box{
+	background: rgba(var(--bs-primary),1) !important;
+}
+
+.btn-primary{
+    background: rgba(var(--bs-primary),1) !important;
+    border-color: rgba(var(--bs-primary),1) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus{
+    background: rgba(var(--bs-primary-hover),1) !important;
+    border-color: rgba(var(--bs-primary-hover),1) !important;
+}

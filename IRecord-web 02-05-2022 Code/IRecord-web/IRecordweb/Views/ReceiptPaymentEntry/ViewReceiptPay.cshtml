@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ViewReceiptPay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.v4.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="../css/line-awesome.min.css" />
+    <link rel="stylesheet" href="../css/theme-color.css" />
+    <link rel="stylesheet" href="../css/app.min.css" />
+    <link rel="stylesheet" href="../css/custom-body.css" />
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>
+    <script src="~/AngScripts/ngStorage.min.js"></script>
+    <title> :: iRecord</title>
+</head>
+<body class="inner_body">
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="">
+        <div id="layout-wrapper">
+
+            <div class="row form_2 view_mode">
+                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                    <label class="mb-0">Date:</label>
+                    <span class="form-control">{{EditItems.Trans_Dt}}}</span>
+
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                    <label class="mb-0">Cheque:</label>
+                    <span class="form-control">{{EditItems.Chq_No}}</span>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                    <label class="mb-0">Amount:</label>
+                    <span class="form-control">{{EditItems.Amount}}</span>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                    <label class="mb-0">Narration:</label>
+                    <span class="form-control">{{EditItems.Narr1}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/ReceiptPaymentEntry.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,469 @@
+﻿@model BAL.MutualFundManualEntry
+
+@{
+    ViewBag.Title = "SaveMFEntry";
+}
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section Scripts {
+
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    @if (ViewBag.Message != null)
+        {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+        }
+
+    <script>
+
+        $(document).ready(function () {
+            $("#EntryDate").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+                //showOn: "both",
+                //   buttonText : "Select"
+                //  buttonText: "<i class='fa glyphicon-calendar'></i>"
+            });
+            $("#PaymentDate").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}
+
+
+<h2>Mutual Fund Manual Entry</h2>
+
+@using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="form-group">
+            <tr>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.FolioNo, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+
+                <td class="col-md-10">
+                    @Html.EditorFor(model => model.FolioNo, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.FolioNo, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.EntryDate, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-10">
+                    @Html.EditorFor(model => model.EntryDate, new { htmlAttributes = new { @class = "form-control fa glyphicon-calendar" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.EntryDate, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.Consultant, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-10">
+                    @Html.DropDownListFor(model => model.Consultant, ViewBag.Consultant as SelectList, "Select Consultant", htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Consultant, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+
+                @if (ViewBag.FundFamily != null)
+                    {
+                    <td class="form-group">
+                        @Html.LabelFor(model => model.FundFamily, htmlAttributes: new { @class = "control-label col-md-12" })
+
+                    </td>
+                    <td class="col-md-10">
+                        @Html.DropDownListFor(model => model.FundFamily, ViewBag.FundFamily as SelectList, "Select Fund Family", htmlAttributes: new { @class = "form-control" })
+                    </td>
+                    <td>
+
+                        @Html.ValidationMessageFor(model => model.FundFamily, "", new { @class = "text-danger" })
+                    </td>
+                    }
+
+            </tr>
+            <tr>
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.Scheme, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-10">
+                    @Html.DropDownListFor(model => model.Scheme, new SelectList(" "), "Select Scheme", htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Scheme, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.DematAC, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-10">
+
+                    @Html.DropDownListFor(model => model.DematAC, ViewBag.DematAC as SelectList, "Select Demat A/C", htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.DematAC, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+        </table>
+        <table class="form-group">
+            <tr>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-2">
+                    <select id="Type" name="Type" class="form-control" style="width: 62%;">
+                        <option value="0">Select Type</option>
+                        <option value="1">Bought</option>
+                        <option value="2">Sold</option>
+                    </select>
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </td>
+
+                <td class="form-group">
+                    @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+
+                <td class="col-md-2">
+                    @*@Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })*@
+                    <input type="text" id="Unit" name="Unit" onkeyup="sum()" class="form-control" style="width: 62%;" />
+
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+
+                </td>
+
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.PriceNav, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.PriceNav, new { htmlAttributes = new { @class = "form-control", style = "width: 126%;" } })*@
+                    <input type="text" id="PriceNav" name="PriceNav" class="form-control" style="width: 126%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.PriceNav, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })*@
+                    <input type="text" id="Amount" name="Amount" onkeyup="sum()" class="form-control" style="width: 62%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </td>
+
+                <td class="form-group">
+                    @Html.LabelFor(model => model.NavAfterLoad, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.NavAfterLoad, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })*@
+                    <input type="text" id="NavAfterLoad" name="NavAfterLoad" class="form-control" style="width: 62%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.NavAfterLoad, "", new { @class = "text-danger" })
+
+                </td>
+
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.LoadAmount, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.LoadAmount, new { htmlAttributes = new { @class = "form-control", style = "width: 126%;" } })*@
+                    <input type="text" id="LoadAmount" name="LoadAmount" class="form-control" style="width: 126%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.LoadAmount, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.EntryLoadIn, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.EntryLoadIn, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })*@
+                    <input type="text" id="EntryLoadIn" name="EntryLoadIn" class="form-control" onkeyup="PerCal()" style="width: 62%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.EntryLoadIn, "", new { @class = "text-danger" })
+                </td>
+
+
+                <td class="form-group" id="STTblock" style="display:none">
+                    @Html.LabelFor(model => model.STT, htmlAttributes: new { @class = "control-label col-md-12" })
+                    @*<label id="STT" name="STT" class = "control-label col-md-12">STT</label>*@
+                </td>
+                <td class="col-md-5" id="STTblock1" style="display:none">
+                    <input type="text" id="STT" name="STT" class="form-control" style="width: 62%;" onkeyup="STTCal()" />
+                </td>
+                @*<td>
+                    @Html.ValidationMessageFor(model => model.STT, "", new { @class = "text-danger" })
+                    </td>*@
+
+                <td class="form-group">
+                    @Html.LabelFor(model => model.FinalAmount, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @*@Html.EditorFor(model => model.FinalAmount, new { htmlAttributes = new { @class = "form-control", style = "width: 126%;" } })*@
+                    <input type="text" id="FinalAmount" name="FinalAmount" class="form-control" style="width: 126%;" />
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.FinalAmount, "", new { @class = "text-danger" })
+                </td>
+
+            </tr>
+            <tr><th style="text-align:left"> Payment Details</th></tr>
+            <tr>
+
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @Html.DropDownListFor(model => model.PaymentMode, ViewBag.PaymentMode as SelectList,"Select Payment Mode",   htmlAttributes: new { @class = "form-control", style = "width: 62%;" , @onchange="Changeval()"})
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+
+                </td>
+                <td class="form-group">
+
+                    @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group">
+                 
+                    @*@Html.LabelFor(model => model.ChequeNo, htmlAttributes: new { @class = "control-label col-md-12" })*@   
+                    <label id="ChequeNo1" name="ChequeNo1" class="control-label">Cheque No</label>            
+                </td>
+                <td class="col-md-5">
+                    @*<div class="col-md-10">*@
+                    @*@Html.EditorFor(model => model.ReferenceNo, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;", @Style="display:none" } })*@
+                    @Html.EditorFor(model => model.ChequeNo, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.ChequeNo, "", new { @class = "text-danger" })
+                    @*</div>
+                        </div>*@
+                </td>
+                <td class="form-group">
+                    @Html.LabelFor(model => model.Bank, htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-5">
+                    @Html.DropDownListFor(model => model.Bank, ViewBag.Bank as SelectList, "Select Cash/Bank", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control", style = "width: 62%;" } })*@
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Bank, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    }
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#FundFamily").change(function () {
+
+            $.get("/MFManualEntry/GetSchemeList", { MutualFundID: $("#FundFamily").val() }, function (data) {
+
+                $("#Scheme").empty();
+                $.each(data, function (index, row) {
+                    $("#Scheme").append("<option value='" + row.ScriptID + "'>" + row.ScriptName + "</option>")
+                });
+            });
+
+        })
+    });
+</script>
+
+<script type="text/javascript">
+    function sum() {
+
+        var Unit = document.getElementById('Unit').value;
+        var decmpl;
+        var Amount = document.getElementById('Amount').value;
+
+        var FinalAmt = parseInt(Amount) / parseInt(Unit);
+
+        if (!isNaN(FinalAmt)) {
+            document.getElementById('FinalAmount').value = Amount;
+            document.getElementById('PriceNav').value = Math.round(FinalAmt, decmpl);
+            document.getElementById('NavAfterLoad').value = Math.round(FinalAmt, decmpl);
+        }
+    }
+
+
+    function PerCal() {
+
+        var Amount = document.getElementById('Amount').value;
+
+        var Type = document.getElementById('Type').value;
+
+        if (Amount != null) {
+            if (Type.toString() == 1)
+                calBought();
+            else
+                calSold();
+        }
+
+    }
+    function calBought() {
+
+        var decmpl;
+
+        var Price = document.getElementById('PriceNav').value;
+
+        var Percent = document.getElementById('EntryLoadIn').value;
+
+        var Amount = document.getElementById('Amount').value;
+
+        var calper = Price * Percent / 100;
+
+        var amstt = Math.round(parseInt(Price) + parseInt(calper), decmpl);
+        document.getElementById('NavAfterLoad').value = Math.round(amstt);
+
+        var calamt = Amount * Percent / 100;
+        var amstt2 = Math.round(calamt, decmpl);
+        document.getElementById('LoadAmount').value = amstt2;
+        var finalamt = Math.round(parseInt(Amount) + parseInt(calamt), decmpl);
+        var fnamt = Math.round(finalamt, decmpl);
+        document.getElementById('FinalAmount').value = fnamt;
+    }
+
+    function calSold() {
+        var stt = document.getElementById('STT').value;
+
+        //   alert(0000);
+        var decmpl;
+        var Price = document.getElementById('PriceNav').value;
+        var Percent = document.getElementById('EntryLoadIn').value;
+        var Amount = document.getElementById('Amount').value;
+        var calper = Price * Percent / 100;
+        document.getElementById('NavAfterLoad').value = parseInt(Price - calper, decmpl);
+        var calamt = Amount * Percent / 100;
+        document.getElementById('LoadAmount').value = parseFloat(calamt, decmpl);
+        var finalamt = Math.round(Amount - calamt, decmpl);
+        document.getElementById('FinalAmount').value = parseFloat(finalamt, decmpl);
+    }
+
+
+    function STTCal() {
+
+        var STT = document.getElementById('STT').value;
+
+        var Amount = document.getElementById('Amount').value;
+
+        var LoadAmount = document.getElementById('LoadAmount').value;
+        if (STT.toString() != 0) {
+
+            var cal = (parseFloat(Amount) - parseFloat(LoadAmount)) - (parseFloat(STT));
+            document.getElementById('FinalAmount').value = cal;
+        }
+
+        else {
+            var cal = parseFloat(Amount) - parseFloat(LoadAmount);
+            document.getElementById('FinalAmount').value = cal;
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Type').change(function () {
+            if (this.value == 2) {
+                $('#STTblock').show();
+                $('#STTblock1').show();
+            }
+            else {
+                $('#STTblock').hide();
+                $('#STTblock1').hide();
+            }
+
+        });
+    });
+
+
+    function Changeval()
+    {
+        var PaymentMode = document.getElementById('PaymentMode').value;
+        $('#ChequeNo1').text("Cheque No");
+
+        if (PaymentMode == "12") {
+            $('#ChequeNo1').text("Cheque No");
+            document.getElementById('ChequeNo').disabled = false;
+        }
+        else if (PaymentMode == "15")
+        {    
+            document.getElementById('ChequeNo').disabled = true;
+            $('#ChequeNo1').text("Reference No");
+        }
+        else
+        {
+            document.getElementById('ChequeNo').disabled = false;
+            $('#ChequeNo1').text("Reference No");
+        }
+    }
+</script>
+
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

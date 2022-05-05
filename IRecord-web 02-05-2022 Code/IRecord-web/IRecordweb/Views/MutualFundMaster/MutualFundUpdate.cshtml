@@ -1,0 +1,178 @@
+﻿@model IRecordweb.Models.MUTUALFUND
+
+@{
+    ViewBag.Title = "MutualFundUpdate";
+}
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Mutual Fund Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="card mutualfund_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.MutualFundID)
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FundFamilyName, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(m => m.FundFamilyName, Model.items, "Select Fund Family", htmlAttributes: new { @class = "form-select", @selected = true })
+                                @Html.ValidationMessageFor(model => model.FundFamilyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.NameOfScheme, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.NameOfScheme, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NameOfScheme, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.SchemeCode, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.SchemeCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SchemeCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.InvestmentOption, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @if (Model.InvestmentOption != null)
+                                    {
+                                    <select class="form-select" id="InvestmentOption" name="InvestmentOption">
+                                        <option value=""> Select Investment Option </option>
+                                        @if (Model.InvestmentOption == "G-Growth")
+                                            {
+                                            <option value="G-Growth" selected> G-Growth </option>
+                                            <option value="D-Dividend"> D-Dividend </option>
+                                            <option value="P-Dividend Payout"> P-Dividend Payout </option>
+                                            }
+                                        else if (Model.InvestmentOption == "D-Dividend")
+                                            {
+                                            <option value="G-Growth"> G-Growth </option>
+                                            <option value="D-Dividend" selected> D-Dividend </option>
+                                            <option value="P-Dividend Payout"> P-Dividend Payout </option>
+                                            }
+                                        else                      /*(Model.InvestmentOption == "P-Dividend Payout")*/
+                                            {
+                                            <option value="G-Growth"> G-Growth </option>
+                                            <option value="D-Dividend"> D-Dividend </option>
+                                            <option value="P-Dividend Payout" selected> P-Dividend Payout </option>
+                                            }
+                                    </select>
+                                    }
+                                @Html.ValidationMessageFor(model => model.InvestmentOption, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @if (Model.Code != null)
+                                    {
+                                    <select class="form-select" id="Code" name="Code">
+                                        <option value=""> Select Code </option>
+                                        @if (Model.Code == "Dept")
+                                            {
+                                            <option value="Dept" selected> Dept </option>
+                                            <option value="Equity"> Equity </option>
+                                            }
+                                        else if (Model.Code == "Equity")
+                                            {
+                                            <option value="Dept"> Dept </option>
+                                            <option value="Equity" selected> Equity </option>
+                                            }
+                                    </select>
+                                    }
+                                else
+                                    {
+                                    <select class="form-select" id="Code" name="Code">
+                                        <option value=""> Select Code </option>
+                                        <option value="Dept" selected> Dept </option>
+                                        <option value="Equity"> Equity </option>
+                                    </select>
+                                    }
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                <div class="checkbox">
+                                    @if (Model.Active == true)
+                                        {
+                                        @Html.CheckBoxFor(model => model.Active, new { @checked = "checked" });
+                                        }
+                                    else
+                                        {
+                                        @Html.CheckBoxFor(model => model.Active)
+                                        }
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+                            <input type="button" value="Update" class="btn btn-primary" data-bs-target="#myModal" data-bs-toggle="modal" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Mutual Fund Master </h4>
+                            <div class="btn-close" data-bs-dismiss="modal"></div>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Record Updated Successfully..!
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="OK" name="OK" class="btn btn-danger">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/jquery-1.12.4.js"></script>*@

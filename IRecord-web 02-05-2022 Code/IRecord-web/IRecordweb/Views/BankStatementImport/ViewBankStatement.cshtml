@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "ViewBankStatement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>ViewBankStatement</h2>*@
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="~/css/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="~/css/line-awesome.min.css" />
+<link rel="stylesheet" href="~/css/theme-color.css" />
+<link rel="stylesheet" href="~/css/app.min.css" />
+<link rel="stylesheet" href="~/css/custom-body.css" />
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<link rel="stylesheet" href="~/css/loader-1.css">
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">
+
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Bank Statement</h4>
+
+            <div class="page-title-right">
+                <input type="submit" class="btn btn-success add-on" value="Add New" name="Add" onclick="location.href='@Url.Action("Index", "BankStatementImport")'" />
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div>
+        <table class="table">
+            <tr class="">
+                <td>&nbsp;</td>
+                <td><label class="control-label">Datewise Bill</label></td>
+
+                <td><input type="text" id="BillDate" ng-model="search.Date" name="BillDate" class="form-control" /></td>
+
+                <td>@*<input type="submit" value="Search" name="Search"  id="btnsearch" class="btn btn-info" />*@</td>
+
+                <td>
+
+                    <input type="button" value="{{btnsubmit}}" name="Save" id="Save" class="btn btn-success" ng-click="PostDeatils()" />
+
+
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div class="card fundfamily_par">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table style="
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+" class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+
+
+                            <th>
+
+                            </th>
+                            @*<th>
+                                    Sr No
+                                </th>*@
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Accounts
+                            </th>
+                            <th>
+                                Cheque
+                            </th>
+                            <th>
+                                Debit
+                            </th>
+                            <th>
+                                Credit
+                            </th>
+                            <th>
+                                Narration
+                            </th>
+
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="data in Info  | filter:search|orderBy:'Date'">
+                            <td>
+                                <a ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger las la-trash-alt font-size-18"></a>
+
+                            </td>
+                            @*<td>
+                                    {{$index+1}}
+                                </td>*@
+
+                            <td>
+                                {{data.Date}}
+                            </td>
+                            <td>
+
+                                <label ng-click="Ac_click(data)" style="color:{{data.Accounts_color}};"> {{data.Accounts}}</label>
+
+
+                            </td>
+                            <td>
+                                {{data.Cheque}}
+
+                            </td>
+                            <td>
+                                {{data.Debit}}
+
+                            </td>
+
+
+                            <td>
+                                {{data.Credit}}
+
+                            </td>
+                            <td>
+                                {{data.Narration}}
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <a style="display:none" href="javascript:;" id="openModalButton" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_ScriptMapping">
+        <i class="la la-plus"></i>
+    </a>
+    <a style="display:none" href="javascript:;" id="openModalAccountAdd" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_AddAccountMaster">
+        <i class="la la-plus"></i>
+    </a>
+    <a style="display:none" href="javascript:;" id="openModalButtonAll" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal_ScriptAllMapping">
+        <i class="la la-plus"></i>
+    </a>
+    <div class="modal fade" id="modal_ScriptMapping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Account Mapping</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-sm-2">Name of Ac:</div>
+                        <div class="col-sm-2">{{ACMappingedit.Accounts}}</div>
+                        <div class="col-sm-2">Mapping of Ac:</div>
+                        <div class="col-sm-4">
+
+                            <select id="ddlACCode" ng-model="ACMappingedit.ACcode" ng-options="v.ID as v.NAME for v in Acc" class="form-control">
+                                <option ng-option value="Not Seleted">Not Seleted A/C</option>
+                            </select>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-secondary" ng-click="updateScriptmaster(ScpritMappingedit)" data-bs-dismiss="modal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_ScriptAllMapping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Account All Mapping</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="button" class="btn btn-success add-on" ng-click="AddAccClick()" value="Add New Account" />
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name Of Script</th>
+                                    <th scope="col">Map Script</th>
+                                    @*<th scope="col">Action</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="alldata in AllScriptMapModel track by $index">
+                                    <th scope="row">{{$index+1}}</th>
+                                    <td>{{alldata.Accounts}}</td>
+                                    <td>
+                                        <select ui-select2 id="ddlAllScriptCode" class="MySeleted2" ng-model="alldata.ACcode" ng-options="v.ID as v.NAME for v in Acc" class="form-control">
+                                            <option ng-option value="Not Seleted">Not Seleted Account</option>
+                                        </select>
+
+
+                                    </td>
+                                    @*<td><input type="button" class="btn btn-success add-on" ng-click="AddAccClick()" value="Add New Account" /></td>*@
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-secondary" ng-click="SubmitAllScriptMap()" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_AddAccountMaster" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="
+    background: #d4d4f1;
+">
+                    <h5 class="modal-title" id="staticBackdropLabel">Account Master</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="
+    background: #d4d4f1;
+">
+                    <div class="row">
+
+                        <iframe style="
+    height: 1199px;
+    width: 1199px;
+" src="/AccountMaster/SaveAccountMaster?VarAction=WithOutLayout">
+                          
+                        </iframe>
+
+
+
+                    </div>
+                </div>
+                <div style="
+    background: #d4d4f1;
+" class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-secondary" ng-click="getAcc()" data-bs-dismiss="modal">Reload All Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @*For Duplicate Name Validate*@
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+    }
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/ViewBankStatementdetails.js"></script>
+}

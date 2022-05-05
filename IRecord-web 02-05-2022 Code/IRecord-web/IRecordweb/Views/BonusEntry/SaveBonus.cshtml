@@ -1,0 +1,144 @@
+﻿@model IRecordweb.Models.BONUSENTRY
+@{
+    ViewBag.Title = "SaveBonus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#RecordDate").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+            });
+        });
+    </script>
+
+<script>
+    $(document).ready(function () {
+        $("#Script").change(function () {
+            debugger;
+            $.get("/BonusEntry/ScriptISIN", { OldISIN: $("#Script").val() },
+                function (data)
+                {
+                    $("#OldISIN").empty();
+                $.each(data, function (index, row) {
+                    $("#OldISIN").val(row.OldISIN);
+                });
+            });
+
+        })//
+    });
+</script>
+}
+
+<h2> Create Bonus Entry</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Script, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Script, ViewBag.ScriptList as SelectList, "---Select Script---", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Script, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RecordDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RecordDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                @Html.ValidationMessageFor(model => model.RecordDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OldISIN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OldISIN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OldISIN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewISIN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NewISIN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewISIN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bonusqtyper, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bonusqtyper, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bonusqtyper, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Share, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Share, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Share, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Apply Bonus" class="btn btn-success" />
+            </div>
+        </div>
+        <div class="Details">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.srno)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MemberName)
+                        </th>
+                       <th>
+                           @Html.DisplayNameFor(model => model.HoldingType)
+                       </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DematName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.brokerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Consultant)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.holdingQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceivedQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalQty)
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Post in Respective demat" class="btn btn-success" />
+            </div>
+        </div>
+            </div>
+}

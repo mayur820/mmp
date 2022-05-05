@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "OpeningStock";
+}
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<link rel="stylesheet" href="~/css/loader-1.css">
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Opening Stock</h1>
+                <div class="page-title-right">
+                    <a href="/OpeningStock/OpeningStockLIST" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="card member_master_par">
+            <div class="card-body">
+                <div class="row form_2" id="data">
+
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Segment:</label>
+                        <div class="w-100">
+                            <select id="ddlSegment" ng-model="ddlSegment" ng-change="showhidefn()" class="form-select select2">
+
+                                <option value="" selected="selected">Select Segment Type</option>
+                                <option value="0">Equity</option>
+                                <option value="1"> F & O</option>
+                                <option value="3">MCX</option>
+                                <option value="4">Currency</option>
+                                <option value="5">NCDEX</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Broker:</label>
+                        <div class="w-100">
+                            <select id="ddlBroker" ng-model="ddlBroker" ng-options="v.ID as v.NAME for v in Brokers" ng-change="bindbills()" style="font-size:0.9rem" class="form-select select2">
+                                <option ng-option value="">Select Broker</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Demat:</label>
+                        <div class="w-100">
+                            <select id="Demat_Ac_Id" ng-model="Demat_Ac_Id" class="form-select select2" style="font-size:0.9rem">
+
+                                <option ng-option value="">Select Demat A/c</option>
+                                <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Holding Type:</label>
+                        <div class="w-100">
+                            <select id="ddlHoldingType" ng-model="ddlHoldingType" class="form-control form-select select2">
+
+                                <option ng-option value="">Select Holding Type</option>
+                                <option value="0">I-Share Invenstment</option>
+                                <option value="1">T-Stock In Trade</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Consultant:</label>
+
+                        <div class="w-100">
+                            <select id="ddlConsultant" ng-model="ddlConsultant" ng-options="v.ID as v.NAME for v in Consultants" class="form-control form-select select2">
+                                <option ng-option value="">Select Consultant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Select File to Import:</label>
+                        <div class="w-100">
+
+                            <input type="file" class="form-control" id="ExcelFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="encodeImgtoBase64(this,'Excelb64')" />
+                            <input type="hidden" id="Excelb64" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center mt-3">
+
+                        <button type="button" ng-click="DownloadFile()" class="btn btn-primary">Download Sample File</button>
+                        <button type="button" class="btn btn-secondary">Reset</button>
+                        <button type="button" ng-click="btn_click_sumit()" class="btn btn-primary">{{btntext}}</button>
+                        <div style="display:none;" class="loader-wrapper" id="loader-1">
+                            <div id="loader"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/OpeningStock.js"></script>
+
+}

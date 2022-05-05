@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "LoginDashBoard";
+}
+
+
+<div style="padding-top:5%">
+
+    @if (Session["UserName"] != null)
+        {
+        <div>
+            <h4>
+                <text> Welcome - @Session["UserName"].ToString()  </text>
+            </h4>
+        </div>
+        }
+
+</div>
+        @*<html>
+        <head>
+            <meta name="viewport" content="width=device-width" />
+        </head>
+        <body>
+
+
+
+
+            <h2>LoginDashBoard</h2>
+            Welcome : @HttpContext.Current.User.Identity.Name
+        </body>
+    </html>
+@section Scripts {
+@if (Session["UserName"] != null)
+    {
+   Welcome @Session["UserName"].ToString()
+    }*@

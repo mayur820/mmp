@@ -1,0 +1,267 @@
+*{margin: 0; padding: 0;}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    margin: 0;
+    font-family: var(--font_w_4);
+    font-size: .9rem;
+    font-family: var(--font_w_4);
+    font-weight: normal;
+    line-height: 1.5;
+    color: #495057;
+    background: rgba(var(--body_bg_l),1);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.inner_body {
+    overflow-x: hidden;
+}
+
+/* =============================================
+    Common CSS
+============================================= */
+
+.vertical-collpsed .vertical-menu #sidebar-menu>ul>li>a,
+#sidebar-menu ul li a.has-arrow{
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+/* =============================================
+    Page Topbar
+============================================= */
+
+#sidebar-menu .has-arrow:after {
+	content: "\f105";
+	font-family: 'Line Awesome Free';
+	font-weight: 900;
+	display: block;
+	float: right;
+	-webkit-transition: -webkit-transform .2s;
+	transition: -webkit-transform .2s;
+	transition: transform .2s;
+	transition: transform .2s, -webkit-transform .2s;
+	font-size: 1rem
+}
+
+.vertical-menu .sub-menu{
+    margin: 0 0 0 32px;
+}
+
+.vertical-collpsed .vertical-menu .sub-menu{
+    margin: 0;
+}
+
+#sidebar-menu ul li ul.sub-menu li a,
+#sidebar-menu ul ul.sub-menu li a{
+    font-family: var(--font_w_4);
+    font-weight: normal;
+    color: #7b8190;
+    margin: 0;
+    background-color: transparent;
+    font-size: 13px;
+
+    padding: .4rem 1.5rem .4rem 1.6rem;
+    position: relative;
+    margin: 0;
+}
+
+#sidebar-menu ul li a.has-arrow{
+        padding: .7rem 1.1rem;
+    font-size: 16px;
+}
+
+.vertical-menu .sub-menu li a:before{
+    content: "\f105";
+	font-family: 'Line Awesome Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+}
+
+header .desk_search{margin-right:auto;}
+
+.noti-icon .badge {
+    position: absolute !important;
+    top: 12px !important;
+    right: 5px;
+}
+
+/* =============================================
+    Working Area
+============================================= */
+
+.whitespace_nowrap{white-space: nowrap;}
+
+.page-title-box h1{
+    font-family: var(--font_w_6);
+    font-weight: normal;
+    font-size: 18px!important;
+}
+
+.form_2 .col-md-6 > label{
+	-ms-flex: 0 0 140px;
+	flex: 0 0 140px;
+	max-width: 140px;
+    margin-bottom: 0;
+}
+
+.form_2 .form-check .form-check-label {
+    margin: 0 9px 0 0;
+}
+
+.chosen-container.chosen-container-multi{
+    width: 100% !important;
+}
+
+.chosen-container-multi .chosen-choices{
+    background-image: none !important;
+}
+
+table tr th,
+table tr td{
+    vertical-align: middle;
+}
+
+.table .table-light{
+    background: #F00 !important;
+}
+
+.table > :not(caption) > * > *{
+    padding: .6rem .65rem;
+}
+
+.custom_checkbox{margin-top: 5px;}
+
+.form_2 .form-check{
+    padding-left: 0 !important;
+    margin: 0 13px 7px 0;
+}
+
+.form_2 .form-check label {
+    margin-bottom: 0;
+}
+
+.field-validation-error{font-size: 13px;}
+
+.chosen-container-multi .chosen-choices{
+    display: block;
+    width: 100% !important;
+    min-height: 38px;
+    padding: .3rem .75rem !important;
+    font-size: .9rem;
+    font-family: var(--font_w_4);
+    font-weight: normal;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff !important;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.table [class*="btn-outline-"]{
+    border-color: transparent;
+    line-height: normal;
+}
+
+.view_mode .col-sm-12.col-md-6{
+    align-items: center;
+}
+
+.view_mode .col-sm-12.col-md-6 label{
+    width: 100%;
+    font-size: 14px;
+}
+
+.view_mode span.form-control{
+    color: #000;
+    border: none;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+    font-family: var(--font_w_5);
+    font-weight: normal;
+}
+
+.accordion-item .accordion-button,
+.accordion-item .card-body{
+    padding: .5rem 1rem;
+}
+
+.vertical-menu .sub-menu{padding-left: 0 !important;}
+
+
+
+.pagination_parent .pagination{margin-bottom: 0;}
+
+.pagination_parent li:first-child a {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+.pagination_parent li.disabled a {
+    color: #ced4da;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #ced4da;
+}
+.pagination_parent li a {
+    padding: .375rem .75rem;
+    position: relative;
+    display: block;
+    color: #74788d;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.pagination_parent li.active a {
+    z-index: 3;
+    color: #fff;
+    background-color: #5b73e8;
+    border-color: #5b73e8;
+}
+
+.width_auto{width: auto}
+
+#page-header-user-dropdown form{text-align: left;}
+
+#page-header-user-dropdown span{
+    line-height: normal;
+    text-align: left;
+}
+
+small{font-size: 81%;}
+
+/* =============================================
+    Responsive
+============================================= */
+
+@media (max-width:520px) {
+    .form_2 .col-md-6 > label{
+        max-width: 100%;
+        flex: 1 0 auto;
+    }
+
+    .form_2.row > *{
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px){
+    .navbar-header {
+        float: none !important;
+    }
+}

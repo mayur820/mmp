@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "HoldingReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="display_adds display_adds_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="">
+</div>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h1 class="mb-0">Holding Reports</h1>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<iframe src="~/Reports/Reports.aspx" class="w-100 d-flex" id="idIframe" onload="iframeLoaded()" title="Iframe Holding"></iframe>
+
+<script type="text/javascript">
+  function iframeLoaded() {
+      var iFrameID = document.getElementById('idIframe');
+      if(iFrameID) {
+            // here you can make the height, I delete it first, then I make it again
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+      }
+  }
+</script>

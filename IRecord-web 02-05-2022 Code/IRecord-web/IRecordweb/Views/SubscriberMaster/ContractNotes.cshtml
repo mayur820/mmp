@@ -1,0 +1,108 @@
+﻿@model BAL.Subscriber
+@{
+    ViewBag.Title = "ContractNotes";
+}
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+@section Scripts {
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Date").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+            });
+        });
+    </script>
+}
+<h2> Upload Contract Notes</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control date-input" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Broker, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Broker, ViewBag.Broker as SelectList, "Select Broker", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Broker, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Demat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Demat, ViewBag.DematAC as SelectList, "Select Demat A/C", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Demat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Consultant, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Consultant, ViewBag.Consultant as SelectList, "Select Consultant A/C", htmlAttributes: new { @class = "form-control", @onChange = "SelectedValue(this)" })
+                @Html.ValidationMessageFor(model => model.Consultant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoldingType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="HoldingType" name="HoldingType" class="form-control">
+                    <option value="1">I-Share Investment</option>
+                    <option value="2">T-Stock In Trade</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.HoldingType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.InvestmentType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.InvestmentType, ViewBag.InvestmentType as SelectList, "Select Investment Type", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InvestmentType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BrokerFormat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.BrokerFormat, ViewBag.BrokerFormat as SelectList, "Select Broker Format", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BrokerFormat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.FilePath, htmlAttributes: new { @class = "form-control", type = "file", value = "FilePath" })
+                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Pdf Password(If Required)", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PdfPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PdfPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" name="Upload" class="btn btn-success" />
+                <input type="submit" value="Close" name="Close" class="btn btn-danger ui-icon-cancel" />
+
+            </div>
+        </div>
+    </div>
+}

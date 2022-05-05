@@ -1,0 +1,194 @@
+﻿@model IPagedList<IRecordweb.Models.MEMBER>
+
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var a = HttpContext.Current.Session["UserID"];
+   // @TempData["Message"];
+  
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        /*.row {
+            /*display: table-row;*/
+            /*background: #f6f6f6;
+            color: #ffffff;
+            background: #2980b9;
+        }*/
+         .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="display_ad display_ad_top text-center mb-3">
+        <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+    </div>
+
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h1 class="mb-0">Member Master</h1>
+
+            <div class="page-title-right">
+                @if (Session["RoleId"] != null)
+                {
+                    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ADVISOR")
+                    {
+                        @*<p style="font-size:medium; font-weight:100;">
+                                <u>@Html.ActionLink("Add Member", "SaveMember")</u>
+                            </p>*@
+                        <input type="submit" class="btn btn-primary add-on" value="Add Member" onclick="location.href='@Url.Action("SaveMember", "MemberMaster")'" />
+                    }
+                    else if (Session["RoleName"].ToString() == "OPERATOR")  /*|| Session["RoleName"].ToString() == "MEMBER"*/
+                    {
+                        @*@Html.ActionLink("Add Family", "Save", new { }, new { @class = "isdisabled" })*@
+                        <input type="submit" class="btn btn-primary isdisabled" value="Add Member" onclick="location.href='@Url.Action("SaveMember", "MemberMaster")'" />
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().MemberName)
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Code)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().ServTax_No)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().AadharCardNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().PAN)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Active)
+                            </th>
+
+                            <th>@Html.DisplayName("Action")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    @foreach (var item in Model)
+    {
+        string Gender = item.Gender == 1 ? "Male" : "Female";
+        string Active = item.Active == true ? "Active" : "Inanctive";
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+                @* @Html.DropDownListFor(modelItem => item.MemberName, ViewBag.MemberName as SelectList, "Select Member")*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServTax_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AadharCardNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Active)
+            </td>
+            @if (Session["RoleId"] != null)
+                {
+                    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+                    {
+                    <td class="whitespace_nowrap">
+                        @Html.ActionLink(" ", "Edit", new { id = item.MemberID }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                        @Html.ActionLink(" ", "Details", new { id = item.MemberID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                        @Html.ActionLink(" ", "Delete", new { id = item.MemberID }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                    </td>
+                }
+                else
+                {
+                    <td class="whitespace_nowrap">
+                        @Html.ActionLink(" ", "Edit", new { id = item.MemberID }, new { @class = "isdisabled px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                        @if (Session["RoleName"].ToString() == "OPERATOR")
+                        {
+                            @Html.ActionLink("View", "FamilyDetails", new { id = item.MemberID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                        }
+                        @Html.ActionLink(" ", "DeleteFamily", new { id = item.MemberID }, new { @class = "isdisabled px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+
+                    </td>
+                }
+            }
+        </tr>
+    }
+                </tbody>
+
+                </table>
+            </div>
+
+            <div class="pagination_parent d-flex flex-wrap mt-3">
+                <div class="w-100 d-flex justify-content-end">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+
+
+
+
+</html>
+@{
+    if (@TempData["Message"] != null)
+        {
+        <script type="text/javascript">
+
+        window.onload = function () {
+            alert('@TempData["Message"]');
+        };
+   
+        </script>
+        }
+
+}
+

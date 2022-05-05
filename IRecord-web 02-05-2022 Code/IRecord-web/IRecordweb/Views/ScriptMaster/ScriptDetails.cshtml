@@ -1,0 +1,119 @@
+﻿@model IRecordweb.Models.SCRIPT
+
+@{
+    ViewBag.Title = "ScriptDetails";
+}
+
+@*<style>
+        .isdisabled {
+            cursor: not-allowed;
+            /* color: currentColor;
+            opacity: 0.5; */
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>*@
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Script Master</h1>
+
+                <div class="page-title-right">
+                    @*@Html.ActionLink("Edit", "ScriptEdit", new { id = Model.ScriptID }, new { @class = "btn btn-primary mr-2" })*@
+                    @*@if (Session["RoleId"] != null)
+                    {
+                        if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "ADVISOR")
+                        {
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Edit", "ScriptEdit", new { id = Model.ScriptID }, new { @class = "isdisabled btn btn-dark" })
+                        }
+                    }*@
+                    @Html.ActionLink("Back to List", "ScriptIndex", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @{
+            bool status = Model.Active;
+            string Active = status == true ? "Active" : "Inanctive";
+        }
+
+        <div class="card scriptmaster_par">
+            <div class="card-body">
+                <div class="row form_2 view_mode">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.ScriptID)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ScriptID)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0"> @Html.DisplayNameFor(model => model.ScriptName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ScriptName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.BSECode)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.BSECode)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0"> @Html.DisplayNameFor(model => model.NSECode)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.NSECode)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0"> @Html.DisplayNameFor(model => model.GroupName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.GroupName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.FaceValue)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.FaceValue)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.ISIN)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ISIN)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.SectorName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.SectorName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0"> @Html.DisplayNameFor(model => model.ListType)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ListType)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Active)</label>
+                        <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>

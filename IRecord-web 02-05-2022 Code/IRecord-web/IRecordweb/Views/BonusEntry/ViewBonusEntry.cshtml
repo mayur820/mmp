@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "ViewBonusEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="row form_2 mb-3">
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">Select Script:</label>
+                <select class="form-select select2">
+                    <option value="-1">-- Select Script --</option>
+                    <option value="AK">Broker 1</option>
+                    <option value="HI">Broker 2</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">Record Date:</label>
+                <input type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" />
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">Existing ISIN:</label>
+                <input type="text" class="form-control" readonly="" />
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">New ISIN:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">Bonus Qty Per:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                <label class="mb-0">Share:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col text-center">
+                <input type="submit" class="btn btn-primary" value="Apply Bonus">
+            </div>
+        </div>
+        <div class="table-responsive table-small">
+            <table class="table defaultTable table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            <span class="">Sr. No</span>
+                        </th>
+                        <th>
+                            <span class="">Member Name</span>
+                        </th>
+                        <th>
+                            <span class="">Holding Type</span>
+                        </th>
+                        <th>
+                            <span class="">Demat name</span>
+                        </th>
+                        <th>
+                            <span class="">Broker name</span>
+                        </th>
+                        <th>
+                            <span class="">Consultant name</span>
+                        </th>
+                        <th>
+                            <span class="">Holding Qty</span>
+                        </th>
+                        <th>
+                            <span class="">Received Qty</span>
+                        </th>
+                        <th>
+                            <span class="">Total Qty</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Vishal Dalal</td>
+                        <td>Share Investment</td>
+                        <td>Abc Demat Accont</td>
+                        <td>ABC Broker</td>
+                        <td>Ialf</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Vishal Dalal</td>
+                        <td>Share Investment</td>
+                        <td>Abc Demat Accont</td>
+                        <td>ABC Broker</td>
+                        <td>Ialf</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Vishal Dalal</td>
+                        <td>Share Investment</td>
+                        <td>Abc Demat Accont</td>
+                        <td>ABC Broker</td>
+                        <td>Ialf</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Vishal Dalal</td>
+                        <td>Share Investment</td>
+                        <td>Abc Demat Accont</td>
+                        <td>ABC Broker</td>
+                        <td>Ialf</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Vishal Dalal</td>
+                        <td>Share Investment</td>
+                        <td>Abc Demat Accont</td>
+                        <td>ABC Broker</td>
+                        <td>Ialf</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 text-center mt-3">
+            <input type="submit" class="btn btn-primary" value="Post In Respective Demat" />
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Consultant Master</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row form_2">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Consultant Name <span class="text-danger">*</span>:</label>
+                        <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Consultant Name" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+

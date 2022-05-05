@@ -1,0 +1,85 @@
+﻿@model IRecordweb.Models.FINANCIALYEAR
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<div>
+    <h1>Financial Year Master</h1>
+
+    @{
+        bool status = Model.Active;
+        string Active = status == true ? "Active" : "Inanctive";
+    }
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FinancialYearID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinancialYearID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+       
+    </dl>
+</div>
+<p>
+    @if (Session["RoleId"] != null)
+        {
+        if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+            {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.FinancialYearID })
+            }
+        else
+            {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.FinancialYearID }, new { @class = "isdisabled" })
+            }
+        } |
+    @Html.ActionLink("Back to List", "Index")
+</p>

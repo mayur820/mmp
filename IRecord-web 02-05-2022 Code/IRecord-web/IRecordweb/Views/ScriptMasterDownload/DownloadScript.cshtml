@@ -1,0 +1,145 @@
+﻿@model IEnumerable<BAL.ScriptUploadDownload>
+
+@{
+    ViewBag.Title = "DownloadScript";
+}
+
+<h2>DownloadScript</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("DownloadScript", "ScriptMasterDownload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ScriptName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.BSECode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NSECode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IndustryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvestmentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMcx)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCurrency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsNcdx)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFO)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FaceValue)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ISIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MutualFundID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.scripdatalist)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScriptName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.BSECode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NSECode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IndustryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvestmentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsMcx)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCurrency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsNcdx)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFO)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.FaceValue)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ISIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MutualFundID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeId)
+        </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ScriptID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ScriptID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ScriptID })
+        </td>*@
+    </tr>
+    }
+
+</table>
+    }

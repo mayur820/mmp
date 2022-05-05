@@ -1,0 +1,176 @@
+﻿@model IRecordweb.Models.SCRIPT
+
+@{
+    ViewBag.Title = "ScriptDelete";
+}
+
+@*<style>
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 600px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+</style>*@
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Script Master</h1>
+
+                <div class="page-title-right">
+
+                    @Html.ActionLink("Back to List", "ScriptIndex", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @{
+            bool status = Model.Active;
+            string Active = status == true ? "Active" : "Inanctive";
+
+            bool status1 = Model.IsMcx;
+            string IsMcx = status1 == true ? "Active" : "Inanctive";
+
+            bool status2 = Model.IsNcdx;
+            string IsNcdx = status2 == true ? "Active" : "Inanctive";
+
+            bool status3 = Model.IsFO;
+            string IsFO = status3 == true ? "Active" : "Inanctive";
+
+            bool status4 = Model.IsCurrency;
+            string IsCurrency = status4 == true ? "Active" : "Inanctive";
+        }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+        <div class="card scriptmaster_par">
+            <div class="card-body">
+                <div class="row form_2 view_mode">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.ScriptName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ScriptName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.BSECode)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.BSECode)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.NSECode)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.NSECode)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.GroupName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.GroupName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.FaceValue)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.FaceValue)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.ISIN)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ISIN)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.SectorName)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.SectorName)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.ListType)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.ListType)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.Active)</label>
+                        <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                    </div>
+
+                    @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.IsMcx)</label>
+                        <span class="form-control">@Html.DisplayFor(model => IsMcx)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.IsNcdx)</label>
+                        <span class="form-control">@Html.DisplayFor(model => IsNcdx)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.IsFO)</label>
+                        <span class="form-control">@Html.DisplayFor(model => IsFO)</span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.IsCurrency)</label>
+                        <span class="form-control">@Html.DisplayFor(model => IsCurrency)</span>
+                    </div>*@
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                    </div>
+
+                    <div class="col-sm-12 text-center mt-3">
+                        <input type="submit" value="Delete" class="btn btn-danger" />  @*data-bs-target="#myModal" data-bs-toggle="modal"*@ 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*@using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()*@
+
+
+        @*}*@
+        @*@using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()*@
+
+            <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Script Master </h4>
+                            <div class="btn-close" data-bs-dismiss="modal"></div>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Are you sure you want to delete this?
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="OK" name="OK" class="btn btn-danger">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>

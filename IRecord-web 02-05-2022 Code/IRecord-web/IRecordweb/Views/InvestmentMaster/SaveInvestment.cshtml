@@ -1,0 +1,107 @@
+﻿@model IRecordweb.Models.INVESTMENT
+
+@{
+    ViewBag.Title = "SaveInvestment";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Investment Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card invesment_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @Checked = true })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-12 text-center mt-3">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            @*@if (Session["RoleName"].ToString() == "OPERATOR")
+                    {
+                    <input type="submit" value="Save" class="btn btn-primary isdisabled" />
+                    }
+                    else
+                    {
+           
+                    }*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Scripts/jquery-1.12.4.js"></script>*@
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+    }
+}

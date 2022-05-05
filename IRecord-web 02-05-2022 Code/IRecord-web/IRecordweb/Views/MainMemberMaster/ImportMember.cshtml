@@ -1,0 +1,330 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+@*<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>*@
+
+@*<link href="/Content/bootstrap.min.v4.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+    <link href="~/Content/app.min.css" rel="stylesheet" />
+    <link href="~/Content/theme-color.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css">*@
+
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+<div ng-app="myApp">
+    <div ng-controller="myctrn" ng-init="PageLoad()">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Member Master</h4>
+                    @{
+                        if (Session["Add_Rights"].ToString() == "1")
+                        {
+                            int MemberCount = 0;
+                            int subscription = 0;
+                            if (TempData["Val1"] != null)
+                            {
+                                if (TempData["onMemberCount"] != null && TempData["onMemberCount"] != null)
+                                {
+                                    MemberCount = Convert.ToInt32(Session["onMemberCount"].ToString());
+                                    subscription = Convert.ToInt32(Session["onMemberSubscription"].ToString());
+                                }
+                            }
+                            else
+                            {
+                                if (TempData["MemberCount"] != null && TempData["MemberCount"] != null)
+                                {
+                                    MemberCount = Convert.ToInt32(Session["MemberCount"].ToString());
+                                    subscription = Convert.ToInt32(Session["MemberSubscription"].ToString());
+
+                                }
+
+                            }
+                            if (MemberCount >= subscription)
+                            {
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="las la-plus font-size-18"></i> Add New <i class="las la-angle-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="/BrokerBillEntry/SaveBREntry">Import</a>
+                                        <a class="dropdown-item" href="/BrokerBillEntry/ManualEntry">Manual Entry</a>
+                                    </div>
+                                </div>
+                                @*<div class="page-title-right">
+                        <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-soft-info disabled"><i class="las la-plus font-size-18"></i> Add New</a>
+                    </div>*@
+                            }
+                            else
+                            {
+                                @*<div class="page-title-right">
+                        <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
+                    </div>*@
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="las la-plus font-size-18"></i> Add New <i class="las la-angle-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="/BrokerBillEntry/SaveBREntry">Import</a>
+                                        <a class="dropdown-item" href="/BrokerBillEntry/ManualEntry">Manual Entry</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    @*}*@
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <!-- Working Area Start -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row form_2">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Member Name <span class="text-danger">*</span>:</label>
+                        <input type="text" id="member_name" ng-model="MemberName" required="required" name="member_name" class="form-control" placeholder="Enter Member Name" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Member Of Family <span class="text-danger">*</span>:</label>
+                        @*<input type="text" id="member_of_family" ng-model="FamilyID" name="member_of_family" class="form-control" placeholder="Enter Member of Family" />*@
+                        <select id="FamilyID" ng-model="FamilyID" ng-options="x.ID as x.NAME for x in FILLFAMILY" class="form-control">
+                            <option ng-option value=""> Select Family </option>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Address Line 1:</label>
+                        <input type="text" id="Address_1" ng-model="Address_1" name="addressLine_1" class="form-control" placeholder="Enter Address Line 1" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Address Line 2:</label>
+                        <input type="text" id="Address_2" ng-model="Address_2" name="addressLine_2" class="form-control" placeholder="Enter Address Line 2" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Address Line 3:</label>
+                        <input type="text" id="Address_3" ng-model="Address_3" name="addressLine_3" class="form-control" placeholder="Enter Address Line 3" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">P.A.N:</label>
+                        <input type="text" id="pan_no" name="pan_no" ng-model="PAN" class="form-control" placeholder="Enter P.A.N" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">GST No.:</label>
+                        <input type="text" id="gst_no" name="gst_no" ng-model="ServTax_No" class="form-control" placeholder="Enter GST No" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Aadhaar No.:</label>
+                        <input type="text" id="aadhaar_no" ng-model="AadharCardNo" name="aadhaar_no" class="form-control" placeholder="Enter Aadhaar No" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Logo File.:</label>
+                        <input type="file" id="memberfile" class="form-control" />
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Gender:</label>
+                        <select type="text" ng-model="Gender" id="gst_no" name="gst_no" class="form-select">
+                            <option value="">Select Gender</option>
+                            <option value="1">Male </option>
+                            <option value="0">Female</option>
+                        </select>
+
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Email.<span class="text-danger">*</span>:</label>
+                        <input type="text" id="Email" ng-model="Email" name="aadhaar_no" class="form-control" placeholder="Enter Email Id" autocomplete="off" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Password.<span class="text-danger">*</span>:</label>
+                        <input type="password" id="Password" ng-model="Password" name="Password" class="form-control" placeholder="Enter Password" />
+                        <button id="show_password" class="btn btn-primary btn-soft-primary" type="button" style="position:relative; display:block">
+                            <span class="fa fa-eye-slash icon"></span>
+                        </button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Operator <span class="text-danger">*</span>:</label>
+                        <select id="OperatorID" ng-model="OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-control">
+                            @*class="form-select select2 wd_buy_sell"*@
+                            <option ng-option value="">-- Select Operator --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex" style="display:none">
+                        <label class="mb-0" style="display:none">Client Code.:</label>
+                        <input type="text" id="Client_Code" ng-model="Client_Code" name="Client_Code" class="form-control" style="display:none" placeholder="Enter Client Code" />
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                    @*<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>*@
+                    <button type="button" class="btn btn-primary" id="ApproveNowUpload" ng-click="SubmitData()">Save</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- Working Area End -->
+        <!-- container-fluid -->
+        <!-- Modal 2 -->
+        <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Member Master</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Member Name <span class="text-danger">*</span>:</label>
+                                <input type="text" id="member_name" ng-model="MemberName" required="required" name="member_name" class="form-control" placeholder="Enter Member Name" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Member Of Family <span class="text-danger">*</span>:</label>
+                                @*<input type="text" id="member_of_family" ng-model="FamilyID" name="member_of_family" class="form-control" placeholder="Enter Member of Family" />*@
+                                <select id="FamilyID" ng-model="FamilyID" ng-options="x.ID as x.NAME for x in FILLFAMILY" class="form-control">
+                                    <option ng-option value=""> Select Family </option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Address Line 1:</label>
+                                <input type="text" id="Address_1" ng-model="Address_1" name="addressLine_1" class="form-control" placeholder="Enter Address Line 1" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Address Line 2:</label>
+                                <input type="text" id="Address_2" ng-model="Address_2" name="addressLine_2" class="form-control" placeholder="Enter Address Line 2" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Address Line 3:</label>
+                                <input type="text" id="Address_3" ng-model="Address_3" name="addressLine_3" class="form-control" placeholder="Enter Address Line 3" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">P.A.N:</label>
+                                <input type="text" id="pan_no" name="pan_no" ng-model="PAN" class="form-control" placeholder="Enter P.A.N" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">GST No.:</label>
+                                <input type="text" id="gst_no" name="gst_no" ng-model="ServTax_No" class="form-control" placeholder="Enter GST No" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Aadhaar No.:</label>
+                                <input type="text" id="aadhaar_no" ng-model="AadharCardNo" name="aadhaar_no" class="form-control" placeholder="Enter Aadhaar No" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Logo File.:</label>
+                                <input type="file" id="memberfile" class="form-control" />
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Gender:</label>
+                                <select type="text" ng-model="Gender" id="gst_no" name="gst_no" class="form-select">
+                                    <option value="">Select Gender</option>
+                                    <option value="1">Male </option>
+                                    <option value="0">Female</option>
+                                </select>
+
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Email.<span class="text-danger">*</span>:</label>
+                                <input type="text" id="Email" ng-model="Email" name="aadhaar_no" class="form-control" placeholder="Enter Email Id" autocomplete="off" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Password.<span class="text-danger">*</span>:</label>
+                                <input type="password" id="Password" ng-model="Password" name="Password" class="form-control" placeholder="Enter Password" />
+                                <button id="show_password" class="btn btn-primary btn-soft-primary" type="button" style="position:relative; display:block">
+                                    <span class="fa fa-eye-slash icon"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Operator <span class="text-danger">*</span>:</label>
+                                <select id="OperatorID" ng-model="OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-control">
+                                    @*class="form-select select2 wd_buy_sell"*@
+                                    <option ng-option value="">-- Select Operator --</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex" style="display:none">
+                                <label class="mb-0" style="display:none">Client Code.:</label>
+                                <input type="text" id="Client_Code" ng-model="Client_Code" name="Client_Code" class="form-control" style="display:none" placeholder="Enter Client Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                        @*<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>*@
+                        <button type="button" class="btn btn-primary" id="ApproveNowUpload" ng-click="SubmitData()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var txt;
+        var r = confirm("Do you want to delete record?");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#show_password').hover(function show() {
+            //Change the attribute to text
+            $('#Password').attr('type', 'text');
+            $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        },
+            function () {
+                //Change the attribute back to password
+                $('#Password').attr('type', 'password');
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+            });
+        //CheckBox Show Password
+        $('#show_password').click(function () {
+            $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+        });
+    });
+
+//}
+</script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/MainMemberMaster.js"></script>

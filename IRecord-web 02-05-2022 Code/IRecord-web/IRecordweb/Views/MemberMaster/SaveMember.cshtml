@@ -1,0 +1,201 @@
+﻿@model IRecordweb.Models.MEMBER
+@{
+    ViewBag.Title = "SaveMember";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+
+    listItems.Add(new SelectListItem
+        {
+        Text = "Male",
+        Value = "1"
+        });
+    listItems.Add(new SelectListItem
+        {
+        Text = "Female",
+        Value = "0"
+
+        });
+}
+
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Member Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm("SaveMember", "MemberMaster", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="card member_master_par">
+                <div class="card-body">
+                    <div class="row form_2" id="data">
+                        @*<h4>Member</h4>*@
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FamilyID, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(model => model.FamilyID, ViewBag.FamilyID as SelectList, "Select Family", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FamilyID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.MemberName, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.MemberName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>*@
+                        @*</div>*@
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @*@Html.DropDownList("Gender", listItems, "Select Gender", new { htmlAttributes = new { @class = "form-control" } })*@
+                                <select class="form-select" id="Gender" name="Gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ServTax_No, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.ServTax_No, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ServTax_No, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.AadharCardNo, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.AadharCardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AadharCardNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.ReportLogoPath, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.TextBoxFor(model => model.ReportLogoPath, htmlAttributes: new { @class = "form-control", type = "file", value = "ReportLogoPath" })
+                                @Html.ValidationMessageFor(model => model.ReportLogoPath, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label" })
+                                <div class="w-100">
+                                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.PAN, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.PAN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PAN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @checked = true })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+
+                            @*<input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" onclick="Savebtn()" />*@
+                            @if (Session["RoleName"].ToString() == "OPERATOR")
+                                {
+                                <input type="submit" value="Save" class="btn btn-primary isdisabled" />
+                                }
+                            else
+                                {
+                                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-primary" onclick="Savebtn()" />
+                                }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            }
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+@*@Html.Partial("_PartialButton")*@
+
+@*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    @if (ViewBag.Message != null)
+        {
+        <script type="text/javascript">
+            debugger;
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+            // window.location.href = '~/MemberMaster/Index';
+        </script>
+        }
+}

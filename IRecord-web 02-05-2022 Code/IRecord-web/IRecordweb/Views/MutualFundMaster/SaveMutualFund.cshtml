@@ -1,0 +1,156 @@
+﻿@model IRecordweb.Models.MUTUALFUND
+
+@{
+    ViewBag.Title = "SaveMutualFund";
+}
+
+@*<style>
+        .isdisabled {
+            color: currentColor;
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>*@
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Mutual Fund Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="card mutualfund_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                @Html.LabelFor(model => model.MCode, htmlAttributes: new { @class = "control-label" })
+                                <div class="w-100">
+                                    @Html.EditorFor(model => model.MCode, new { htmlAttributes = new { @class = "form-control", @disabled=true } })
+                                    @Html.ValidationMessageFor(model => model.MCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.FundFamilyName, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @*@Html.EditorFor(model => model.FundFamilyName, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownListFor(model => model.FundFamilyName, ViewBag.FundFamilyName as SelectList, "Select Fund Family", htmlAttributes: new { @class = "form-select" })
+                                @Html.ValidationMessageFor(model => model.FundFamilyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.NameOfScheme, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.NameOfScheme, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NameOfScheme, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.SchemeCode, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.SchemeCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SchemeCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.InvestmentOption, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @*@Html.EditorFor(model => model.InvestmentOption, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <select class="form-select" id="InvestmentOption" name="InvestmentOption">
+                                    <option value=""> Select Investment Option </option>
+                                    <option value="G-Growth"> G-Growth </option>
+                                    <option value="D-Dividend"> D-Dividend </option>
+                                    <option value="P-Dividend Payout"> P-Dividend Payout </option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.InvestmentOption, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @*@Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <select class="form-select" id="Code" name="Code">
+                                    <option value=""> Select Code </option>
+                                    <option value="Dept"> Dept </option>
+                                    <option value="Equity"> Equity </option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @checked = true })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+                            @if (Session["RoleName"] != null)
+                            {
+                                if (Session["RoleName"].ToString() == "OPERATOR")
+                                {
+                            <input type="submit" value="Save" class="btn btn-primary isdisabled" />
+                                }
+                                else
+                                {
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @if (ViewBag.Message != null)
+        {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+        }
+}
+
+
+
+

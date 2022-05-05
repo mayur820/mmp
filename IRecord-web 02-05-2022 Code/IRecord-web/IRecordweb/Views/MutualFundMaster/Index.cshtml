@@ -1,0 +1,128 @@
+﻿@model IEnumerable<IRecordweb.Models.MUTUALFUND>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>*@
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Mutual Fund Master</h1>
+
+        <div class="page-title-right">
+            <input type="submit" class="btn btn-primary add-on" value="Add Mutual Fund" onclick="location.href='@Url.Action("SaveMutualFund", "MutualFundMaster")'" />
+            @*@if (Session["RoleId"] != null)
+        {
+            if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "ADVISOR")
+            {
+
+            }
+            else if (Session["RoleName"].ToString() == "OPERATOR")  /*|| Session["RoleName"].ToString() == "MEMBER"*/
+            {
+                <input type="submit" class="btn btn-primary disabled isdisabled" value="Add Mutual Fund" onclick="location.href='@Url.Action("SaveMutualFund", "MutualFundMaster")'" />
+            }
+        }*@
+        </div>
+
+    </div>
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+
+<div class="card mutualfund_master_par">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NameOfScheme)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SchemeCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.InvestmentOption)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Action")
+                        </th>
+                    </tr>
+                </thead>
+
+                    @foreach (var item in Model)
+                    {
+
+                        string Active = item.Active == true ? "Active" : "Inactive";
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameOfScheme)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SchemeCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvestmentOption)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Active)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "MutualFundUpdate", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                        @Html.ActionLink(" ", "MutualFundDetails", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                        @Html.ActionLink(" ", "MutualFundDelete", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                    </td>
+                    @*@if (Session["RoleId"] != null)
+                    {
+                        if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "ADVISOR")
+                        {
+                            <td>
+                                @Html.ActionLink(" ", "MutualFundUpdate", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                                @Html.ActionLink(" ", "MutualFundDetails", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                                @Html.ActionLink(" ", "MutualFundDelete", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink(" ", "MutualFundUpdate", new { id = item.MutualFundID }, new { @class = "isdisabled px-2 btn btn-outline-primary las la-pencil-alt font-size-18" })
+                                @if (Session["RoleName"].ToString() == "OPERATOR")
+                                {
+                                    @Html.ActionLink(" ", "MutualFundDetails", new { id = item.MutualFundID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" })
+                                }
+                                @Html.ActionLink(" ", "MutualFundDelete", new { id = item.MutualFundID }, new { @class = "isdisabled px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                            </td>
+                        }
+                    }*@
+                </tr>
+                    }
+
+</table>
+        </div>
+    </div>
+</div>

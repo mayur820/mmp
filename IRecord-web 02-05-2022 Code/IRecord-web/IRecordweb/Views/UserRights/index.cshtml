@@ -1,0 +1,390 @@
+﻿
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_LayoutTemp.cshtml";
+}
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<link rel="stylesheet" href="/css/select2.min.css" />
+<style type="text/css">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+@*---------*Angular JS* SECTION-----*@
+<div ng-app="myApp">
+    <div ng-controller="myctrn" ng-init="PageLoad()">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Role Base Access</h4>
+                    <div class="page-title-right">
+                        <a href="#modal_Addrole" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add Role</a>
+                        <a href="#modal_AssignUserRole" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i>Assign User Role</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <!-- Working Area Start -->
+        <!-- end page title -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row cols-md-6">
+                    <div class="col-md-3">
+                        <select id="ddlRoles" class="form-select select2 wd_buy_sell" onchange="GetMenu()">
+                            <option value="">Select Role</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="ddlUsers" class="form-select select2 wd_buy_sell">
+                            <option value="">Select User</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12  tbl_int_grp flex-nowrap">
+                    <div class="table-responsive" style="height: 400px;">
+                        <table id="tblMenu" class="table table-hover table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>MenuID</th>
+                                    <th>Name</th>
+                                    <th>Add</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>View</th>
+                                    <th>Super Admin</th>
+                                    <th>Normal User</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblbody">
+                            </tbody>
+                        </table>
+                    </div>
+                    @*<button id="btnSave" type="button" onclick="SaveData();">Save</button>*@
+
+                </div>
+                <br />
+                <div class="page-title-right">
+                    <button type="button" class="px-2 btn btn-success" id="btnSave" onclick="SaveData();">Save Role Base Access</button>
+                </div>
+            </div>
+        </div>
+        @*Model 1*@
+        <div class="modal fade" id="modal_Addrole" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Role</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2 view_mode">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Role Name <span class="text-danger">*</span>:</label>
+                                <input type="text" id="role_name" required="required" name="role_name" class="form-control" placeholder="Enter Role Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="px-2 btn btn-primary" id="AddRoelname" onclick=" SaveRole();">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Model 2*@
+        <div class="modal fade" id="modal_AssignUserRole" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Assign User Role</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form_2 view_mode">
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Select Role <span class="text-danger">*</span>:</label>
+                                <select id="ddlrolename" class="form-select select2 wd_buy_sell" onchange="SelectUsers();"><option value="">Select Role</option></select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label class="mb-0">Select User <span class="text-danger">*</span>:</label>
+                                <select id="ddlusername" class="form-select select2 wd_buy_sell" multiple="multiple"><option value="">Select User</option></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary" id="Adduserrole" onclick="SaveUserRoleAssign();">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetRoles();
+        /*GetMenu();*/
+        GetUsers();
+        $("#ddlusername").select2();
+        //$("#ddlusername").multiselect({
+        //    //closeOnSelect: false,
+        //    //placeholder: "Placeholder",
+        //    //allowHtml: true,
+        //    //allowClear: true,
+        //    //tags: true //
+        //});
+    });
+    function GetRoles() {
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/GetRoles",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $("#ddlRoles").empty().append('<option selected="selected" value="">Select Role</option>');
+                $.each(response, function (data, value) {
+                    $("#ddlRoles").append($("<option></option>").val(value.RoleID).html(value.RoleName));
+                });
+                $("#ddlrolename").empty().append('<option selected="selected" value="">Select Role</option>');
+                $.each(response, function (data, value) {
+                    $("#ddlrolename").append($("<option></option>").val(value.RoleID).html(value.RoleName));
+                });
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function GetUsers() {
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/GetUsers",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $("#ddlusername").empty().append('<option selected="selected" value="">Select User</option>');
+                $.each(response, function (data, value) {
+                    $("#ddlusername").append($("<option></option>").val(value.Userid).html(value.UserName));
+                });
+                $("#ddlUsers").empty().append('<option selected="selected" value="">Select User</option>');
+                $.each(response, function (data, value) {
+                    $("#ddlUsers").append($("<option></option>").val(value.Userid).html(value.UserName));
+                });
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function SelectUsers() {
+        var rolename = $("#ddlrolename").val();
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/SelectUsers",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: '{"RoleID":' + rolename + '}',
+            /*data: '{"RoleName":"' + rolename + '"}',*/
+            success: function (data) {
+                var userlst = [];
+                $.each(data, function (index) {
+                    userlst.push(data[index]);
+                });
+                $("#ddlusername").val(userlst);
+                $('#ddlusername').trigger('change');
+            }
+        });
+    }
+    function GetMenu() {
+
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/GetMenu",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ 'RoleID': $("#ddlRoles").val() }),
+            /*data: '{"RoleName":"' + rolename + '"}',*/
+            success: function (data) {
+                $("#tblbody").html("");
+                var strbody = "";
+                $.each(data, function (index) {
+                    var stradd = "";
+                    var stredit = "";
+                    var strdelete = "";
+                    var strview = "";
+                    var strsuperadmin = "";
+                    var strnormaluser = "";
+                    debugger
+                    if (data[index].Add == true) {
+                        stradd = "checked";
+                    }
+                    if (data[index].Edit == true) {
+                        stredit = "checked";
+                    }
+                    if (data[index].Delete == true) {
+                        strdelete = "checked";
+                    }
+                    if (data[index].View == true) {
+                        strview = "checked";
+                    }
+                    if (data[index].SuperAdmin == true) {
+                        strsuperadmin = "checked";
+                    }
+                    if (data[index].NormalUser == true) {
+                        strnormaluser = "checked";
+                    }
+
+                    strbody += '<tr>' +
+                        '<td>' + data[index].MenuID + '</td>' +
+                        '<td>' + data[index].Name + '</td>' +
+
+                        '<td><input type="checkbox" ' + stradd + ' /></td>' +
+                        '<td><input type="checkbox" ' + stredit + ' /></td>' +
+                        '<td><input type="checkbox" ' + strdelete + ' /></td>' +
+                        '<td><input type="checkbox" ' + strview + ' /></td>' +
+                        '<td><input type="checkbox" ' + strsuperadmin + ' /></td>' +
+                        '<td><input type="checkbox" ' + strnormaluser + ' /></td>' +
+                        '</tr>';
+                });
+                $("#tblbody").append(strbody);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function SaveData() {
+        var menulist = [];
+        $("#tblMenu tbody tr").each(function () {
+            var obj = new Object();
+            var id = $(this).find("td").eq(0).html();
+            var name = $(this).find("td").eq(1).html();
+            var isadd = false;
+            var isedit = false;
+            var isdelete = false;
+            var isview = false;
+            var issuperadmin = false;
+            var isnormaluser = false;
+            if ($(this).find("td").eq(2).children("input").prop("checked")) {
+                isadd = true;
+            }
+            if ($(this).find("td").eq(3).children("input").prop("checked")) {
+                isedit = true;
+            }
+            if ($(this).find("td").eq(4).children("input").prop("checked")) {
+                isdelete = true;
+            }
+            if ($(this).find("td").eq(5).children("input").prop("checked")) {
+                isview = true;
+            }
+            if ($(this).find("td").eq(6).children("input").prop("checked")) {
+                issuperadmin = true;
+            }
+            if ($(this).find("td").eq(7).children("input").prop("checked")) {
+                isnormaluser = true;
+            }
+            if (isadd == true || isedit == true || isdelete == true || isview == true) {
+                obj.MenuID = id;
+                obj.Name = name;
+                obj.Add = isadd;
+                obj.Edit = isedit;
+                obj.Delete = isdelete;
+                obj.View = isview;
+                obj.SuperAdmin = issuperadmin;
+                obj.NormalUser = isnormaluser;
+                obj.RoleID = $("#ddlRoles").val();
+                if ($("#ddlUsers").val() == "") {
+                    obj.UserID = 0;
+                }
+                else {
+                    obj.UserID = $("#ddlUsers").val();
+                }
+                menulist.push(obj);
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/InsertMenu",
+            data: JSON.stringify({ "menulist": menulist }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Menu Role Access Added Successfully.");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function SaveRole() {
+        var rolename = $("#role_name").val();
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/InsertRoleMaster",
+            data: '{"RoleName":"' + rolename + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Role Added Successfully.");
+                GetRoles();
+                $('#modal_Addrole').modal('hide');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function SaveUserRoleAssign() {
+        debugger
+        var userids = $("#ddlusername").select2('val');
+        var rid = $("#ddlrolename").val();
+        //var uid = $("#ddlusername").val();
+        $.ajax({
+            type: "POST",
+            url: "/UserRights/InsertUserRoleAssign",
+            data: '{"UserIDS":"' + userids + '","RoleID":"' + rid + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Role Assign Successfully.");
+                $('#modal_AssignUserRole').modal('hide');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+</script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="../js/select2.min.js"></script>
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/MainMemberMaster.js"></script>

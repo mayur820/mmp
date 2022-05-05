@@ -1,0 +1,502 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>*@
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">User Security</h4>
+
+            <!-- <div class="page-title-right">
+                <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- Working Area Start -->
+@*<div ng-app="myApp" class="wrapper">
+    <div ng-controller="myctrn" ng-init="PageLoad()">*@
+<div class="card">
+    <div class="card-body">
+
+        <div class="user_rights_par">
+            <!-- Main Level 1 -->
+            <div class="accordion" id="investor_L_1">
+
+                @{
+                    foreach (DataRow dr in ((Session["DT_ALL_MEMBER"] as DataTable).Select("Manager_ID='0'")))
+                        {
+
+                        <div class="accordion_title_box accordion-item">
+                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                <div class="arrow_box me-2 collapsed d-flex justify-content-center align-items-center" data-bs-toggle="collapse" data-bs-target='#collapseOne_@dr["ID"]' aria-expanded="false"></div>
+                                <a href='#collapseOne_@dr["ID"]' class="accordion-header collapsed" data-bs-toggle="collapse" aria-expanded="false">
+                                    @*<a href='("UserSecurity","GET_ALL_MEMEBERlevel2")'>*@
+                                    @dr["UserName"].ToString()
+
+                                </a>
+
+                            </div>
+                            <div id="collapseOne_@dr["ID"]" class="accordion-collapse collapse_L_1 collapse" data-bs-parent="#investor_L_1">
+                                <div class="accordion-body">
+                                    <!-- Main Level 2 -->
+                                    <div id="operator_List_1-1_@dr["id"]">
+                                        @{
+                                            foreach (DataRow drlevel2 in ((Session["DT_ALL_MEMBER"] as DataTable).Select("Manager_ID='" + dr["UserId"].ToString() + "' and Level_ID=2")))
+                                                {
+                                                <div class="accordion_title_box accordion-item">
+                                                    <div class="accordion-button d-flex flex-wrap align-items-center">
+                                                        <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#operator_L_1_1_@drlevel2["ID"]" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                        <a class="collapsed" data-bs-toggle="collapse" href="#operator_L_1_1_@drlevel2["ID"]" aria-expanded="false">
+                                                            @drlevel2["UserName"].ToString()
+                                                        </a>
+
+
+                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'add_@drlevel2["ID"]','Add','H2_level',@dr["UserId"], @drlevel2["UserId"].ToString())" id="add_@drlevel2["UserId"]">
+                                                                @*<input class="form-check-input" value="@drlevel2["View"]" type="checkbox" name="Data" id="view_1">*@
+                                                                <label class="form-check-label" for="view_1"><span>Add</span></label>
+
+
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'View_@drlevel2["ID"]','View','H2_level',@dr["UserId"], @drlevel2["UserId"].ToString())" id="View_@drlevel2["UserId"]">
+                                                                @*<input class="form-check-input" value="@drlevel2["View"]" type="checkbox" name="Data" id="view_1">*@
+                                                                <label class="form-check-label" for="view_1"><span>View</span></label>
+
+
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Edit_@drlevel2["ID"]','Edit','H2_level',@dr["UserId"], @drlevel2["UserId"].ToString())" id="Edit_@drlevel2["UserId"]">
+                                                                <label class="form-check-label" for="edit_1"><span>Edit</span></label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Delete_@drlevel2["ID"]','Delete','H2_level',@dr["UserId"], @drlevel2["UserId"].ToString())" id="Delete_@drlevel2["UserId"]">
+                                                                <label class="form-check-label" for="delete_1"><span>Delete</span></label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Execute_@drlevel2["ID"]','Execute','H2_level',@dr["UserId"], @drlevel2["UserId"].ToString())" id="Execute_@drlevel2["UserId"]">
+                                                                <label class="form-check-label" for="execute_1"><span>Execute</span></label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="operator_L_1_1_@drlevel2["id"]" class="accordion-collapse collapse_L_2 collapse" data-bs-parent="#operator_L_1_1_@drlevel2["id"]">
+                                                        <div class="accordion-body panel_inner_body">
+
+                                                            <ul class="panel_inner_list d-flex flex-column">
+
+                                                                @{
+                                                                    foreach (DataRow pg in ((Session["DT_ALL_VIEWBYPAGENAME"] as DataTable).Select("userid='" + drlevel2["UserId"].ToString() + "'")))
+                                                                        {
+                                                                        <li class="d-flex flex-wrap align-items-center">
+                                                                            <div class="flex_1">@pg["Page_Name"].ToString()</div>
+
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input add_@drlevel2["ID"]" type="checkbox" id="view_1_2" onchange="UpldateUser(this,@pg["Id"],'Add')" @(pg["Add"].ToString() == "1" ? "checked" : "")>
+
+                                                                                    <label class="form-check-label" for="view_1_2"><span>Add</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input View_@drlevel2["ID"]" type="checkbox" onchange="UpldateUser(this,@pg["Id"],'View')" @(pg["View"].ToString() == "1" ? "checked" : "")>
+
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input Edit_@drlevel2["ID"]" type="checkbox" onchange="UpldateUser(this,@pg["Id"],'Edit')" @(pg["Edit"].ToString() == "1" ? "checked" : "")>
+
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input Delete_@drlevel2["ID"]" type="checkbox" id="delete_1_2" onchange="UpldateUser(this,@pg["Id"],'Delete')" @(pg["Delete"].ToString() == "1" ? "checked" : "")>
+
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input Execute_@drlevel2["ID"]" type="checkbox" id="execute_1_2" onchange="UpldateUser(this,@pg["Id"],'Execute')" @(pg["Execute"].ToString() == "1" ? "checked" : "")>
+
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        }
+                                                                }
+
+
+
+                                                            </ul>
+                                                            @{
+                                                                foreach (DataRow drlevel3 in ((Session["DT_ALL_MEMBER"] as DataTable).Select("Manager_ID='" + drlevel2["UserId"].ToString() + "' and Level_ID=3")))
+                                                                    {
+
+                                                                    <div class="accordion_title_box accordion-item">
+                                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#entry_L_1_@drlevel3["Id"]" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                            <a class="collapsed" data-bs-toggle="collapse" href="#entry_L_1_@drlevel3["Id"]">
+                                                                                @drlevel3["UserName"].ToString()
+                                                                            </a>
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'add_@drlevel3["Id"]','Add','H3_level',@dr["UserId"], @drlevel3["UserId"].ToString())" id="add_@drlevel3["Id"]">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>Add</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'View_@drlevel3["Id"]','View','H3_level',@dr["UserId"], @drlevel3["UserId"].ToString())" id="View_@drlevel3["Id"]">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Edit_@drlevel3["Id"]','Edit','H3_level',@dr["UserId"], @drlevel3["UserId"].ToString())" id="Edit_@drlevel3["Id"]">
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Delete_@drlevel3["Id"]','Delete','H3_level',@dr["UserId"], @drlevel3["UserId"].ToString())" id="Delete_@drlevel3["Id"]">
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Execute_@drlevel3["Id"]','Execute','H3_level',@dr["UserId"], @drlevel3["UserId"].ToString())" id="Execute_@drlevel3["Id"]">
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="entry_L_1_@drlevel3["Id"]" class="accordion-collapse collapse">
+                                                                            <div class="panel_inner_body">
+
+
+                                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                                    @{
+                                                                                        foreach (DataRow pg in ((Session["DT_ALL_VIEWBYPAGENAME"] as DataTable).Select("userid='" + drlevel3["UserId"].ToString() + "'")))
+                                                                                            {
+                                                                                            <li class="d-flex flex-wrap align-items-center">
+                                                                                                <div class="flex_1">@pg["Page_Name"].ToString()</div>
+                                                                                                <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input add_@drlevel3["Id"]" type="checkbox" id="view_1_2" onchange="UpldateUser(this,@pg["Id"],'Add')" @(pg["Add"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                        <label class="form-check-label" for="view_1_2"><span>Add</span></label>
+                                                                                                    </div>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input View_@drlevel3["Id"]" type="checkbox" id="view_1_2" onchange="UpldateUser(this,@pg["Id"],'View')" @(pg["View"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                        <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                                    </div>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input Edit_@drlevel3["Id"]" type="checkbox" id="edit_1_2" onchange="UpldateUser(this,@pg["Id"],'Edit')" @(pg["Edit"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                        <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                                    </div>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input Delete_@drlevel3["Id"]" type="checkbox" id="delete_1_2" onchange="UpldateUser(this,@pg["Id"],'Delete')" @(pg["Delete"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                        <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                                    </div>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input Execute_@drlevel3["Id"]" type="checkbox" id="execute_1_2" onchange="UpldateUser(this,@pg["Id"],'Execute')" @(pg["Execute"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                        <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            }
+                                                                                    }
+                                                                                </ul>
+                                                                                @{
+
+                                                                                    foreach (DataRow drlevel4 in ((Session["DT_ALL_MEMBER"] as DataTable).Select("Manager_ID='" + drlevel3["UserId"].ToString() + "' and Level_ID=4")))
+                                                                                        {
+                                                                                        <div id="accordion_L_4-1">
+                                                                                            <div class="accordion_title_box accordion-item">
+                                                                                                <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                                                    <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#banking_view_L_1_@drlevel4["Id"]" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                                                    <a class="collapsed" data-bs-toggle="collapse" href="#banking_view_L_1_@drlevel4["Id"]">
+                                                                                                        @drlevel4["UserName"].ToString()
+                                                                                                    </a>
+                                                                                                    <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                                        <div class="form-check">
+                                                                                                            <input class="form-check-input" value="true" type="checkbox" onchange="UpldateAllUser(this,'add_@drlevel4["Id"]','Add','H4_level',@dr["UserId"], @drlevel4["UserId"].ToString())" id="add_@drlevel4["Id"]">
+                                                                                                            <label class="form-check-label" for="view_1_2"><span>Add</span></label>
+                                                                                                        </div>
+                                                                                                        <div class="form-check">
+                                                                                                            <input class="form-check-input" value="true" type="checkbox" onchange="UpldateAllUser(this,'View_@drlevel4["Id"]','View','H4_level',@dr["UserId"], @drlevel4["UserId"].ToString())" id="View_@drlevel4["Id"]">
+                                                                                                            <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                                        </div>
+                                                                                                        <div class="form-check">
+                                                                                                            <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Edit_@drlevel4["Id"]','Edit','H4_level',@dr["UserId"], @drlevel4["UserId"].ToString())" id="Edit_@drlevel4["Id"]">
+                                                                                                            <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                                        </div>
+                                                                                                        <div class="form-check">
+                                                                                                            <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Delete_@drlevel4["Id"]','Delete','H4_level',@dr["UserId"], @drlevel4["UserId"].ToString())" id="Delete_@drlevel4["Id"]">
+                                                                                                            <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                                        </div>
+                                                                                                        <div class="form-check">
+                                                                                                            <input class="form-check-input" type="checkbox" onchange="UpldateAllUser(this,'Execute_@drlevel4["Id"]','Execute','H4_level',@dr["UserId"], @drlevel4["UserId"].ToString())" id="Execute_@drlevel4["Id"]">
+                                                                                                            <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div id="banking_view_L_1_@drlevel4["Id"]" class="accordion-collapse collapse">
+                                                                                                    <div class="panel_inner_body">
+                                                                                                        <ul class="panel_inner_list d-flex flex-column">
+                                                                                                            @{
+                                                                                                                foreach (DataRow pg in ((Session["DT_ALL_VIEWBYPAGENAME"] as DataTable).Select("userid='" + @drlevel4["UserId"].ToString() + "'")))
+                                                                                                                    {
+                                                                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                                                                        <div class="flex_1">@pg["Page_Name"].ToString()</div>
+                                                                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input class="form-check-input add_@drlevel4["Id"]" type="checkbox" id="view_1_2" onchange="UpldateUser(this,@pg["Id"],'Add')" @(pg["Add"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                                                <label class="form-check-label" for="view_1_2"><span>Add</span></label>
+                                                                                                                            </div>
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input class="form-check-input View_@drlevel4["Id"]" type="checkbox" id="view_1_2" onchange="UpldateUser(this,@pg["Id"],'View')" @(pg["View"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                                                            </div>
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input class="form-check-input Edit_@drlevel4["Id"]" type="checkbox" id="edit_1_2" onchange="UpldateUser(this,@pg["Id"],'Edit')" @(pg["Edit"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                                                            </div>
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input class="form-check-input Delete_@drlevel4["Id"]" type="checkbox" id="delete_1_2" onchange="UpldateUser(this,@pg["Id"],'Delete')" @(pg["Delete"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                                                            </div>
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input class="form-check-input Execute_@drlevel4["Id"]" type="checkbox" id="execute_1_2" onchange="UpldateUser(this,@pg["Id"],'Execute')" @(pg["Execute"].ToString() == "1" ? "checked" : "")>
+
+                                                                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </li>
+                                                                                                                    }
+                                                                                                            }
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                                                    }
+                                                                                }
+
+                                                                                <!-- Sub admin -->
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                                                                    }
+                                                            }
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                                                                                    }
+                                        }
+
+
+                                        <!-- End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                                                                                    }
+
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    //$(function () {
+    //    //Bind on change event with .clsChkFromDB(Checkbox)
+    //    $("#formId").on("change", '.clsChkFromDB', function () {
+    //        updateValue(this.id, this.checked);
+    //    });
+    //});
+
+
+    function UpldateAllUser(check, id, Col1, Col2,varid1,varid2) {
+        if (check.checked) {
+
+            $('.' + id + '').attr('checked', 'checked');
+            $.ajax({
+                url: "/UserSecurity/UpdateAllValue/",
+                type: 'POST',
+                data: "{ 'varid1': '" + varid1 + "','varid2': '"+varid2+"','Col1': '" + Col1 + "','Col2': '" + Col2 + "','Status': '1' }",
+                //data: "{ 'id': '" + x + "' }",
+                async: true,
+                contentType: 'application/json',
+                success: function (result) {
+                    //Do some action on success
+                },
+                complete: function (result) {
+                    //Do some action on complate
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+
+        } else {
+            $('.' + id + '').attr('checked', false);
+     $.ajax({
+                url: "/UserSecurity/UpdateAllValue/",
+                type: 'POST',
+                data: "{ 'varid1': '" + varid1 + "','varid2': '"+varid2+"','Col1': '" + Col1 + "','Col2': '" + Col2 + "','Status': '0' }",
+                //data: "{ 'id': '" + x + "' }",
+                async: true,
+                contentType: 'application/json',
+                success: function (result) {
+                    //Do some action on success
+                },
+                complete: function (result) {
+                    //Do some action on complate
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+        }
+    }
+
+    function UpldateUser(check, id, action) {
+        //alert(check.value)
+        if (check.checked) {
+            //alert("Yes");
+            $.ajax({
+                url: "/UserSecurity/UpdateValue/",
+                type: 'POST',
+                data: "{ 'Action': '" + action + "','check': 'Yes','ID': '" + id + "' }",
+                //data: "{ 'id': '" + x + "' }",
+                async: true,
+                contentType: 'application/json',
+                success: function (result) {
+                    //Do some action on success
+                },
+                complete: function (result) {
+                    //Do some action on complate
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/UserSecurity/UpdateValue/",
+                type: 'POST',
+                data: "{ 'Action': '" + action + "','check': 'No','ID': '" + id + "' }",
+                async: true,
+                contentType: 'application/json',
+                success: function (result) {
+                    //Do some action on success
+                },
+                complete: function (result) {
+                    //Do some action on complate
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+        }
+        //alert(action);
+        //alert(id);
+    }
+
+</script>
+@*<script>
+
+    $(document).ready(function(){
+        alert("hii");
+        $(".chk_select_all").click(function(){
+            $(".chk_group").attr('checked', this.checked);
+        });
+
+    });
+    </script>*@
+<script>
+    //$(document).ready(function () {
+    //    $("#view_1").click(function () {
+    //        $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+    //    });
+
+    //    $(".checkBoxClass").change(function () {
+    //        if (!$(this).prop("checked")) {
+    //            $("#view_1").prop("checked", false);
+    //        }
+    //    });
+    //});
+
+
+</script>
+<script>
+    function myFunction() {
+        var txt;
+        var r = confirm("Do you want to delete record?");
+    }
+
+    $(document).ready(function () {
+        // // Lavel 1
+        // $('.collapse_L_1').on('shown.bs.collapse', function () {
+        //     $(this).prev().addClass('active_lvl_1');
+        // });
+        // $('.collapse_L_1').on('hidden.bs.collapse', function () {
+        //     $(this).prev().removeClass('active_lvl_1');
+        // });
+
+        // // Lavel 2
+        // $('.collapse_L_2').on('shown.bs.collapse', function () {
+        //     $(this).prev().addClass('active_lvl_2');
+        // });
+        // $('.collapse_L_2').on('hidden.bs.collapse', function () {
+        //     $(this).prev().removeClass('active_lvl_2');
+        // });
+    });
+</script>
+
+
+
+<script src="js/custom-script.js"></script>
+<script type="text/javascript">
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function () {
+                if (oldonload) {
+                    oldonload();
+                }
+            }
+        }
+    }
+    addLoadEvent(setmenu('4'));
+</script>
+
+@*<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/UserSecurityselect.js"></script>*@

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "PaymentCheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="container-fluid">
+    <div class="display_adds display_adds_top text-center mb-3">
+        <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="">
+    </div>
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Check Out Payment</h1>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="display_adds_2_col">
+        <div class="card">
+            <div class="card-body">
+                <div class="row form_2">
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Per License Amount:</label>
+                        <label id="totalLicenseAmount">100</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">No. of License:</label>
+                        <input class="form-control" id="txt_noOfLicense" type="number" value="1" />
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Apply Coupon:</label>
+                        <div class="d-flex">
+                            <input class="form-control" id="txt_ApplyCoupon" type="text" value="IR10" />
+                            <input id="btn_ApplyCoupon" ng-click="onclickApplyCouponCode()" class="btn btn-outline-primary ms-2" type="button" value="Apply Coupon Code" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                        <label class="mb-0">Total Pay Amout:</label>
+                        <label id="totalPayAmout">100</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center mt-3">
+                    <input id="btn_ProcessTopaymout" ng-click="GotoPayment()" type="button" class="btn btn-primary" value="Procces to Pay" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/PaymentCheckout.js"></script>
+

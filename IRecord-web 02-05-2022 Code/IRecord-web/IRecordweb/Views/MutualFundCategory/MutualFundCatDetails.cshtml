@@ -1,0 +1,89 @@
+﻿@model IRecordweb.Models.FUNDCATEGORY
+
+    @{
+        ViewBag.Title = "MutualFundCatDetails";
+    }
+    @*<style>
+            .isdisabled {
+                color: currentColor;
+                cursor: not-allowed;
+                opacity: 0.5;
+                text-decoration: none;
+                pointer-events: none;
+            }
+        </style>*@
+
+    <div class="display_ad_parent">
+        <div class="display_ad_view_box">
+
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h1 class="mb-0">Mutual Fund Category Master</h1>
+
+                    <div class="page-title-right">
+                        @if (Session["RoleId"] != null)
+                            {
+                            if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+                                {
+                                @Html.ActionLink("Edit", "MutualFundCatUpdate", new { id = Model.MutualFundCategoryID }, new { @class = "btn btn-primary" })
+                                }
+                            else
+                                {
+                                @Html.ActionLink("Edit", "MutualFundCatUpdate", new { id = Model.MutualFundCategoryID }, new { @class = "isdisabled btn btn-primary disabled" })
+                                }
+                            }
+                        @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark ml-1" })
+                    </div>
+
+                </div>
+            </div>
+
+            @{
+                bool status = Model.Active;
+                string Active = status == true ? "Active" : "Inanctive";
+            }
+
+            <div class="card mutualfund_cate_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Name)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">
+                                @Html.DisplayNameFor(model => model.Code)
+                            </label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Code)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">
+                                @Html.DisplayNameFor(model => model.Active)
+                            </label>
+                            <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </label>
+                            <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="display_ad display_ad_right text-center">
+            <div class="mobile_ad mb-3">
+                <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+            </div>
+            <div class="desktop_ad">
+                <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+            </div>
+        </div>
+    </div>

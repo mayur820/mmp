@@ -1,0 +1,240 @@
+﻿@model IRecordweb.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "EditAccount";
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+}
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Account Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="card account_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.AccountId)
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.GroupID, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @*@Html.DropDownList("GroupID", ViewBag.DefaultBrand as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-select" })*@
+                                @*@Html.DropDownList("GroupID", ViewBag.AccountName as SelectList, ViewBag.DefaultBrand, "---Select Under Group---", htmlAttributes: new { @class = "form-select" })*@
+                                @*@Html.DropDownList("GroupID", (IEnumerable<SelectListItem>)ViewBag.AccountName, new { @class = "form-control" })*@  @*Final Code*@
+                                @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @*@Html.DropDownListFor(model => model.Name, new SelectList(" --Select--"), "--Select--", htmlAttributes: new { @class = "form-select GroupID" })*@
+                                @*@ @Html.DropDownList("Name", (IEnumerable<SelectListItem>)ViewBag.Name, new { @class = "form-control"  })*@
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.OpeningBalance, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.OpeningBalance, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OpeningBalance, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.OpeningCal, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.OpeningCal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OpeningCal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+
+                        <div class="accordion mt-2" id="accordionExample">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a class="accordion-button collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        Contact Detail
+                                    </a>
+                                </div>
+                                <div class="accordion-collapse collapse" id="collapseExample">
+                                    <div class="card card-body mb-0">
+                                        <div class="row form_2">
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Contactperson, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Contactperson, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Contactperson, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Emailid, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Emailid, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Emailid, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.AadharCardNo, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.AadharCardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.AadharCardNo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.GSTIN, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.GSTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.GSTIN, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.PAN, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.PAN, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PAN, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                                                <div class="w-100">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.Active)
+                                                        @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Account Master </h4>
+                            <div class="btn-close" data-bs-dismiss="modal"></div>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Record Updated Successfully..!
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="OK" name="OK" class="btn btn-danger">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#OpeningBalance").focus();
+        $("#GroupID").change(function () {
+            debugger;
+            $.get("/AccountMaster/GetFormatList", { GroupID: $("#GroupID").val() }, function (data) {
+
+                $("#Name").empty();
+                $.each(data, function (index, row) {
+                    $("#Name").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                });
+            });
+
+        })
+    });
+    </script>
+    <script>
+        $(function(){
+        $('#GroupID option').each(function () {
+            if ($(this).html() == country) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+        });
+    </script>
+}

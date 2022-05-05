@@ -1,0 +1,10 @@
+:root {
+    --primary_bg: 0,123,255;
+    --secondary_bg: 32,101,167;
+    --body_bg_d: 32,33,36;
+    --body_bg_l: 102,102,102;
+    --font_title: 'Poppins', sans-serif;
+    --font_w_4: 400;
+	--font_w_5: 500;
+	--font_w_6: 600;
+}

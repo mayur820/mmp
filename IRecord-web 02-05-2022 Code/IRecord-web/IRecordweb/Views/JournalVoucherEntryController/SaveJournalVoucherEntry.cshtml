@@ -1,0 +1,172 @@
+﻿@model BAL.JournalVoucherEntry
+
+@{
+    ViewBag.Title = "SaveJournalVoucherEntry";
+}
+
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#Date").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+            });
+        });
+
+    </script>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+    }
+
+}
+
+
+
+
+<h2>Journal Voucher Entry</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Debit, htmlAttributes: new { @class = "control-label col-md-5" })
+
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.Debit, ViewBag.UGroupName as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Debit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DebitAccount, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.DebitAccount, new SelectList(" "), "---Select Account---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DebitAccount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Credit, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.Credit, ViewBag.UGroupName as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CreditAccount, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.CreditAccount, new SelectList(" "), "---Select Account---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CreditAccount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.Narration, ViewBag.Narration as SelectList, "---Select Narration---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Narration, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // alert(110);
+        $("#Debit").change(function () {
+            $.get("/JournalVoucherEntryController/GetAccountList", { UGroupID: $("#Debit").val() }, function (data) {
+                $("#DebitAccount").empty();
+                $.each(data, function (index, row) {
+                   // alert(10000);
+
+                    $("#DebitAccount").append("<option value='" + row.Code + "'>" + row.Name + "</option>")
+                });
+            });
+
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // alert(110);
+        $("#Credit").change(function () {
+           // alert(20000);
+            $.get("/JournalVoucherEntryController/GetAccountList", { UGroupID: $("#Credit").val() }, function (data) {
+                $("#CreditAccount").empty();
+                $.each(data, function (index, row) {
+                   // alert(30000);
+                    $("#CreditAccount").append("<option value='" + row.Code + "'>" + row.Name + "</option>")
+                });
+            });
+
+        })
+    });
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,300 @@
+﻿@model IRecordweb.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "SaveAccountMaster";
+    Layout = ViewBag.masterpage;
+}
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Account Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @*@Html.AntiForgeryToken()*@
+
+            <div class="card account_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <h4 class="card-title mb-3">Basic Details</h4>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.GroupID, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @*, new { @onchange = "toggleDIvDisplay(this.value)" }*@
+                                @Html.DropDownListFor(model => model.GroupID, ViewBag.GroupID as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-select select2", @onchange = "GetGroupDatabyID()"  })
+                                @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="DIV_FOR_AC_ddl" class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.DropDownListFor(model => model.Name, new SelectList("", ""), "--Select--", htmlAttributes: new { @class = "form-select select2" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="DIV_FOR_AC_TEXTBOX" style="display: none !important;" class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.txt_name, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.OpeningBalance, htmlAttributes: new { @class = "control-label" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.OpeningBalance, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OpeningBalance, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                @Html.LabelFor(model => model.OpeningCal, htmlAttributes: new { @class = "control-label" })
+                                <div class="w-100">
+                                    @Html.EditorFor(model => model.OpeningCal, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>*@
+
+
+                        <div class="accordion mt-2" id="accordionExample" style="display:none" >
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a class="accordion-button collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        Contact Detail
+                                    </a>
+                                </div>
+                                <div class="accordion-collapse collapse" id="collapseExample">
+                                    <div class="card card-body mb-0">
+                                        <div class="row form_2">
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Contactperson, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Contactperson, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.Brokercode, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Emailid, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Emailid, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.AadharCardNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.AadharCardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*@Html.ValidationMessageFor(model => model.Brokercode, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.GSTIN, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.GSTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.GSTIN, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.PAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    @Html.EditorFor(model => model.PAN, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PAN, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="w-100">
+                                                    <div class="checkbox">
+                                                        @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @Checked = true })
+                                                        @*@Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-3">
+                            @*@if (Session["RoleName"].ToString() == "OPERATOR")
+                                {
+                                    <input type="submit" value="Save" class="btn btn-primary disabled isdisabled" id="Sbt" />
+                                }
+                                else
+                                {*@
+                            <input type="submit" value="Save" class="btn btn-primary" id="Sbt" />
+                            @*}*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="display_adds display_adds_right text-center">
+        <div class="mobile_adds mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_adds">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+    }
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    @*<script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#Name").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/AccountMaster/FamliySearch",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.Name, value: item.Name };
+                                }))
+
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+            })
+        </script>*@
+    <script>
+        $(document).ready(function () {
+            $("#GroupID").focus();
+            $("#GroupID").change(function () {
+                if ($("#GroupID").val().includes("A")) {
+                    $("#DIV_FOR_AC_ddl").attr("style", "display: relative !important");
+                    $("#DIV_FOR_AC_TEXTBOX").attr("style", "display:none !important");
+                    $.get("/AccountMaster/GetFormatList", { GroupID: $("#GroupID").val() }, function (data) {
+                        $("#Name").empty();
+                        $.each(data, function (index, row) {
+                            $("#Name").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                        });
+                    });
+                }
+                else {
+                    $("#DIV_FOR_AC_TEXTBOX").attr("style", "display: relative !important");
+                    $("#DIV_FOR_AC_ddl").attr("style", "display:none !important");
+                }
+            })
+        });
+
+    </script>
+    <script type="text/javascript">
+        function GetGroupDatabyID() {
+            debugger
+            
+
+            //$.get("/GroupMaster/GetGroupByID",{ id: $("#GroupID").val() },
+            //    function (data) {
+            //    })
+            //$.ajax({
+            //    url: "/GroupMaster/GetGroupByID
+            //        //? GroupID = " + $("#GroupID").val(),
+            //  /*  data: { GroupID: $("#GroupID").val() },*/
+            //    type: 'JSON',
+            //    success: function (data) {
+            //        /*var d = data.ALLOW_CONTACT_DETAIL;*/
+            //        /*alert(d);*/
+            //    }
+            //})
+            $.get("/GroupMaster/GetGroupByID", { id: $("#GroupID").val() },
+                function (data) {
+                    debugger
+                    var IsAllowtoview = null;
+                    /*IsAllowtoview = data.ALLOW_CONTACT_DETAIL;*/
+                    var newdata = JSON.parse(data);
+                    debugger
+                    //$.each(data, function (index, row) {
+                    //    debugger
+                    //    IsAllowtoview = row.Allow_Contact_Detail;
+                    //    alert(IsAllowtoview);
+                    //});
+                    IsAllowtoview = newdata[0].ALLOW_CONTACT_DETAIL;
+                    if (IsAllowtoview == '1') {
+                        $("#accordionExample").show();
+                    }
+                    else {
+                        $("#accordionExample").hide();
+                    }
+                });
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#GroupID').select2();
+            $("#GroupID").focus();
+            $('#Name').select2();
+        });
+    </script>
+}

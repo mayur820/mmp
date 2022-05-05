@@ -1,0 +1,118 @@
+﻿@model IRecordweb.Models.SUBSCRIBER
+
+@{
+    ViewBag.Title = "RegisterSubmit";
+    Layout = null;
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+}
+<link href="~/Content/onboard.css" rel="stylesheet" />
+
+<div class="wrapper">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="text-center mb-4">
+            <img src="~/Content/images/logo2.png" alt="IRecord" />
+
+            <div class="checkout-wrap">
+                <ul class="checkout-bar nav_tabs d-flex">
+                    <li class="visited"><a href="#tab_1"></a></li>
+                    <li class="visited"><a href="#tab_2"></a></li>
+                    <li class="visited"><a href="#tab_3"></a></li>
+                    <li class="visited"><a href="#tab_4"></a></li>
+                    <li class="visited"><a href="#tab_5"></a></li>
+                    <li class="visited"><a href="#tab_6"></a></li>
+                    <li class="visited"><a href="#tab_7"></a></li>
+                    <li class="active"><a href="#tab_8"></a></li>
+                    <li class=""><a href="#tab_9"></a></li>
+                    <li class=""><a href="#tab_10"></a></li>
+                    <li class=""><a href="#tab_11"></a></li>
+                    <li class=""><a href="#tab_12"></a></li>
+                    <li class=""><a href="#tab_13"></a></li>
+                    <li class=""><a href="#tab_14"></a></li>
+                    <li class=""><a href="#tab_15"></a></li>
+                    <li class=""><a href="#tab_16"></a></li>
+                    <li class=""><a href="#tab_17"></a></li>
+                    <li class=""><a href="#tab_18"></a></li>
+                    <li class=""><a href="javascript:;"></a></li>
+                </ul>
+            </div>
+
+            @*<h1 class="mb-4">Register</h1>*@
+        </div>
+        <div class="w-100" id="tab_8">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h2>
+                Congratulation
+                @if (TempData["SubscriberName"] != null)
+                {
+                    <span class="success-message">
+                        @Html.Raw(@TempData["SubscriberName"].ToString())
+                    </span>
+                }
+
+            </h2>
+            <strong>
+                Your Registeration Is Successful.
+            </strong>
+
+            <p style="margin: 15px auto;">
+                Let Us Quickly Get Started
+            </p>
+
+
+            <div class="form-row">
+                @Html.LabelFor(model => model.MemberSubscription, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.MemberSubscription, new { htmlAttributes = new { @class = "form-control", @Autocomplete = "Off", @Value = "1"} })
+                    @Html.ValidationMessageFor(model => model.MemberSubscription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="div1" class="text-danger"></div>
+
+            <div class="text-center">
+                <input type="submit" value="SUBMIT" class="btn btn-primary ml-auto text-uppercase" onclick="location.href='@Url.Action("OnboardingFamily", "Family")'" />
+                <br />
+
+                <br />
+
+                <a href='@Url.Action("Login", "Login")' style="font-size: 12px;color: black;">
+                    Login
+                </a>
+                @*<input type="button" value="Login" name="Login" class="btn btn-primary ml-auto text-uppercase next-tab text-left" onclick="location.href='@Url.Action("Login", "Login")'" />*@
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script>
+
+    $('#MemberSubscription').keyup(function () {
+        if ($(this).val() > 5) {
+            alert("Enjoy Your free trial for 7 days For more license contact our office on 9876543210");
+            $(this).val('5');
+        }
+    });
+
+    function CheckVal() {
+        var limit = document.getElementById("MemberSubscription").value;
+
+        if (limit > 4) {
+            //  $('#div1').html('value cannot be greater then 5');
+            document.getElementById("MemberSubscription").disabled = true;
+        }
+        else {
+            document.getElementById("MemberSubscription").disabled = false;
+        }
+    }
+</script>

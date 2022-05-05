@@ -1,0 +1,162 @@
+﻿@model IPagedList<IRecordweb.Models.SCRIPT>
+
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ScriptIndex";
+}
+
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+   /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<link rel="stylesheet" href="style.css" />
+
+<div class="display_adds display_adds_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Script Master</h1>
+
+        <div class="page-title-right">
+            <input type="submit" class="btn btn-primary add-on" value="Add Script" onclick="location.href='@Url.Action("SaveScript", "ScriptMaster")'" />
+            @if (Session["RoleId"] != null)
+            {
+                //if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ADVISOR")
+                //    {
+
+                @*@Html.ActionLink("Create New", "SaveScript")*@
+                //    }
+                //else if (Session["RoleName"].ToString() == "OPERATOR")    /*|| Session["RoleName"].ToString() == "MEMBER"*/
+                //    {
+                @*<input type="submit" class="btn btn-primary disabled isdisabled" value="Add Script" onclick="location.href='@Url.Action("SaveScript", "ScriptMaster")'" />*@
+                //}
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">
+    <div class="card scriptmaster_par">
+        <div class="card-body">
+            <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                <div class="float-sm-end">
+                    <uib-pagination class="pagination MYPAGECSS" total-items="Info.length" ng-model="page"
+                                    ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Script Name <input type="text" class="form-control " ng-model="search.ScriptName" placeholder="Script Name"></th>
+                            <th>BSE Code <input type="text" class="form-control " ng-model="search.BSECode" placeholder="BSE Code"></th>
+                            <th>NSE Code <input type="text" class="form-control " ng-model="search.NSECode" placeholder="NSE Code"></th>
+                            <th>Face Value <input type="text" class="form-control " ng-model="search.FaceValue" placeholder="Face Value"></th>
+                            <th>ISIN <input type="text" class="form-control " ng-model="search.ISIN" placeholder="ISIN"></th>
+                            <th>List Type <input type="text" class="form-control " ng-model="search.ListType" placeholder="List Type"></th>
+                            <th>Active <input type="text" class="form-control " ng-model="search.Active" placeholder="Active"></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tbody>
+                        <tr ng-repeat="data in Info | filter:search | limitTo:10:10*(page-1)">
+                            <td>{{$index+1}}</td>
+                            <td>{{data.ScriptName}}</td>
+                            <td>{{data.BSECode}}</td>
+                            <td>{{data.NSECode}}</td>
+                            <td>{{data.FaceValue}}</td>
+                            <td>{{data.ISIN}}</td>
+                            <td>{{data.ListType}}</td>
+                            <td>{{data.Active}}</td>
+
+                            <td class="whitespace_nowrap">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="/ScriptMaster/ScriptDetails?Id={{data.ScriptID}}" class="px-2 btn btn-outline-primary"><i class="las la-search font-size-18"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/ScriptMaster/ScriptEdit?Id={{data.ScriptID}}&&Status=Edit" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/ScriptMaster/ScriptDelete?Id={{data.ScriptID}}&&Status=Delete" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            @*<div class="pagination_parent d-flex flex-wrap mt-3">
+                    <div class="w-100 d-flex justify-content-end">
+                        @Html.PagedListPager(Model, page => Url.Action("ScriptIndex", "ScriptMaster", new { page }))
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+<script>
+    function Approvedlink() {
+        alert(11);
+        var data = document.getElementById('ListType').value;
+        alert(data);
+        document.getElementById('ListType').value = data;
+        document.getElementById('ListType').text('listed');
+
+    }
+</script>
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@TempData["Message"]');
+            window.location.href = "/ScriptMaster/ScriptIndex";
+        };
+    </script>
+}
+
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/ScriptList.js"></script>

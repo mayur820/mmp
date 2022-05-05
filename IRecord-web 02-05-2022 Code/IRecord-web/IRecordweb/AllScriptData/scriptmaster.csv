@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="HandheldFriendly" content="true" /><meta name="MobileOptimized" content="width" /><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=EmulateIE8, IE=EmulateIE9, IE=EmulateIE10, IE=EmulateIE11 " /><title>
+	BSEINDIA
+</title><link href="/include/css/bootstrap.css" type="text/css" rel="stylesheet" /><link href="/include/css/style.css" type="text/css" rel="stylesheet" /><link href="/include/css/font-awesome.css" type="text/css" rel="stylesheet" />
+    <script src="/include/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://www.bseindia.com/include/js/google_mid.js"></script>
+    <script src="/include/js/jquery-ui-1.12.1.min.js"></script>
+    <link href="/include/css/jquery-ui-1.12.1.min.css" rel="stylesheet" /></head>
+<body>
+
+    <div class="wrap">
+        <form method="post" action="./List_Scrips.aspx?expandable=1" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CF507786" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+
+            
+<script src="/D90/Angular/angular.js"></script>
+<script src="/D90/Angular/angular-sanitize.min.js"></script>
+<script>
+    var a = new Date();
+    var mon = a.getMonth();
+    var mint = 30;
+    mon = mon + 1;
+    if (a.getMinutes() % 30 == 0) {
+        mint = a.getMinutes();
+    }
+    var time = a.getDate() + "" + mon + "" + a.getFullYear() + "" + a.getHours() + "" + mint;
+    document.write("<script type='text/javascript' src='/version.js?v=" + time + "'><\/script>");
+</script>
+<script>
+    document.write("<script type='text/javascript' src='/D90/Controller/AppController.js?v=" + version_cntroller + "'><\/script>");
+    document.write("<script type='text/javascript' src='/D90/Controller/headerController.js?v=" + version_cntroller + "'><\/script>");    
+</script>
+
+<div ng-app="topHeader" ng-controller="topController">
+    <div id="topDiv"  ng-include="'/D90/Header/top.html'">
+
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div id="Divhomemenu" class="container-fluid" ng-include="'/D90/Header/corporates_menu.html'">
+        </div>
+    </nav>
+</div>
+
+            <div style="margin-top: 10px;">
+
+                <div id="fontSize"> <div id="divmain" class="body slide">
+
+                    
+
+    <meta name="description" content="Get a comprehensive record of listed companies. Find all the details and stock market updates of any company listed by BSE India." />
+
+    <meta name="keywords" content="listed companies, listed company, list of Securities, Company names group wise, company group, company name segment wise, company segment, company name industry wise, sector wise company names, active companies, delisted companies, suspended companies, bse, bse india." />
+
+
+
+    <input name="ctl00$ContentPlaceHolder1$hdnCode" type="hidden" id="ContentPlaceHolder1_hdnCode" />
+
+    <!--For Google AD-->
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/35735749/Corp_List_Scrips', [[300, 100], [970, 90], [234, 60], [728, 90]], 'div-gpt-ad-1566886211942-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/35735749/Corp_Second', [[234, 60], [728, 90], [970, 90], [300, 100]], 'div-gpt-ad-1566808164151-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+
+
+    <!--Google AD-->
+    <br>
+    <div align="center" class="largetable">
+
+        <!-- /35735749/Corp_List_Scrips -->
+        <div id='div-gpt-ad-1566886211942-0'>
+            <script>
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1566886211942-0'); });
+            </script>
+        </div>
+
+    </div>
+    <div class="whitebox">
+        <div class="container-fluid marketstartarea">
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class=" blueheading" style="text-align: left">
+                        <div class="home_widget">
+                            <span class="page_info_title_s2">List Of Securities</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 text-right">
+
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--searchshadediv -->
+    <div class="container-fluid whitebox marketstartarea">
+        <div class="row marketstartarea">
+            <div class="col-lg-1 text-left"><strong>Segment</strong></div>
+            <div class="col-lg-2 text-left">
+                <select name="ctl00$ContentPlaceHolder1$ddSegment" id="ContentPlaceHolder1_ddSegment" class="form-control">
+	<option selected="selected" value="Select">Select</option>
+	<option value="Equity">Equity</option>
+	<option value="MF">MF</option>
+	<option value="Preference Shares">Preference Shares</option>
+	<option value="Debentures and Bonds">Debentures and Bonds</option>
+	<option value="Equity - Institutional Series">Equity - Institutional Series</option>
+	<option value="Commercial Papers">Commercial Papers</option>
+
+</select>
+            </div>
+            <div class="col-lg-1 text-left"><strong>Status</strong></div>
+            <div class="col-lg-2 text-left">
+                <select name="ctl00$ContentPlaceHolder1$ddlStatus" id="ContentPlaceHolder1_ddlStatus" class="form-control">
+	<option value="Active">Active</option>
+	<option value="Suspended">Suspended</option>
+	<option value="Delisted">Delisted</option>
+	<option selected="selected" value="Select">Select</option>
+
+</select>
+            </div>
+            <div class="col-lg-1 text-left"><strong>Security Name</strong></div>
+            <div class="col-lg-2 text-left">
+                <input name="ctl00$ContentPlaceHolder1$getTExtData" type="text" id="ContentPlaceHolder1_getTExtData" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row marketstartarea">
+            <div class="col-lg-1 text-left"><strong>Group</strong></div>
+            <div class="col-lg-2 text-left">
+                <select name="ctl00$ContentPlaceHolder1$ddlGroup" id="ContentPlaceHolder1_ddlGroup" class="form-control">
+	<option value="Select">Select</option>
+	<option value="A ">A </option>
+	<option value="B ">B </option>
+	<option value="E ">E </option>
+	<option value="F ">F </option>
+	<option value="FC">FC</option>
+	<option value="GC">GC</option>
+	<option value="I ">I </option>
+	<option value="IF">IF</option>
+	<option value="IP">IP</option>
+	<option value="M ">M </option>
+	<option value="MS">MS</option>
+	<option value="MT">MT</option>
+	<option value="P ">P </option>
+	<option value="R ">R </option>
+	<option value="T ">T </option>
+	<option value="W ">W </option>
+	<option value="X ">X </option>
+	<option value="XD">XD</option>
+	<option value="XT">XT</option>
+	<option value="Y ">Y </option>
+	<option value="Z ">Z </option>
+	<option value="ZP">ZP</option>
+	<option value="ZY">ZY</option>
+
+</select>
+            </div>
+            <div class="col-lg-1 text-left"><strong>Industry</strong></div>
+            <div class="col-lg-2 text-left">
+                <select name="ctl00$ContentPlaceHolder1$ddlIndustry" id="ContentPlaceHolder1_ddlIndustry" class="form-control">
+	<option value="Select">Select</option>
+	<option value="2/3 Wheelers">2/3 Wheelers</option>
+	<option value="Advertising &amp; Media">Advertising &amp; Media</option>
+	<option value="Aerospace">Aerospace</option>
+	<option value="Agrochemicals">Agrochemicals</option>
+	<option value="Airlines">Airlines</option>
+	<option value="Airport Services">Airport Services</option>
+	<option value="Aluminium">Aluminium</option>
+	<option value="Asset Management Cos.">Asset Management Cos.</option>
+	<option value="Auto Parts &amp; Equipment">Auto Parts &amp; Equipment</option>
+	<option value="Auto Tyres &amp; Rubber Products">Auto Tyres &amp; Rubber Products</option>
+	<option value="Banks">Banks</option>
+	<option value="Biotechnology">Biotechnology</option>
+	<option value="BPO/KPO">BPO/KPO</option>
+	<option value="Breweries &amp; Distilleries">Breweries &amp; Distilleries</option>
+	<option value="Broadcasting &amp; Cable TV">Broadcasting &amp; Cable TV</option>
+	<option value="Carbon Black">Carbon Black</option>
+	<option value="Cars &amp; Utility Vehicles">Cars &amp; Utility Vehicles</option>
+	<option value="Cement &amp; Cement Products">Cement &amp; Cement Products</option>
+	<option value="Cigarettes,Tobacco Products">Cigarettes,Tobacco Products</option>
+	<option value="Coal">Coal</option>
+	<option value="Comm.Printing/Stationery">Comm.Printing/Stationery</option>
+	<option value="Comm.Trading  &amp; Distribution">Comm.Trading  &amp; Distribution</option>
+	<option value="Commercial Vehicles">Commercial Vehicles</option>
+	<option value="Commodity Chemicals">Commodity Chemicals</option>
+	<option value="Computer Hardware">Computer Hardware</option>
+	<option value="Construction &amp; Engineering">Construction &amp; Engineering</option>
+	<option value="Construction Materials">Construction Materials</option>
+	<option value="Consulting Services">Consulting Services</option>
+	<option value="Consumer Electronics">Consumer Electronics</option>
+	<option value="Containers &amp; Packaging">Containers &amp; Packaging</option>
+	<option value="Copper">Copper</option>
+	<option value="Data Processing Services">Data Processing Services</option>
+	<option value="Defence">Defence</option>
+	<option value="Department Stores">Department Stores</option>
+	<option value="Distributors">Distributors</option>
+	<option value="Diversified">Diversified</option>
+	<option value="Edible Oils">Edible Oils</option>
+	<option value="Education">Education</option>
+	<option value="Electric Utilities">Electric Utilities</option>
+	<option value="Electronic Components">Electronic Components</option>
+	<option value="Exploration &amp; Production">Exploration &amp; Production</option>
+	<option value="Fertilizers">Fertilizers</option>
+	<option value="Fibres &amp; Plastics">Fibres &amp; Plastics</option>
+	<option value="Finance (including NBFCs)">Finance (including NBFCs)</option>
+	<option value="Financial Institutions">Financial Institutions</option>
+	<option value="Food &amp; Drugs Retailing">Food &amp; Drugs Retailing</option>
+	<option value="Footwear">Footwear</option>
+	<option value="Forest Products">Forest Products</option>
+	<option value="Furniture,Furnishing,Paints">Furniture,Furnishing,Paints</option>
+	<option value="General Insurance">General Insurance</option>
+	<option value="Gift Articles,Toys &amp; Cards ">Gift Articles,Toys &amp; Cards </option>
+	<option value="Healthcare Facilities">Healthcare Facilities</option>
+	<option value="Healthcare Services">Healthcare Services</option>
+	<option value="Healthcare Supplies">Healthcare Supplies</option>
+	<option value="Heavy Electrical Equipment">Heavy Electrical Equipment</option>
+	<option value="Holding Companies">Holding Companies</option>
+	<option value="Hotels">Hotels</option>
+	<option value="Household Appliances">Household Appliances</option>
+	<option value="Household Products">Household Products</option>
+	<option value="Houseware">Houseware</option>
+	<option value="Housing Finance ">Housing Finance </option>
+	<option value="Industrial Gases">Industrial Gases</option>
+	<option value="Industrial Machinery">Industrial Machinery</option>
+	<option value="Integrated Oil &amp; Gas">Integrated Oil &amp; Gas</option>
+	<option value="Internet &amp; Catalogue Retail">Internet &amp; Catalogue Retail</option>
+	<option value="Internet Software &amp; Services">Internet Software &amp; Services</option>
+	<option value="Investment Companies">Investment Companies</option>
+	<option value="Iron &amp; Steel Products">Iron &amp; Steel Products</option>
+	<option value="Iron &amp; Steel/Interm.Products">Iron &amp; Steel/Interm.Products</option>
+	<option value="IT Consulting &amp; Software">IT Consulting &amp; Software</option>
+	<option value="IT Networking Equipment">IT Networking Equipment</option>
+	<option value="IT Software Products">IT Software Products</option>
+	<option value="IT Training Services">IT Training Services</option>
+	<option value="Jute &amp; Jute Products">Jute &amp; Jute Products</option>
+	<option value="Life Insurance">Life Insurance</option>
+	<option value="Marine Port &amp; Services">Marine Port &amp; Services</option>
+	<option value="Medical Equipment">Medical Equipment</option>
+	<option value="Mining">Mining</option>
+	<option value="Misc.Commercial Services">Misc.Commercial Services</option>
+	<option value="Movies &amp; Entertainment">Movies &amp; Entertainment</option>
+	<option value="Non-alcoholic Beverages">Non-alcoholic Beverages</option>
+	<option value="Non-Durable Household Prod.">Non-Durable Household Prod.</option>
+	<option value="Oil Equipment &amp; Services">Oil Equipment &amp; Services</option>
+	<option value="Oil Marketing &amp; Distribution">Oil Marketing &amp; Distribution</option>
+	<option value="Other Agricultural Products">Other Agricultural Products</option>
+	<option value="Other Apparels &amp; Accessories">Other Apparels &amp; Accessories</option>
+	<option value="Other Elect.Equip./ Prod.">Other Elect.Equip./ Prod.</option>
+	<option value="Other Financial Services">Other Financial Services</option>
+	<option value="Other Food Products">Other Food Products</option>
+	<option value="Other Industrial Goods">Other Industrial Goods</option>
+	<option value="Other Industrial Products">Other Industrial Products</option>
+	<option value="Other Leisure Facilities">Other Leisure Facilities</option>
+	<option value="Other Leisure Products">Other Leisure Products</option>
+	<option value="Other Non-Ferrous Metals">Other Non-Ferrous Metals</option>
+	<option value="Other Telecom Services">Other Telecom Services</option>
+	<option value="Packaged Foods">Packaged Foods</option>
+	<option value="Paper &amp; Paper Products">Paper &amp; Paper Products</option>
+	<option value="Personal Products">Personal Products</option>
+	<option value="Petrochemicals">Petrochemicals</option>
+	<option value="Pharmaceuticals">Pharmaceuticals</option>
+	<option value="Photographic Products">Photographic Products</option>
+	<option value="Plastic Products">Plastic Products</option>
+	<option value="Publishing">Publishing</option>
+	<option value="Real Estate Investment">Real Estate Investment</option>
+	<option value="Realty">Realty</option>
+	<option value="Refineries/ Petro-Products">Refineries/ Petro-Products</option>
+	<option value="Restaurants">Restaurants</option>
+	<option value="Roads &amp; Highways">Roads &amp; Highways</option>
+	<option value="Shipping">Shipping</option>
+	<option value="Sp.Consumer Services">Sp.Consumer Services</option>
+	<option value="Specialty Chemicals">Specialty Chemicals</option>
+	<option value="Specialty Retail">Specialty Retail</option>
+	<option value="Storage Media &amp; Peripherals">Storage Media &amp; Peripherals</option>
+	<option value="Sugar">Sugar</option>
+	<option value="Surface Transportation">Surface Transportation</option>
+	<option value="Tea &amp; Coffee">Tea &amp; Coffee</option>
+	<option value="Telecom - Alternate Carriers">Telecom - Alternate Carriers</option>
+	<option value="Telecom Cables">Telecom Cables</option>
+	<option value="Telecom Equipment">Telecom Equipment</option>
+	<option value="Telecom Services">Telecom Services</option>
+	<option value="Textiles">Textiles</option>
+	<option value="Transport Related Services">Transport Related Services</option>
+	<option value="Transportation - Logistics">Transportation - Logistics</option>
+	<option value="Travel Support Services">Travel Support Services</option>
+	<option value="Utilities:Non-Elec.">Utilities:Non-Elec.</option>
+	<option value="Zinc">Zinc</option>
+
+</select>
+            </div>
+            <div class="col-lg-2 text-left">
+                <input type="submit" name="ctl00$ContentPlaceHolder1$btnSubmit" value="Submit" id="ContentPlaceHolder1_btnSubmit" class="btn btn-default" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="whitebox">
+        <div class="container-fluid marketstartarea">
+            <div class="row">
+
+                <div class="col-lg-12 largetable">
+
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0">
+
+                        
+                        <tr>
+                            <td bgcolor="#ffffff" align="center" colspan="4">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td bgcolor="#d6d6d6">
+
+                                            <div>
+
+</div>
+                                            <span id="ContentPlaceHolder1_lblData"></span>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+
+    <div align="center" class="largetable">
+        <!-- /35735749/Corp_Second -->
+        <div id='div-gpt-ad-1566808164151-0'>
+            <script>
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1566808164151-0'); });
+            </script>
+        </div>
+    </div>
+
+
+
+                </div></div>
+            </div>
+
+
+            <div class="middlefoot"></div>
+
+            <footer id="footerarea" class="footerarea">
+            </footer>
+            <script>$("#footerarea").load("/footer.aspx");</script>
+            <script src="/include/js/jquery.ui.touch-punch.min.js"></script>
+            <script src="/include/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="/include/js/jquery.bootstrap-responsive-tabs.min.js"></script>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿@model IRecordweb.Models.FINANCIALYEAR
+
+
+@{
+    ViewBag.Title = "SaveFinYear";
+}
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Financial Year Master</h1>
+
+        <div class="page-title-right">
+            @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+        </div>
+
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @checked = true, @class = "checkbox" })
+                @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            @if (Session["RoleName"] != null && (Session["RoleName"].ToString() == "OPERATOR" || Session["RoleName"].ToString() == "MEMBER"))
+            {
+                <input type="submit" value="Save" class="btn btn-success isdisabled" />
+            }
+            else
+            {
+                <input type="submit" value="Save" class="btn btn-success" />
+            }
+        </div>
+    </div>
+</div>
+    }
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    @if (ViewBag.Message != null)
+        {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+        }
+    <script>
+    $(document).ready(function () {
+        $("#FromDate").datepicker({
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true,
+            onSelect: function (date) {
+                var date2 = $('#FromDate').datepicker('getDate');
+                $('#ToDate').datepicker('option', 'minDate', date2);
+            }
+            //onSelect: function (selected) {
+            //    var dt = new Date(selected);
+            //    dt.setDate(dt.getDate() + 1);
+            //    $("#ToDate").datepicker("option", "minDate", dt);
+            //}
+        });
+
+        $("#ToDate").datepicker({
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true,
+              onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 1);
+                  $("#FromDate").datepicker("option", "maxDate", dt);
+            }
+        });
+    });
+    </script>
+
+}
+
+

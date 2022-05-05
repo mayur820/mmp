@@ -1,0 +1,120 @@
+﻿@model IRecordweb.Models.FamilyModel
+@{
+    ViewBag.Title = "EditFamily";
+}
+
+@*<style>
+        .modal-dialog {
+            right: auto;
+            left: 0%;
+            width: 600px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    </style>*@
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+}
+
+<div class="display_ad_parent">
+    <div class="display_ad_view_box">
+
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Family Master</h1>
+
+                <div class="page-title-right">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                </div>
+
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card family_master_par">
+                <div class="card-body">
+                    <div class="row form_2">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="w-100">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @checked = true })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 text-center mt-3">
+                            <input type="submit" value="Update" class="btn btn-primary" />  @*data-bs-target="#myModal" data-bs-toggle="modal"*@ 
+                        </div>
+                        @*</div>
+                            }*@
+
+
+                        @*@using (Html.BeginForm())
+                            {
+                            @Html.AntiForgeryToken()*@
+
+
+                        @*}*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Family Master </h4>
+                            <div class="btn-close" data-bs-dismiss="modal"></div>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Record Updated Successfully..!
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="OK" name="OK" class="btn btn-danger">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            }
+
+    </div>
+    <div class="display_ad display_ad_right text-center">
+        <div class="mobile_ad mb-3">
+            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+        <div class="desktop_ad">
+            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,298 @@
+﻿
+@{
+    ViewBag.Title = "SaveBREntry";
+    Layout = "~/Views/Shared/_BLayout.cshtml";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="#">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="css/select2.min.css">
+
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+@*<style>
+    footer.footer {
+        margin-bottom: -806px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #5b73e8 !important;
+        border-color: #5b73e8 !important;
+    }
+</style>*@
+
+<body>
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="wrapper">
+@using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+        <div >
+            <div class="text-center mb-4">
+                <img src="/Content/images/logo2.png" alt="IRecord" />
+                <!-- <h1 style="margin-bottom: 15px;">Register</h1> -->
+            </div>
+
+            <ul class="checkout-bar nav_tabs d-flex">
+                <li class="visited"><a href="#tab_1"></a></li>
+                <li class="visited"><a href="#tab_2"></a></li>
+                <li class="visited"><a href="#tab_3"></a></li>
+                <li class="visited"><a href="#tab_4"></a></li>
+                <li class="visited"><a href="#tab_5"></a></li>
+                <li class="visited"><a href="#tab_6"></a></li>
+                <li class="visited"><a href="#tab_7"></a></li>
+                <li class="visited"><a href="#tab_8"></a></li>
+                <li class="visited"><a href="#tab_9"></a></li>
+                <li class="visited"><a href="#tab_10"></a></li>
+                <li class="active"><a href="#tab_11"></a></li>
+                <li class=""><a href="#tab_12"></a></li>
+                <li class=""><a href="#tab_13"></a></li>
+                <li class=""><a href="#tab_14"></a></li>
+                <li class=""><a href="#tab_15"></a></li>
+                <li class=""><a href="#tab_16"></a></li>
+                <li class=""><a href="#tab_17"></a></li>
+                <li class=""><a href="#tab_18"></a></li>
+                <li class=""><a href="javascript:;"></a></li>
+            </ul>
+        </div>
+        <div class="w-100" id="tab_11">
+            <h2 class="text-center">
+                Upload Contract Note File
+            </h2>
+
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Select Date:
+                    </label>
+                    <div class="form-holder w-100">
+                        <input class="form-control datepicker date" ng-model="SaveBREntry.Date" type="date" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Segment Type:
+                    </label>
+                    <div class="form-holder w-100">
+
+                        <select id="ddlInvestmentType" ng-model="ddlInvestmentType" ng-change="bindbills()" class="form-control">
+
+                            <option ng-option="" value="" selected="selected">Select Segment Type</option>
+                            <option ng-option="" value="0">Equity</option>
+                            <option ng-option="" value="1"> F & O</option>
+                            <option ng-option="" value="3">MCX</option>
+                            <option ng-option="" value="4">Currency</option>
+                            <option ng-option="" value="5">NCDEX</option>
+
+
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Select Broker:
+                    </label>
+                    <div class="form-holder w-100">
+
+                        <select id="ddlBroker" ng-model="ddlBroker" ng-options="v.ID as v.NAME for v in Brokers" class="form-control">
+                            <option ng-option value="">Select Broker</option>
+
+
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Consultant:
+                    </label>
+                    <div class="form-holder w-100">
+
+                        <select id="ddlConsultant" ng-model="ddlConsultant" ng-options="v.ID as v.NAME for v in Consultants" class="form-control">
+                            <option ng-option value="">Select Consultant</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Holding Type:
+                    </label>
+                    <div class="form-holder w-100">
+
+                        <select id="ddlHoldingType" class="form-control">
+                            <option ng-option value="">Select Holding Type</option>
+                            <option ng-option value="0">I-Share Invenstment</option>
+                            <option ng-option value="1">T-Stock In Trade</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Select Contract Note:
+                    </label>
+                    <div class="form-holder w-100">
+                        <select id="ContractNoteId" ng-model="ContractNoteId" ng-options="v.ID as v.NAME for v in BILLS" class="form-control">
+                            <option ng-option value="">Select Contract Note</option>
+
+                        </select>
+
+                        <i class="las la-angle-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Default Demat A/c:
+                    </label>
+                    <div class="form-holder w-100">
+                        <select id="Demat_Ac_Id" ng-model="SaveBREntry.Demat_Ac_Id" class="form-control">
+                            @*<option value="-1" class="option"></option>*@
+                            <option ng-option value="">Select Demat A/c</option>
+                            <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                        </select>
+                        <i class="las la-angle-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Browse:
+                    </label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="contractnotefile" ng-model="SaveBREntry.uploadfileurl" ng-select="UploadFiles($files)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-holder">
+                    <label for="">
+                        Password:
+                    </label>
+                    <input type="text" ng-model="SaveBREntry.Password" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="text-center mt-4">
+                <a href="javascript:;"  ng-click="btnupload()" class="btn btn-primary btn-soft-primary  ml-auto text-uppercase">Upload</a>
+            </div>
+
+            <a href="javascript:;" class="text-center d-flex justify-content-center mt-3">
+                Display All Charges on First Upload of specific broker
+                Display Any Charges Which Are Not Matching
+            </a>
+
+            <div class="text-center mt-3">
+                <a href="javascript:;" class="btn btn-primary btn-soft-primary text-uppercase mt-3">View</a>
+            </div>
+            <div class="text-center mt-4">
+                <a href="~/ScriptMaster/ScriptMapping1" id="ApproveNowUpload" ng-click="btn_click_sumit()" class="btn btn-primary  btn-soft-primary text-uppercase mt-3">Approve Now</a>
+            </div>
+
+            <div class="justify-content-end form-row mt-4">
+                <span class="btn btn-primary  btn-soft-primary ml-auto text-uppercase next-tab">Submit</span>
+            </div>
+            <div class="text-right form-row justify-content-end mt-4 text-center">
+                <input type="button" value="SKIP THIS STEP" name="SKIP" class="btn btn-primary btn-soft-primary ml-auto text-uppercase next-tab text-left"  onclick="location.href='@Url.Action("ScriptMapping1", "ScriptMaster")'"/>
+            </div>
+        </div>
+    }
+    </div>
+
+    <!-- End -->
+   </body>
+
+
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/select2.min.js"></script>
+
+    <!-- <script src="js/jquery.steps.js"></script>
+    <script src="js/main.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+
+
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var href = $(e.target).attr('href');
+                var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+                $('.checkout-bar li').removeClass();
+                $curr.addClass("active");
+                $curr.prevAll().addClass("visited");
+            });
+        });
+        //$("#ApproveNowUpload").click(function () {
+
+        //    window.location.href = "/BrokerBillEntry/BRDetails";
+        //});
+        jQuery('body').on('click', '.next-tab', function () {
+            var next = jQuery('.nav_tabs > .active').next('li');
+            if (next.length) {
+                next.find('a').trigger('click');
+            }
+            // else
+            // {
+            //     jQuery('#myTabs a:first').tab('show');
+            // }
+        });
+        jQuery('body').on('click', '.skip-tab', function () {
+            var next = jQuery('.nav_tabs > .active').next('li');
+            if (next.length) {
+                next.find('a').trigger('click');
+            }
+        });
+
+       
+        $('#option1').click(function () {
+            $('.nav-tabs a[href="#tab_2"]').tab('show');
+        });
+        $('#option2').click(function () {
+            $('.nav-tabs a[href="#tab_3"]').tab('show');
+        });
+        $('#option3').click(function () {
+            $('.nav-tabs a[href="#tab_4"]').tab('show');
+        });
+
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+      
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/SaveBREntry.js"></script>
+        
+

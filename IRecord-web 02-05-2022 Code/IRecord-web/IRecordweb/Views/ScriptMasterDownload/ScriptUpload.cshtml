@@ -1,0 +1,221 @@
+﻿@model BAL.ScriptUploadDownload
+
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "ScriptUpload";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+    @if (ViewBag.Message != null)
+        {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+        }
+}
+<script>
+    function DisplayVal() {
+      
+        var Investment = document.getElementById('InvestmentType');
+        var Exchange = document.getElementById('Exchange');
+        if (document.getElementById('InvestmentType').value == 'Equity')
+        {
+            document.getElementById('Exchange').style.visibility = 'visible';
+        }
+        else {
+        
+            document.getElementById('Exchange').style.visibility = 'hidden';
+        }
+    }
+
+
+
+    function leaveChange() {
+        if (document.getElementById("leave").value != "100") {
+            document.getElementById("message").innerHTML = "Common message";
+        }
+        else {
+            document.getElementById("message").innerHTML = "Having a Baby!!";
+        }
+    }
+</script>
+<script>
+    function UploadData() {
+        var integerInput = document.getElementById("Upload");
+        var integer = Number(integerInput.value);
+        if (Upload.click()) {
+            $('#uploadlist').visible = true;
+            $('#DownloadData').visible = false;
+        }
+
+    }
+</script>
+
+<style>
+    .file {
+        margin-top: 8px;
+        padding-left: 53px;
+    }
+</style>
+
+<h2>Script Master Upload</h2>
+
+@using (Html.BeginForm("ScriptUpload", "ScriptMasterDownload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td class="form-group">
+                        @Html.LabelFor(model => model.InvestmentType, htmlAttributes: new { @class = "control-label col-md-12" })
+                    </td>
+                    <td>
+                        <div class="col-md-20">
+                            @*@Html.DropDownListFor(model => model.InvestmentType, ViewBag.InvestmentType as SelectList, "Select Investment Type", htmlAttributes: new { @class = "form-control" })*@
+                            <select id="InvestmentType" name="InvestmentType" onchange="DisplayVal()" class="form-control">
+                                <option value="1">Equity</option>
+                                <option value="2">Mutual Fund</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.InvestmentType, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td class="col col-md-2">&nbsp;</td>
+
+                    <td>
+                        <div id="Exchange">
+                            @Html.LabelFor(model => model.Exchange, htmlAttributes: new { @class = "control-label col-md-20" })
+
+                            @*<div class="col-md-20">*@
+                            BSE &nbsp;  @Html.RadioButtonFor(model => model.Exchange, "BSE", htmlAttributes: new { @checked = true }) &nbsp;
+                                NSE &nbsp; @Html.RadioButtonFor(model => model.Exchange, "NSE") &nbsp;
+                                @*</div>*@
+                            @*BSE  <input type="radio" value="rdsbe" checked />
+                            NSE <input type="radio" value="rdnse" />*@
+                            @Html.ValidationMessageFor(model => model.Exchange, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td class="form-group">
+                        @Html.Label("Select File", htmlAttributes: new { @class = "control-label col-md-12" })
+                    </td>
+                    <td>
+                        <div class="col-md-20">
+                            @Html.TextBoxFor(m => m.FilePath, htmlAttributes: new { @class = "form-control", type = "file", value = "FilePath" })
+                            @*<input type="file" name="FilePath" required />*@
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="Upload" name="Upload" id="Upload" class="btn btn-primary" onclick="UploadData();" />
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="OK" class="btn btn-success" />
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="Download Script Master" name="Download" class="btn btn-danger" id="Download" />
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+
+
+    @* New Code Added for grid *@
+
+    <div id="DownloadData">
+        <table class="table table-striped table-hover">
+            <thead class="row">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ScriptName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BSECode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NSECode)
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FaceValue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ISIN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvestmentType)
+                    </th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.scripdata)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScriptName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BSECode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NSECode)
+                        @* @Html.DropDownListFor(modelItem => item.MemberName, ViewBag.MemberName as SelectList, "Select Member")*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FaceValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ISIN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvestmentType)
+                    </td>
+
+                </tr>
+                }
+        </table>
+    </div>
+    }
+
+@*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

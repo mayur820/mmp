@@ -1,0 +1,117 @@
+﻿@model IRecordweb.Models.MENU
+@{
+    ViewBag.Title = "UserRights";
+}
+
+@if (ViewBag.Message != null)
+    {
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+    }
+
+
+<style>
+    .textdisplay {
+        font-weight: bold;
+    }
+</style>
+
+<h2>User Rights</h2>
+
+@using (Html.BeginForm("UserRights", "Menu", FormMethod.Post))
+    {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal form-control">
+
+        @*<hr />*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div>
+        @*<table class="table">
+            <tr class="">
+                <td>&nbsp;</td>
+                <td><label class="control-label">Menu</label></td>
+                <td>&nbsp;</td>
+                <td><input type="text" id="MenuName" name="MenuName" class="form-control" /></td>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Search" name="Search" id="btnsearch" class="btn btn-primary" /></td>
+            </tr>
+        </table>*@
+        <table class="col-sm-12 col-md-6 mb-3 d-flex">
+            <tr class="tr">
+                <td>User:&nbsp;</td>
+                <td>
+                    @*@Html.DropDownList("UserList", "Select User", new { id = "ddlUser", @class = "form-select select2 col-sm-5 ", @width = "50px;" })*@
+                    @Html.DropDownList("UserList", "Select User")
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+        <table class="table table-hover sr-table table-bordered mb-1 ">
+            <tr class="form-group textdisplay table-light">
+                <td>Sr.</td>
+                <td>Menu</td>
+                <td>Add</td>
+                <td>Edit</td>
+                <td>Delete</td>
+                <td>View</td>
+            </tr>
+            @*@foreach (var item in Model.MenuList)
+                {*@
+            @for (int i = 0; i < Model.MenuList.Count; i++)
+			{		
+                <tr>
+                    @*<td></td>*@
+                   
+                    <td>
+                        @*@Html.LabelFor(model => model.MenuList[i].MenuID)*@
+                        @*@Html.DisplayFor(model => model.MenuList[i].MenuID)*@
+                        @*@Html.TextBoxFor(model => model.MenuList[i].MenuID, new { @class = "col-sm-1 border-0", disabled = "disabled",display="none" } )*@
+                        @*<input type="hidden" id="@Model.MenuList[i].MenuID" value="@Model.MenuList[i].MenuID" />*@
+                        @*@Html.HiddenFor(model => item.UserMenuID)
+        @Html.DisplayFor(model => item.MenuID)*@
+                        @Html.TextBoxFor(model => model.MenuList[i].MenuID, new { @class = "col-sm-1 border-0"} )
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Name)*@
+                        @Html.DisplayFor(model => model.MenuList[i].Name)
+                    </td >
+                    <td>
+                        @*@Html.CheckBoxFor(model => item.Add, new { id = item.MenuID })*@
+                       @Html.CheckBoxFor(model => model.MenuList[i].Add)
+                        @*<input type="checkbox" id="chkadd" name="chkadd" />*@
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(model => model.MenuList[i].Edit)
+                        @*@Html.CheckBoxFor(model => item.Edit, new { id = item.MenuID })*@
+                        @*<input type="checkbox" id="chkedit" name="chkedit" />*@
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(model => model.MenuList[i].Delete)
+                        @*@Html.CheckBoxFor(model => item.Delete, new { id = item.MenuID })*@
+                        @*<input type="checkbox" id="chkdelete" name="chkdelete" />*@
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(model => model.MenuList[i].View)
+                        @*@Html.CheckBoxFor(model => item.View, new { id = item.MenuID })*@
+                        @*<input type="checkbox" id="chkview" name="chkview" />*@
+                    </td>
+
+                </tr>
+                }
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" name="Save" id="Save" class="btn btn-success" onclick="myFunction()" />
+        </div>
+    </div>
+
+    }

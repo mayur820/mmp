@@ -1,0 +1,291 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html data-select2-id="28">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Register :: IRecord</title>
+    <link href="~/css/line-awesome.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<meta name="author" content="colorlib.com">*@
+
+    <link rel="stylesheet" href="~/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+    <link rel="stylesheet" href="~/css/select2.min.css">
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/theme-color.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css">
+
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>
+</head>
+<body data-select2-id="27">
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="d-flex Login_box">
+        <div class="cms_display_data d-flex align-items-center">
+            <div class="w-100 text-center">
+                <div class="left_banner owl-carousel owl-theme">
+                    <div class="item">
+                        <img src="~/images/slide-1.png"  alt="Slide 1" />
+                    </div>
+                    <div class="item">
+                        <img src="~/images/slide-2.png" alt="Slide 2" />
+                    </div>
+                    <div class="item">
+                        <img src="https://via.placeholder.com/500x500.png/007BFF/FFFFFF?text=Irecord+Ads+500x500" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cms_reg_form d-flex">
+            <div class="wrapper" data-select2-id="26">
+                <form action="https://mangeshirecord.github.io/HTML/on-board/index-2.html" data-select2-id="25">
+                    <div class="text-center mb-4">
+                        <img src="~/images/logo.png" alt="IRecord" />
+                        
+                        <h1 style="margin-bottom: 15px;">Member Login</h1>
+                    </div>
+
+                    <!-- <div class="checkout-wrap">
+                        <ul class="checkout-bar nav_tabs d-flex">
+                            <li class="active"><a href="#tab_1" data-toggle="tab"></a></li>
+                            <li class=""><a href="#tab_2" data-toggle="tab"></a></li>
+                        </ul>
+                    </div> -->
+                    <div class="" data-select2-id="24">
+                        <div class="tabbable-panel" data-select2-id="23">
+                            <div class="tabbable-line" data-select2-id="22">
+                                <ul class="nav nav-tabs d-none">
+                                    <li class="active"><a href="https://mangeshirecord.github.io/HTML/on-board/index-2.html#tab_1" data-toggle="tab">A</a></li>
+                                    <li><a href="https://mangeshirecord.github.io/HTML/on-board/index-2.html#tab_2" data-toggle="tab">A</a></li>
+                                </ul>
+                                <div class="tab-content mt-3" data-select2-id="21">
+                                    <!-- 1 -->
+                                    <div class="tab-pane fade active show" id="tab_1" data-select2-id="tab_1">
+                                        <div class="form-holder mb-3" data-select2-id="20">
+                                            <label class="mb-0" for="">Select Member:</label>
+                                            <div class="d-flex" data-select2-id="19">
+                                                <select class="form-control select2" id="ddlmember" ng-change="onmemberchange()" ng-model="details.Member" ng-options="x.UserId as x.UserName for x in InfoMember">
+                                                    <option ng-option value="-1">Select Member</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-holder" data-select2-id="36">
+                                            <label class="mb-0" for="">Financial Year:</label>
+                                            <div class="d-flex" data-select2-id="35">
+                                                <div class="input-group tbl_int_grp" data-select2-id="34">
+                                                    <select class="form-control select2" id="ddlyear" ng-model="details.selectyear" ng-options="x.ID as x.NAME for x in Info"  >
+                                                       <option ng-option value="-1">Select Broker Financial Year</option>
+                                     
+                                                    </select>
+                                                </div>
+                                                <a ng-click="fnadd()" class="d-flex align-items-center no_wrap btn btn-primary ms-2">
+                                                    + Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive mt-3">
+                                            <table class="table table-sm table-bordered">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Sr No</th>
+                                                        <th>Code</th>
+                                                        <th>From Date</th>
+                                                        <th>To Date</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="datatable in InfoAllYear">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>{{datatable.Code}} </td>
+                                                        <td>{{datatable.FromDate}}</td>
+                                                        <td>{{datatable.ToDate}}</td>
+                                                        <td>
+                                                            <a ng-click="fnsetFinancialYear(datatable)" class="no_wrap btn btn-outline-primary btn-sm">
+                                                                Login →
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- End -->
+        </div>
+    </div>
+
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal_1" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row mb-3">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Broker:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2 select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true">
+                                    <option value="-1" data-select2-id="6">Select</option>
+                                    <option value="AK">Broker 1</option>
+                                    <option value="HI">Broker 2</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-vgql-container"><span class="select2-selection__rendered" id="select2-vgql-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Demat A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2 select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                    <option value="-1" data-select2-id="9">Select</option>
+                                    <option value="AK">Demat 1</option>
+                                    <option value="HI">Demat 2</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ovvd-container"><span class="select2-selection__rendered" id="select2-ovvd-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal_2" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Demat A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2 select2-hidden-accessible" data-select2-id="10" tabindex="-1" aria-hidden="true">
+                                    <option value="-1" data-select2-id="12">Select</option>
+                                    <option value="AK">Demat 1</option>
+                                    <option value="HI">Demat 2</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="11" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-uwfk-container"><span class="select2-selection__rendered" id="select2-uwfk-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="modal_3" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row mb-3">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Bank A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2 select2-hidden-accessible" data-select2-id="13" tabindex="-1" aria-hidden="true">
+                                    <option value="-1" data-select2-id="15">Select</option>
+                                    <option value="AK">Bank 1</option>
+                                    <option value="HI">Bank 2</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="14" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-zrp5-container"><span class="select2-selection__rendered" id="select2-zrp5-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- <script src="js/jquery.steps.js"></script>
+    <script src="js/main.js"></script> -->
+    <script>
+		$(document).ready(function () {
+			$(".select2").select2({
+				maximumSelectionLength: 3
+			});
+			$(".select2_multi").select2({
+			});
+
+			var owl = $('.left_banner');
+			owl.owlCarousel({
+			    items: 1,
+			    loop: true,
+			    margin: 0,
+			    dots: true,
+			    autoplay: true,
+			    autoplayTimeout: 3600,
+			    autoplayHoverPause: true
+			});
+
+			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+				var href = $(e.target).attr('href');
+				var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+				$('.checkout-bar li').removeClass();
+				$curr.addClass("active");
+				$curr.prevAll().addClass("visited");
+			});
+		});
+
+		
+
+	
+    </script>
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/MemberLogin.js"></script>
+</body>
+</html>
+

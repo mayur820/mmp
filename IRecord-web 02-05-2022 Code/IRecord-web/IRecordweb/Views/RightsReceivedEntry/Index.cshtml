@@ -1,0 +1,477 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+@*<!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
+        <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+        <link rel="stylesheet" href="/css/select2.min.css" />
+        <link rel="stylesheet" href="/css/line-awesome.min.css" />
+        <link rel="stylesheet" href="/css/theme-color.css" />
+        <link rel="stylesheet" href="/css/app.min.css" />
+        <link rel="stylesheet" href="/css/custom-body.css" />
+        <script src="~/AngScripts/jquery-3.6.0.js"></script>
+        <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+        <script src="~/AngScripts/angular.js"></script>
+        <script src="~/AngScripts/ngStorage.min.js"></script>
+        <link rel="stylesheet" href="~/css/loader-1.css">
+        <title>Consultant Master :: iRecord</title>
+        <style>
+            .displayNO {
+                display: none !important;
+            }
+
+            .tblExpense {
+                height: 325px !important; /* Just for the demo          */
+                overflow-y: auto !important; /* Trigger vertical scroll    */
+                overflow-x: hidden !important; /* Hide the horizontal scroll */
+            }
+        </style>
+    </head>*@
+@*<body class="inner_body">*@
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="" method="POST" action="">
+    <div id="layout-wrapper">
+
+
+
+
+
+        <div class="container-fluid">
+
+            <div class="display_adds_parent">
+                <div class="display_adds_view_box display_adds_2_col">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0">Rights Received Entry</h4>
+                                <div class="page-title-right">
+                                    <a href="#" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <!-- Working Area Start -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row form_2">
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlSegment" class="mb-0">
+                                        Select Script :
+
+                                    </label>
+                                    <select id="ddlScript" ng-model="ddlScript" ng-options="v.Script_ID as v.ScriptName for v in SplitEntryScpirt" ng-change="ChngSprt()" style="font-size:0.9rem" class="form-select select2">
+                                        <option ng-option value="">Select Script</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_Date" class="mb-0">
+                                        Record Date :
+
+                                    </label>
+                                    {{RRDetails.RecordDate}}
+
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlBroker" class="mb-0">
+                                        Transaction No :
+
+                                    </label>
+                                    <div class="input-group tbl_int_grp">
+                                        <label id="lblTransactionNo" />
+
+                                    </div>
+                                </div>
+                                <div id="div_demate" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="Demat_Ac_Id" class="mb-0"></label>
+                                    <div class="input-group tbl_int_grp">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_SettlementNo" class="mb-0">
+                                        Total Available Qty :
+
+                                    </label>
+                                    {{RRDetails.TotalAvailableQty}}
+
+
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_BillNo" class="mb-0">
+                                        Stock in Trade Total Qty :
+
+                                    </label>
+                                    {{RRDetails.StockinTradeTotalQty}}
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlConsultant" class="mb-0">
+                                        Share Investment Total Qty :
+
+                                    </label>
+                                    {{RRDetails.ShareInvestmentTotalQty}}
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlScript_Id" class="mb-0">
+                                        Rate (Per Share) :
+
+                                    </label>
+                                    {{RRDetails.ReteParShare}}
+
+
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="Type" class="mb-0">
+                                        Additional Qty Stock in Trade :
+
+                                    </label>
+                                    <input type="number" value="0" class="form-control" ng-model="RRDetails.AdditionalQtyStockinTrade" />
+
+                                </div>
+                                <div id="div_ExpiryDate" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_BillNo" class="mb-0">
+                                        Additional Qty Share Investment :
+                                    </label>
+                                    <input type="number" value="0" class="form-control" ng-model="RRDetails.AdditionalQtyShareInvestment" />
+
+                                </div>
+                                <div id="div_StockType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlStockType" class="mb-0">
+                                        Ratio Qty :
+
+                                    </label>
+                                    {{RRDetails.Qty1}}
+
+                                </div>
+                                <div id="div_OptionType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlOptionType" class="mb-0">
+                                        Per Share Qty :
+
+                                    </label>
+                                    {{RRDetails.Qty2}}
+                                </div>
+
+
+                                <div id="div_HoldingType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddlHoldingType" class="mb-0">
+                                        Total Qty Received :
+
+                                    </label>
+                                    {{RRDetails.TotalQtyReceived}}
+
+
+                                </div>
+
+                                <div id="divIntraDays" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="chk_intraday" class="mb-0">
+                                        Stock in Trade Rights Qty Received :
+
+                                    </label>
+                                    <div class="form-check">
+
+                                        {{RRDetails.StockinTradeRightsQtyReceived}}
+
+                                    </div>
+                                </div>
+
+
+                                <div id="div_StrikePrice" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_StrikePrice" class="mb-0">
+                                        Share Investment Rights Qty Received :
+
+                                    </label>
+
+                                    {{RRDetails.ShareInvestmentRightsQtyReceived}}
+
+                                </div>
+
+
+
+
+                                <div class="col-sm-12">
+
+
+                                    <div class="table-responsive ">
+                                        <table id="TBL_Equity" class="table table-hover sr-table table-bordered mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Demat Account</th>
+                                                    <th>Available Qty</th>
+                                                    <th>Received Qty</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="data in Multimodel">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{data.DematAccount}}</td>
+
+
+                                                    <td>{{data.AvailableQty}}</td>
+                                                    <td>{{data.ReceivedQty}}</td>
+
+
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <h4>Payment Details :</h4>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_GrossRate" class="mb-0">
+                                        Mode :
+                                    </label>
+                                    <select id="ddlCashbanklist" ng-model="ddlCashbanklist" ng-change="changecashbanklist()" ng-options="v.TypeId as v.Name for v in Cashbanklist" class="form-select select2">
+                                        <option ng-option value="">Select Cash Bank</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_PaymentMode" class="mb-0">Payment Mode:</label>
+                                    <select id="ddlPaymentMode" ng-model="ddlPaymentMode" ng-options="v.TypeId as v.Name for v in paymod" class="form-select select2">
+                                        <option ng-option value="">Select Payment Mode</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_GrossAmount" class="mb-0">
+                                        Reference No :
+                                    </label>
+                                    <input type="text" id="refernce" ng-model="txt_reference" placeholder="Enter Reference No" autocomplete="off" class="form-control" />
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_BrokerageperUnit" class="mb-0">
+                                        Payment Date :
+                                    </label>
+                                    <input id="txt_Date" ng-model="txtPDate" type="text" class="form-control datepicker" data-date-format="dd-M-yy" placeholder="DD-MM-YYYY" autocomplete="off" />
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_BrokerageAmount" class="mb-0">
+                                        Amount :
+                                    </label>
+                                    <input type="text" id="txtAmount" ng-model="txtAmount" class="form-control" placeholder="Enter Amount" autocomplete="off" />
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_NetRate" class="mb-0">
+                                        Bank :
+                                    </label>
+                                    <select id="ddlBankAccount" ng-model="ddlBankAccount" ng-options="v.ID as v.NAME for v in CashBAccount" class="form-select select2">
+                                        <option ng-option value="">Select Bank Account</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="txt_NetAmount" class="mb-0">
+                                        Account :
+
+                                    </label>
+                                    <input type="text" id="txt_Account" ng-model="txt_Account" class="form-control" placeholder="Enter Account" autocomplete="off" />
+                                </div>
+
+                                @* Expense Block - Start *@
+
+                                @* Expense Block - End *@
+
+
+
+                                <div class="col-sm-12 text-center mt-3">
+                                    <button ng-click="FnReset()" type="button" class="btn btn-secondary">Reset</button>
+                                    <button ng-click="SaveData()" type="button" class="btn btn-primary">{{btntext}}</button>
+                                    <div style="display:none;" class="loader-wrapper" id="loader-1">
+                                        @*<div id="loader"></div>*@
+                                    </div>
+                                </div>
+                                @*Chintan*@
+                                <div class="col-sm-12">
+                                    <div class="table-responsive ">
+                                        <table id="TBL_data" class="table table-hover sr-table table-bordered mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Trans_No</th>
+                                                    <th>Script_code</th>
+                                                    <th>Bonus_Rights_qty</th>
+                                                    <th>Member_code Qty</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="data in aftersavedata">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{data.Trans_No}}</td>
+                                                    <td>{{data.Script_code}}</td>
+                                                    <td>{{data.Bonus_Rights_qty}}</td>
+                                                    <td>{{data.Member_code}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                @*Chintan*@
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="display_adds display_adds_right text-center">
+                    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" class="mobile_adds mb-3" alt="" />
+                    <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" class="desktop_adds" alt="" />
+                    <!-- <img src="https://via.placeholder.com/160x600.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" /> -->
+                </div>
+            </div>
+            <!-- container-fluid -->
+            <!-- End Page-content -->
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+    </div>
+
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Demat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat <span class="text-danger">*</span>:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Demat A/c Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal_broker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Broker</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Broker <span class="text-danger">*</span>:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Broker Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<script src="../js/metisMenu.min.js"></script>
+<script src="../js/simplebar.min.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/bootstrap-datepicker.min.js"></script>
+<script src="../js/select2.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+@*<script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $('#txt_Date').attr('readonly', true);
+            $("#txt_Date").datepicker({
+                dateFormat: "dd-M-yy",
+                minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#txt_ExpiryDate').attr('readonly', true);
+            $("#txt_ExpiryDate").datepicker({
+                dateFormat: "dd-M-yy",
+                minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                changeMonth: true,
+                changeYear: true
+            });
+
+        });
+    </script>*@
+<script>
+    $(document).ready(function () {
+        $(".select2").select2({
+            maximumSelectionLength: 3
+        });
+        $(".select2-hide_search").select2({
+            minimumResultsForSearch: Infinity
+        });
+
+    });
+</script>
+
+<script src="../js/custom-script.js"></script>
+<script type="text/javascript">
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function () {
+                if (oldonload) {
+                    oldonload();
+                }
+            }
+        }
+    }
+    addLoadEvent(setmenu('7'));
+    addLoadEvent(setentrymenu('2'));
+</script>
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/RightsReceivedEntry.js"></script>
+
+@*</body>
+
+    </html>*@
+
+

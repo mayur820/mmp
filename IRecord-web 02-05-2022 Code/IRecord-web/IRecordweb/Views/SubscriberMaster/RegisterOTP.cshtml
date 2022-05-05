@@ -1,0 +1,257 @@
+﻿@model IRecordweb.Models.SUBSCRIBER
+
+@{
+    ViewBag.Title = "RegisterOTP";
+    Layout = null;
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - iRecord</title>
+
+
+    <link href="/Content/bootstrap.min.v4.css" rel="stylesheet" />
+    <link href="/Content/line-awesome.min.css" rel="stylesheet" />
+    <link href="/Content/theme-color.css" rel="stylesheet" />
+    <link href="/Content/app.min.css" rel="stylesheet" />
+    <link href="/Content/custom-body.css" rel="stylesheet" />
+</head>
+@*@if (ViewBag.Message != null)
+    {
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+        
+    </script>
+    }*@
+
+<link href="~/Content/onboard.css" rel="stylesheet" />
+
+<div class="wrapper">
+
+  @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="text-center mb-4">
+            <img src="~/Content/images/logo2.png" alt="IRecord" />
+
+            <div class="checkout-wrap">
+                <ul class="checkout-bar nav_tabs d-flex">
+                    <li class="visited"><a href="#tab_1"></a></li>
+                    <li class="visited"><a href="#tab_2"></a></li>
+                    <li class="visited"><a href="#tab_3"></a></li>
+                    <li class="visited"><a href="#tab_4"></a></li>
+                    <li class="visited"><a href="#tab_5"></a></li>
+                    <li class="active"><a href="#tab_6"></a></li>
+                    <li class=""><a href="#tab_7"></a></li>
+                    <li class=""><a href="#tab_8"></a></li>
+                    <li class=""><a href="#tab_9"></a></li>
+                    <li class=""><a href="#tab_10"></a></li>
+                    <li class=""><a href="#tab_11"></a></li>
+                    <li class=""><a href="#tab_12"></a></li>
+                    <li class=""><a href="#tab_13"></a></li>
+                    <li class=""><a href="#tab_14"></a></li>
+                    <li class=""><a href="#tab_15"></a></li>
+                    <li class=""><a href="#tab_16"></a></li>
+                    <li class=""><a href="#tab_17"></a></li>
+                    <li class=""><a href="#tab_18"></a></li>
+                    <li class=""><a href="javascript:;"></a></li>
+                </ul>
+            </div>
+
+            <h1 class="mb-4">Register</h1>
+        </div>
+        <div class="w-100" id="tab_6">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-row mobile_row">
+                @Html.LabelFor(model => model.MobileOTP, htmlAttributes: new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.EditorFor(model => model.MobileOTP, new { htmlAttributes = new { @class = "form-control", @Autocomplete = "Off" } })
+                    @Html.ValidationMessageFor(model => model.MobileOTP, "", new { @class = "text-danger" })
+                    <input type="button" value="VERIFY" name="VERIFY1" id="VERIFY1" class="btn btn-primary" onclick="FnVerifybtn();" />
+                    <input type="submit" value="Resend Code" name="Resend1" class="btn btn-outline-light" />
+                </div>
+            </div>
+
+            <div class="form-row mobile_row">
+                @Html.LabelFor(model => model.EmailOTP, htmlAttributes: new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.EditorFor(model => model.EmailOTP, new { htmlAttributes = new { @class = "form-control", @Autocomplete = "Off" } })
+                    @Html.ValidationMessageFor(model => model.EmailOTP, "", new { @class = "text-danger" })
+                    <input type="button" value="VERIFY" name="VERIFY" id="VERIFY" class="btn btn-primary" onclick="FnVerifybtn1()" />
+                    <input type="submit" value="Resend Code" name="Resend" class="btn btn-outline-light" />
+                </div>
+            </div>
+
+            @*<div class="text-right form-row justify-content-end mt-4">
+            <input type="submit" value="NEXT" class="btn btn-primary" />
+        </div>*@
+
+            @*<label>Mobile No :<b> @Session["MobileNo"].ToString() </b> is your default password</label>*@
+        </div>
+         } 
+</div>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+<script>
+ 
+   function FnVerifybtn()
+    {
+        debugger;
+        var btn = document.getElementById('VERIFY1');
+        if (btn.value == "VERIFY")
+        {
+            // var EmailOTP = ($("#EmailOTP").val()).trim();
+            // fm.append("EmailOTP", EmailOTP);
+            //fm.append("VERIFY1", "");
+            //fm.append("Resend", "");
+            //fm.append("Resend1", "");
+
+            var MobileOTP = ($("#MobileOTP").val()).trim();
+            var fm = new FormData();
+            fm.append("MobileOTP", MobileOTP);
+            fm.append("VERIFY", "VERIFY");
+
+            $.ajax({
+                type: "post",
+                url: "/subscriberMaster/RegisterOTP",
+               // url: '' + ServerURL + '/subscriberMaster/RegisterOTP',
+                data: fm,
+                contentType: false,
+                processData: false,
+                success: function (return_Data) {
+                    debugger;
+                    // var data = '@TempData["OTPMessage"]';
+
+                    if (return_Data == "OTP Verified !") {
+                        $('#VERIFY1').removeClass('btn-primary');
+                        $('#VERIFY1').addClass('btn-success');
+                        //  document.getElementById('VERIFY1').style.backgroundColor = 'green';
+                        btn.value = "VERIFIED";
+                        btn.innerHTML = 'VERIFIED';
+                        redirectpage();
+                    }
+                    else {
+                       alert("OTP Not Verified !");
+                    }
+
+                }
+            });
+        }
+    }
+
+    function FnVerifybtn1()
+    {
+        debugger;
+        var btn = document.getElementById('VERIFY');
+        if (btn.value == "VERIFY")
+        {
+            @*var data =  '@TempData["OTPMessage"]';
+            if (data == "OTP Verified !")
+            {*@
+                var EmailOTP = ($("#EmailOTP").val()).trim();
+                var fm = new FormData();
+                fm.append("EmailOTP", EmailOTP);
+                fm.append("VERIFY1", "VERIFY1");
+
+                $.ajax({
+                    type: "post",
+                    url: "/subscriberMaster/RegisterOTP",
+                  //  url: '' + ServerURL + '/subscriberMaster/RegisterOTP',
+                    data: fm,
+                    contentType: false,
+                    processData: false,
+                    success: function (return_Data) {
+                        debugger;
+
+                        if (return_Data == "OTP Verified !") {
+                            $('#VERIFY').removeClass('btn-primary');
+                            $('#VERIFY').addClass('btn-success');
+                          //  document.getElementById('VERIFY').style.backgroundColor = 'green';
+                            btn.value = "VERIFIED";
+                            btn.innerHTML = 'VERIFIED';
+                            redirectpage();
+                        }
+                        else {
+                            alert("OTP Not Verified !");
+                        }
+
+
+                    }
+                });
+
+            //}
+        }
+    }
+
+    function redirectpage() {
+
+        if ((document.getElementById('VERIFY1').value == "VERIFIED") && (document.getElementById('VERIFY').value == "VERIFIED"))
+        {
+            var MobileOTP = ($("#MobileOTP").val()).trim();
+            var EmailOTP = ($("#EmailOTP").val()).trim();
+            //var fm = new FormData();
+
+            //fm.append("VERIFY1", "VERIFIED");
+            //fm.append("VERIFY", "VERIFIED");
+            $.ajax({
+                type: "post",
+                url: "/subscriberMaster/RegisterOTP",
+               // url: '' + ServerURL + '/subscriberMaster/RegisterOTP',
+                data: "MobileOTP=" + MobileOTP + "&EmailOTP=" + EmailOTP + "&VERIFY1=VERIFIED&VERIFY=VERIFIED",
+               // data : fm,
+                contenttype: false,
+                processdata: false,
+                success: function (return_Data) {
+                    debugger;
+
+                    if (return_Data !=null) {
+                        window.location = "CreatePassword";
+                    }
+
+                }
+            });
+
+        }
+    }
+
+    @*function FnVerifybtn()
+    {
+        var content=@Html.Raw(Json.Encode(ViewBag.Message));
+        debugger;
+        alert(content);
+        if (content == "OTP Verified !")
+        {
+            document.getElementById('VERIFY1').disabled = true;
+        }
+        else
+        {
+            document.getElementById('VERIFY1').disabled = false;
+        }
+    }
+
+
+    function FnVerifybtn1()
+    {
+        debugger;
+        var content=@Html.Raw(Json.Encode(ViewBag.Message));
+        //  alert(content);
+        if (content == "OTP Verified !")
+        {
+            document.getElementById('VERIFY').disabled = true;
+        }
+        else
+        {
+            document.getElementById('VERIFY').disabled = false;
+        }
+    }*@
+</script>
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>

@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "BrokerMappingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.v4.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="../css/line-awesome.min.css" />
+    <link rel="stylesheet" href="../css/theme-color.css" />
+    <link rel="stylesheet" href="../css/app.min.css" />
+    <link rel="stylesheet" href="../css/custom-body.css" />
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/AngScripts/angular.js"></script>
+    <script src="~/AngScripts/ngStorage.min.js"></script>
+
+    <title>Broker Bill Format Mapping :: iRecord</title>
+</head>
+<body class="inner_body">
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="">
+        <div id="layout-wrapper">
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <!-- Left Sidebar End -->
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+
+
+
+            <div class="container-fluid">
+
+                <div class="display_adds display_adds_top text-center mb-3">
+                    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+                </div>
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Broker Bill Format Mapping</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <!-- Working Area Start -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table id="mytable" class="table table-bordered table-striped mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sr No </th>
+                                        <th>Broker Formar </th>
+                                        <th>File Type </th>
+                                        <th>File Extension</th>
+                                        <th>InvestmentType </th>
+                                        <th>Broker</th>
+                                        <th>Import Format File</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="data in Info | filter:search">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{data.Sr_No}}</td>
+                                        <td>{{data.BrokerFormat}}</td>
+                                        <td>{{data.FileType}}</td>
+                                        <td>{{data.FileExtension}}</td>
+                                        <td>{{data.InvestmentType}}</td>
+                                        <td>
+                                            <select id="ddlBroker" ng-model="data.BrokerID" ng-options="v.ID as v.Name for v in Accounts" class="form-select select2">
+                                                <option ng-option value="">Select Broker</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="file" class="form-control" id="FileUpload" ng-model="uploadfileurl">
+                                        </td>
+                                        <td class="whitespace_nowrap">
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:;" ng-click="EditItems(data)" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Working Area End -->
+
+            </div> <!-- container-fluid -->
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> <i class="las la-copyright"></i> iRecord.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- end main content-->
+
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <script src="../js/metisMenu.min.js"></script>
+    <script src="../js/simplebar.min.js"></script>
+    <script src="../js/app.js"></script>
+
+    <script src="../js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: "dd-M-yy",
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+
+    </script>
+
+    <script src="../js/custom-script.js"></script>
+    <script type="text/javascript">
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                }
+            }
+        }
+        addLoadEvent(setmenu('7'));
+        addLoadEvent(setentrymenu('2'));
+    </script>
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/BrokerFormatMap.js"></script>
+</body>
+
+</html>
+
+
+
+

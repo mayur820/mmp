@@ -1,0 +1,150 @@
+﻿@model IRecordweb.Models.FINANCIALYEAR
+
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+@*<div class="display_adds display_adds_top text-center mb-3">
+        <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="">
+    </div>*@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h1 class="mb-0">Financial Year Master</h1>
+
+            <div class="page-title-right">
+
+                @*<center>
+                        <h1>Financial Year Master</h1>
+                    </center>*@
+
+                @*@if (Session["RoleId"] != null)
+                    {
+                    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+                        {
+                        <p>
+                            <input type="submit" class="btn btn-success add-on" value="Add Year" onclick="location.href='@Url.Action("SaveFinYear", "FinancialYearTrans")'" />
+                        </p>
+                        }
+                    else if (Session["RoleName"].ToString() == "OPERATOR")    /*|| Session["RoleName"].ToString() == "MEMBER"*/
+                        {
+                        <p>
+                            <input type="submit" class="btn btn-success isdisabled" value="Add Year" onclick="location.href='@Url.Action("SaveFinYear", "FinancialYearTrans")'" />
+                        </p>
+                        }
+                    }*@
+
+                @*@if (HttpContext.Current.Session["Add_Rights"].ToString() == "1")
+                    {*@
+                <input type="submit" class="btn btn-primary" value="Add Year" onclick="location.href='@Url.Action("SaveFinYear", "FinancialYearTrans")'" />
+                @*}*@
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+            @*<div class="float-sm-end">
+                <uib-pagination class="pagination MYPAGECSS" total-items="AllMember.length" ng-model="page"
+                                ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+            </div>*@
+        </div>  
+        <div class="table-responsive table-small">
+            <table class="table defaultTable table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FromDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ToDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </th>*@
+                        <th>
+                            @Html.DisplayName("Action")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.ShowFinYear)
+                {
+                    string Active = item.Active == true ? "Active" : "Inanctive";
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FromDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ToDate.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Active)
+                        </td>
+
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate, "{0:MM/dd/yyyy}")
+                        </td>*@
+                        @if (Session["RoleId"] != null)
+                        {
+                            if (Session["RoleName"] != null && (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR"))
+                            {
+                                <td>
+                                    @Html.ActionLink(" ", "EditFinYear", new { id = item.FinancialYearID }, new { @class = "px-2 btn btn-outline-primary las la-pencil-alt font-size-18" }) |
+                                    @Html.ActionLink(" ", "ViewFinYear", new { id = item.FinancialYearID }, new { @class = "px-2 btn btn-outline-primary las la-search font-size-18" }) |
+                                    @Html.ActionLink(" ", "DeleteFinYear", new { id = item.FinancialYearID }, new { @class = "px-2 btn btn-outline-danger las la-trash-alt font-size-18" })
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "EditFinYear", new { id = item.FinancialYearID }, new { @class = "isdisabled" }) |
+                                    @if (Session["RoleName"] != null && Session["RoleName"].ToString() == "OPERATOR")
+                                    {
+                                        @Html.ActionLink("View", "ViewFinYear", new { id = item.FinancialYearID }, new { @class = "isdisabled" })
+                                    } |
+                                    @Html.ActionLink("Delete", "DeleteFinYear", new { id = item.FinancialYearID }, new { @class = "isdisabled" })
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["Message"]');
+                window.location.href = "/FinancialYearTrans/Index";
+            };
+    </script>
+}

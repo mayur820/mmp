@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css_new/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="~/css_new/select2.min.css" />
+<link rel="stylesheet" href="~/css_new/bootstrap-datepicker3.min.css" />
+<link rel="stylesheet" href="~/css_new/line-awesome.min.css" />
+<link rel="stylesheet" href="~/css_new/theme-color.css" />
+<link rel="stylesheet" href="~/css_new/app.min.css" />
+<link rel="stylesheet" href="~/css_new/custom-body.css" />
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<title>JV Entry :: iRecord</title>
+<div class="display_adds display_adds_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="">
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h1 class="mb-0">JV Entry</h1>
+
+            <!-- <div class="page-title-right">
+            </div> -->
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- Working Area Start -->
+<div ng-app="myApp" class="card">
+    <div  ng-controller="myctrn" ng-init="PageLoad()" class="card-body">
+
+        <div class="d-flex flex-column">
+            <div class="row mb-3">
+                <div class="col-sm-12 col-md-4 mb-3 d-flex flex-column">
+                    <label class="mb-0">JV No.:</label>
+                    <input type="text" id="txt_jvno"  ng-model="detail.jvno"  class="form-control" readonly="" />
+                </div>
+
+                <div class="col-sm-12 col-md-4 mb-3 d-flex flex-column">
+                    <label class="mb-0">Date:</label>
+                    <input type="date" id="txt_date"   ng-model="detail.date" class="form-control datepicker" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+                </div>
+            </div>
+
+            <h5>Primary Ledger</h5>
+            <div class="row mb-3">
+                <div class="col-sm-12 col-md-5 mb-3 d-flex flex-column">
+                    <label class="mb-0">Ledger:</label>
+                    <select id="ddl_Primary_Ledger" ng-model="detail.Primary_Ledger_Id" ng-options="x.ID as x.NAME for x in Allledger" class="form-select select2" ng-change="GetLedger2()">
+                        <option ng-option value="">-- Select Ledger --</option>
+               
+                    </select>
+                  
+                </div>
+                <div class="col-sm-12 col-md-3 mb-3 d-flex flex-column">
+                    <label class="mb-0">DR/CR:</label>
+                    <select id="ddl_PrimaryLedger_cr_dr"   ng-model="detail.PrimaryLedger_cr_dr" ng-change="drcrchange()" class="form-select w-100 select2-hide_search">
+                        <option  value="1">DR</option>
+                        <option  value="2" >CR</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-4 mb-3 d-flex flex-column">
+                    <label class="mb-0">Amount:</label>
+                    <input type="text" id="txt_Primary_Ledger_amount"   ng-model="detail.Primary_Ledger_amount" class="form-control" placeholder="Enter Amount" />
+                </div>
+                <div class="col-sm-12 col-md-5 mb-3 d-flex flex-column">
+                    <label class="mb-0">Narration:</label>
+                    <input type="text" id="txt_Primary_Ledger_Narration"   ng-model="detail.Primary_Ledger_Narration" class="form-control" placeholder="Enter Narration" />
+                </div>
+            </div>
+        </div>
+
+        <div class="jv_entry_box">
+            <h5>Counter Ledger</h5>
+            <ul class="sub_list">
+                <li class="desk_header">
+                    <div class="col_1">Ledger</div>
+                    <div class="col_2">DR/CR</div>
+                    <div class="col_3">Amount</div>
+                    <div class="col_4">Narraton</div>
+                </li>
+                <li class="d-flex flex-wrap">
+                    <div class="col_1">
+                        @*<select class="form-select w-100 select2">
+                            <option>-- Select Ledger --</option>
+                            <option>Ledger 1</option>
+                            <option>Ledger 2</option>
+                            <option>Ledger 3</option>
+                        </select>*@
+                        <select id="ddl_Counter_Ledger" ng-model="details.Counter_Ledger_ID" ng-options="x.ID as x.NAME for x in Allledger2" class="form-select w-100 select2" >
+                            <option ng-option value="">-- Select Ledger --</option>
+
+                        </select>
+                    </div>
+                    <div class="col_2">
+                        <select id="ddl_Counter_Ledger_cr_dr"   ng-model="detail.Counter_Ledger_cr_dr" class="form-select w-100 select2-hide_search" disabled = "disabled">
+                            <option value="1" >DR</option>
+                            <option  value="2">CR</option>
+                        </select>
+                    </div>
+                    <div class="col_3">
+                        <input type="text" id="txt_Counter_Ledger_Amount"   ng-model="detail.Counter_Ledger_Amount" ng-change="checkamountvalid()" class="form-control" placeholder="Enter Amount" />
+                    </div>
+                    <div class="col_4">
+                        <input type="text" id="txt_Counter_Ledger_Narration"   ng-model="detail.Counter_Ledger_Narration" class="form-control" placeholder="Enter Narraton" />
+                    </div>
+                    <div class="col_5 justify-content-end text-end">
+                        <button type="button" id="btn_add"  data-bs-toggle="modal"  ng-click="FN_SAVE()" class="btn btn-primary whitespace_nowrap"><i class="la la-plus">Add</i> </button>
+                        @*<a  id=""  >
+                           
+                        </a>*@
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="table-responsive mt-5">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="30%">Ledger</th>
+                        <th width="10%">DR/CR</th>
+                        <th width="15%">Amount</th>
+                        <th width="30%">Narraton</th>
+                        <th width="10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in viewdata">
+                        <td>{{$index+1}}</td>
+                        <td>{{data.LedgerName}}</td>
+                        <td>{{data.DRCR_NAME}}</td>
+                        <td>{{data.AMOUNT}}</td>
+                        <td>{{data.Narration}}</td>
+                        <td class="whitespace_nowrap">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <a href="javascript:;" ng-click="editrow(data)" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href=""  ng-click="deleterow($index)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    
+                   
+                </tbody>
+            </table>
+        </div>
+
+        <div class="narration_box mt-4 mb-4">
+            <textarea class="form-control"  type="text" id="txt_entery_Level_Narration" rows="4" placeholder="NarrationBox Entire JV Specific"></textarea>
+        </div>
+
+        <div class="col-sm-12 text-center mt-3">
+            <input type="submit" class="btn btn-primary" ng-click="SubmitData()" value="Submit" />
+            <a href="#modal_add" class="btn btn-outline-primary" data-bs-toggle="modal">
+                <i class="la la-plus"></i> Account
+            </a>
+        </div>
+
+    </div>
+    <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Account Master</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Name <span class="text-danger">*</span>:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Group <span class="text-danger">*</span>:</label>
+                            <select class="form-select">
+                                <option>Select Group</option>
+                                <option>Group 1</option>
+                                <option>Group 2</option>
+                                <option>Group 3</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Opening:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">DR/CR:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                        </div>
+                    </div>
+                    <div class="accordion mt-2" id="accordionExample">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <a class="accordion-button collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Contact Detail
+                                </a>
+                            </div>
+                            <div class="accordion-collapse collapse" id="collapseExample">
+                                <div class="card card-body mb-0">
+                                    <div class="row form_2">
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Contact Person:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Email:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Broker Code:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Mobile:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Address:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Alternet No:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">Aadhar:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">PAN:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label class="mb-0">GST:</label>
+                                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Short Name" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js_new/jquery-3.5.1.min.js"></script>
+    <script src="~/js_new/jquery-migrate-3.3.2.js"></script>
+    <script src="~/js_new/jquery-ui.min.js"></script>
+    <script src="~/js_new/popper.min.js"></script>
+    <script src="~/js_new/bootstrap.min.js"></script>
+
+    <script src="~/js_new/metisMenu.min.js"></script>
+    <script src="~/js_new/simplebar.min.js"></script>
+    <script src="~/js_new/app.js"></script>
+
+    <script src="~/js_new/bootstrap-datepicker.min.js"></script>
+    <script src="~/js_new/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".select2").select2({
+				maximumSelectionLength: 3
+			});
+            $(".select2-hide_search").select2({
+				minimumResultsForSearch: Infinity
+			});
+
+            $('.datepicker').datepicker({
+                format: "dd-mm-yyyy",
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+    <script src="~/js_new/custom-script.js"></script>
+    <script type="text/javascript">
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                }
+            }
+        }
+        addLoadEvent(setmenu('7'));
+        addLoadEvent(setentrymenu('1'));
+    </script>
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/JVEntry.js"></script>

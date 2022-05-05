@@ -1,0 +1,112 @@
+﻿@model IRecordweb.Models.FamilyModel
+@{
+    ViewBag.Title = "OnboardingFamily";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="css/select2.min.css">
+
+@*<h2>Onboarding Family</h2>*@
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+
+<div class="wrapper">
+
+    @using (Html.BeginForm())
+                {
+        @Html.AntiForgeryToken()
+
+
+
+
+        <div class="text-center mb-4">
+            <img src="~/Content/images/logo2.png" alt="IRecord" />
+        </div>
+
+            <div class="checkout-wrap">
+                <ul class="checkout-bar nav_tabs d-flex">
+                    <li class="visited"><a href="#tab_1"></a></li>
+                    <li class="visited"><a href="#tab_2"></a></li>
+                    <li class="visited"><a href="#tab_3"></a></li>
+                    <li class="visited"><a href="#tab_4"></a></li>
+                    <li class="visited"><a href="#tab_5"></a></li>
+                    <li class="visited"><a href="#tab_6"></a></li>
+                    <li class="visited"><a href="#tab_7"></a></li>
+                    <li class="visited"><a href="#tab_8"></a></li>
+                    <li class="active"><a href="#tab_9"></a></li>
+                    <li class=""><a href="#tab_10"></a></li>
+                    <li class=""><a href="#tab_11"></a></li>
+                    <li class=""><a href="#tab_12"></a></li>
+                    <li class=""><a href="#tab_13"></a></li>
+                    <li class=""><a href="#tab_14"></a></li>
+                    <li class=""><a href="#tab_15"></a></li>
+                    <li class=""><a href="#tab_16"></a></li>
+                    <li class=""><a href="#tab_17"></a></li>
+                    <li class=""><a href="#tab_18"></a></li>
+                    <li class=""><a href="javascript:;"></a></li>
+                </ul>
+            </div><br />
+        @*</div>*@
+        <div class="w-100" id="tab_9">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-row mobile_row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" , @Autocomplte = "Off"} })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row mobile_row" style="display:none">
+                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.CheckBoxFor(model => model.Active, htmlAttributes: new { @checked = true })
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="SUBMIT" class="btn btn-primary btn-soft-primary ml-auto text-uppercase next-tab" />
+                <input type="button" value="Login" style="display:none"  name="Login" class="btn btn-primary btn-soft-primary ml-auto text-uppercase next-tab text-left" onclick="location.href='@Url.Action("Login", "Login")'" />
+             </div>
+        </div>
+        }
+    </div>
+
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+@if (ViewBag.Message != null)
+    {
+    <script type="text/javascript">
+                window.onload = function () {
+                    alert('@ViewBag.Message');
+                };
+    </script>
+    }
+
+
+
+
+
+
+

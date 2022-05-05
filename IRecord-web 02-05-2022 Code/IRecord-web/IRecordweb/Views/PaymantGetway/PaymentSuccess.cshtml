@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "PaymentSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    document.getElementById("btnmodelclose").onclick = function () {
+        alert("sdf");
+        location.href = "Dashboard/Index";
+    };
+</script>
+
+
+
+<!-- Modal -->
+<div class="modal show" id="success" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="border:none;border-radius: 5px;">
+            <div class="modal-header" style="    background: #1ab394;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;">
+
+                <h4 class="modal-title text-center"><img src="https://lh3.googleusercontent.com/-Zxh4srAEtU0/Wp0cZV-PJuI/AAAAAAAAD4E/En5x5c53s44jzvG8M0sSyFZXoRhGXfBzwCL0BGAYYCw/h100/2018-03-05.png" alt=""></h4>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:center;color:#1ab394;font-size:24px;font-weight:500;">Payment Successful!</p>
+                <p style="color:#555555;">Transaction ID:&nbsp;<strong style="font-weight:500;font-size:16px;color: #222222;">@Session["TransactionID"].ToString()</strong><br>Payment amount:&nbsp;<strong style="font-weight:500;font-size:16px;color: #222222;">Rs.@Session["PaymentAmount"].ToString()</strong><br></p>
+            </div>
+            <div class="modal-footer">
+                <a  id="btnmodelclose"  href="/Dashboard/Index" class="btn btn-default">Close</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+

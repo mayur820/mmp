@@ -1,0 +1,482 @@
+﻿
+@{
+    ViewBag.Title = "SaveBREntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="#">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
+<link rel="stylesheet" href="~/css/select2.min.css">
+<link rel="stylesheet" href="~/css/style.css">
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<style>
+    footer.footer {
+        margin-bottom: -806px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #5b73e8 !important;
+        border-color: #5b73e8 !important;
+    }
+</style>
+
+@section Scripts {
+
+
+}
+
+<body>
+    <div ng-app="myApp" class="wrapper">
+        <div ng-controller="myctrn" ng-init="PageLoad()">
+            <div class="text-center mb-4">
+                <img src="/Content/images/logo2.png" alt="IRecord" />
+                <!-- <h1 style="margin-bottom: 15px;">Register</h1> -->
+            </div>
+
+
+
+
+            <div class="checkout-wrap">
+                <ul class="checkout-bar nav_tabs d-flex">
+                    @*<li class=""><a href="#tab_1" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_2" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_3" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_4" data-toggle="tab"></a></li>
+
+                        <li class=""><a href="#tab_5" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_6" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_7" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_8" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_9" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_10" data-toggle="tab"></a></li>
+                        <li class=""><a href="#tab_11" data-toggle="tab"></a></li>*@
+                    <li class="active"><a href="#tab_12" data-toggle="tab"></a></li>
+                    <li class=""><a href="#tab_13" data-toggle="tab"></a></li>
+                    <li class=""><a href="#tab_14" data-toggle="tab"></a></li>
+                </ul>
+            </div>
+            <div class="">
+                <div class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs d-none">
+                            <li class="active">
+                                @*<a href="#tab_1" data-toggle="tab">A</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">A</a></li>
+                                    <li><a href="#tab_3" data-toggle="tab">A</a></li>
+                                    <li><a href="#tab_4" data-toggle="tab">A</a></li>
+
+                                    <li class=""><a href="#tab_5" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_6" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_7" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_8" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_9" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_10" data-toggle="tab"></a></li>
+                                    <li class=""><a href="#tab_11" data-toggle="tab"></a></li>*@
+                            <li class="active"><a href="#tab_12" data-toggle="tab"></a></li>
+                            <li class=""><a href="#tab_13" data-toggle="tab"></a></li>
+                            <li class=""><a href="#tab_14" data-toggle="tab"></a></li>
+                        </ul>
+                        <div class="tab-content mt-3">
+                            <!-- 1 -->
+                            <!-- 12 -->
+                            <div class="tab-pane fade active show" id="tab_12">
+                                <h2>
+                                    Upload Contract Note File
+                                </h2>
+
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Select Date:
+                                        </label>
+                                        <div class="form-holder w-100">
+                                            <input type="hidden" ng-model="SaveBREntry.ContractNoteName" />
+                                            <input id="txt_Date" ng-model="SaveBREntry.Date" type="text" class="form-control datepicker" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Segment Type:
+                                        </label>
+                                        <div class="form-holder w-100">
+
+                                            <select id="ddlInvestmentType" ng-model="ddlInvestmentType" class="form-control">
+
+                                                <option value="" selected="selected">Select Segment Type</option>
+                                                <option value="0">Equity</option>
+                                                <option value="1"> F & O</option>
+                                                <option value="3">MCX</option>
+                                                <option value="4">Currency</option>
+                                                <option value="5">NCDEX</option>
+
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Select Broker:
+                                        </label>
+                                        <div class="form-holder w-100">
+
+                                            <select id="ddlBroker" ng-model="ddlBroker" ng-options="v.ID as v.NAME for v in Brokers" ng-change="bindbills()" class="form-control">
+                                                <option ng-option value="">Select Broker</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Consultant:
+                                        </label>
+                                        <div class="form-holder w-100">
+
+                                            <select id="ddlConsultant" ng-model="ddlConsultant" ng-options="v.ID as v.NAME for v in Consultants" class="form-control">
+                                                <option ng-option value="">Select Consultant</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Holding Type:
+                                        </label>
+                                        <div class="form-holder w-100">
+
+                                            <select id="ddlHoldingType" class="form-control">
+                                                <option value="-1">Select Holding Type</option>
+                                                <option value="0">I-Share Invenstment</option>
+                                                <option value="1">T-Stock In Trade</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Select Import Type:
+                                        </label>
+                                        <div class="form-holder w-100">
+                                            <select id="ContractNoteId" ng-model="ContractNoteId" ng-options="v.ID as v.NAME for v in BILLS" class="form-control">
+                                                <option ng-option value="">Select Import Type</option>
+
+                                            </select>
+
+                                            <i class="las la-angle-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Default Demat A/c:
+                                        </label>
+                                        <div class="form-holder w-100">
+                                            <select id="Demat_Ac_Id" ng-model="SaveBREntry.Demat_Ac_Id" class="form-control">
+                                                @*<option value="-1" class="option"></option>*@
+                                                <option ng-option value="">Select Demat A/c</option>
+                                                <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                                            </select>
+                                            <i class="las la-angle-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Browse:
+                                        </label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="contractnotefile" ng-model="SaveBREntry.uploadfileurl" ng-select="UploadFiles($files)">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="">
+                                            Password:
+                                        </label>
+                                        <input type="text" ng-model="SaveBREntry.Password" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="text-center mt-4">
+                                    <a href="javascript:;" ng-show="btnupload" ng-click="btnupload()" class="btn btn-primary text-uppercase">Upload</a>
+                                </div>
+
+                                <a href="javascript:;" class="text-center d-flex justify-content-center mt-3">
+                                    Display All Charges on First Upload of specific broker
+                                    Display Any Charges Which Are Not Matching
+                                </a>
+
+                                @*<div class="text-center mt-3">
+                                        <a href="javascript:;" class="btn btn-primary text-uppercase mt-3">View</a>
+                                    </div>*@
+                                <div class="text-center mt-4">
+                                    <a href="javascript:;" id="ApproveNowUpload" ng-click="btn_click_sumit()" class="btn btn-primary text-uppercase mt-3">Approve Now</a>
+                                </div>
+
+                                @*<div class="justify-content-end form-row mt-4">
+                                        <span class="btn btn-primary ml-1 text-uppercase next-tab">Submit</span>
+                                    </div>*@
+                            </div>
+
+
+                            <!-- End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal_1" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row mb-3">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Broker:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2">
+                                    <option value="-1">Select</option>
+                                    @*<option value="AK">Broker 1</option>
+                                        <option value="HI">Broker 2</option>
+                                        <option value="">Select</option>*@
+                                    <option ng-repeat="BILL in  BILLS" value="{{BILL.ID}}">{{BILL.NAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Demat A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2">
+                                    <option value="-1">Select</option>
+                                    <option value="AK">Demat 1</option>
+                                    <option value="HI">Demat 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal_2" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Demat A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2">
+                                    <option value="-1">Select</option>
+                                    <option value="AK">Demat 1</option>
+                                    <option value="HI">Demat 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="modal_3" tabindex="-1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Default Broker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row mb-3">
+                        <div class="form-holder">
+                            <label for="">
+                                Select Default Bank A/c:
+                            </label>
+                            <div class="d-flex">
+                                <select class="form-control select2">
+                                    <option value="-1">Select</option>
+                                    <option value="AK">Bank 1</option>
+                                    <option value="HI">Bank 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/select2.min.js"></script>
+
+    <!-- <script src="js/jquery.steps.js"></script>
+    <script src="js/main.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+
+
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var href = $(e.target).attr('href');
+                var $curr = $(".checkout-bar  a[href='" + href + "']").parent();
+                $('.checkout-bar li').removeClass();
+                $curr.addClass("active");
+                $curr.prevAll().addClass("visited");
+            });
+        });
+        //$("#ApproveNowUpload").click(function () {
+
+        //    window.location.href = "/BrokerBillEntry/BRDetails";
+        //});
+        jQuery('body').on('click', '.next-tab', function () {
+            var next = jQuery('.nav_tabs > .active').next('li');
+            if (next.length) {
+                next.find('a').trigger('click');
+            }
+            // else
+            // {
+            //     jQuery('#myTabs a:first').tab('show');
+            // }
+        });
+        jQuery('body').on('click', '.skip-tab', function () {
+            var next = jQuery('.nav_tabs > .active').next('li');
+            if (next.length) {
+                next.find('a').trigger('click');
+            }
+        });
+
+        // jQuery('body').on('click','.previous-tab', function(){
+        //     var prev = jQuery('.nav-tabs > .active').prev('li')
+        //     if(prev.length){
+        //         prev.find('a').trigger('click');
+        //     }else{
+        //         jQuery('#myTabs a:last').tab('show');
+        //     }
+        // });
+        $('#option1').click(function () {
+            $('.nav-tabs a[href="#tab_2"]').tab('show');
+        });
+        $('#option2').click(function () {
+            $('.nav-tabs a[href="#tab_3"]').tab('show');
+        });
+        $('#option3').click(function () {
+            $('.nav-tabs a[href="#tab_4"]').tab('show');
+        });
+
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/SaveBREntry.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $('#txt_Date').attr('readonly', true);
+            $("#txt_Date").datepicker({
+                dateFormat: "dd-mm-yy",
+                minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                changeMonth: true,
+                changeYear: true
+            });
+
+        });
+    </script>
+    <script>
+    $(document).ready(function () {
+
+        $("#ddlBroker1").change(function () {
+            debugger;
+            $.get("/ImportTradefileContract/GetBrokerFormatList1", { ID: $("#ddlBroker").val() }, function (data) {
+
+                $("#ContractNoteId").empty();
+                $.each(data, function (index, row) {
+                   // alert(row.Broker);
+                    $("#ContractNoteId").append("<option value='" + row.BrokerId + "'>" + row.Broker + "</option>")
+                });
+            });
+
+        })
+    });
+    </script>
+</body>
+

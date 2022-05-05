@@ -1,0 +1,140 @@
+﻿@model IRecordweb.Models.FamilyModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<link rel="stylesheet" href="style.css" />
+
+
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Family Master</h1>
+
+        <div class="page-title-right">
+            @if (ViewBag.Add == true)
+            {
+                <input type="submit" class="btn btn-primary" value="Add Family" onclick="location.href='@Url.Action("Save", "Family")'" />
+            }
+            @*@if (HttpContext.Current.Session["Add_Rights"].ToString() == "1")
+                    {
+                        if (HttpContext.Current.Session["RoleId"].ToString() == "2")
+                        {
+                                <input type="submit" class="btn btn-soft-info disabled" value="Add Family" onclick="location.href='@Url.Action("Save", "Family")'" />
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-primary" value="Add Family" onclick="location.href='@Url.Action("Save", "Family")'" />
+                        }
+
+                    }
+                </div>*@
+
+        </div>
+    </div>
+
+
+    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">
+        <div class="card family_master_par">
+            <div class="card-body">
+                <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                    <div class="float-sm-end">
+                        <uib-pagination class="pagination MYPAGECSS" total-items="Info.length" ng-model="page"
+                                        ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Name <input type="text" class="form-control " ng-model="search.Name" placeholder="Name"></th>
+                                <th>Code <input type="text" class="form-control " ng-model="search.Code" placeholder="Code"></th>
+                                <th>Active <input type="text" class="form-control " ng-model="search.Active" placeholder="Active"></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="data in Info | filter:search | limitTo:10:10*(page-1)">
+                                <td>{{$index+1}}</td>
+                                <td>{{data.Name}}</td>
+                                <td>{{data.Code}}</td>
+                                <td>{{data.Active}}</td>    @*EditFamily?id={{data.FamilyID}}*@
+                                @*<td><a href="/Family/FamilyDetails?Id={{data.FamilyID}}" class="px-2 btn btn-outline-primary"><i class="las la-search font-size-18"></i></a></td>*@
+
+                                <td class="whitespace_nowrap">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="/Family/FamilyDetails?Id={{data.FamilyID}}" class="px-2 btn btn-outline-primary"><i class="las la-search font-size-18"></i></a>
+                                        </li>
+                                        @if (ViewBag.edit == true)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="/Family/EditFamily?Id={{data.FamilyID}}&&Status=Edit" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                            </li>
+                                        }
+                                        @if (ViewBag.Delete == true)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="/Family/DeleteFamily?Id={{data.FamilyID}}&&Status=Delete" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+        window.onload = function () {
+            alert('@TempData["Message"]');
+            window.location.href = "/Family/Index";
+        };
+        </script>
+    }
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/FamilyList.js"></script>

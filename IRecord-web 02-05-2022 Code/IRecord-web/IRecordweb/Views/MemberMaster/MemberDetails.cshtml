@@ -1,0 +1,62 @@
+﻿@model IRecordweb.Models.Member
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<h1>Member Master</h1>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+@if (Session["RoleId"] != null)
+    {
+    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+        {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MemberID })
+        }
+    else
+        {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MemberID }, new { @class = "isdisabled" })
+        }
+    } |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

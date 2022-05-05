@@ -1,0 +1,114 @@
+*{margin: 0; padding: 0;}
+
+@import url(../css/line.css);
+
+body {
+    margin: 0;
+    /* font-family: "IBM Plex Sans",sans-serif; */
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #f5f6f8;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =============================================
+    Page Topbar
+============================================= */
+
+#sidebar-menu .has-arrow:after {
+	content: "\f105";
+	font-family: 'Line Awesome Free';
+	font-weight: 900;
+	display: block;
+	float: right;
+	-webkit-transition: -webkit-transform .2s;
+	transition: -webkit-transform .2s;
+	transition: transform .2s;
+	transition: transform .2s, -webkit-transform .2s;
+	font-size: 1rem
+}
+
+.vertical-menu .sub-menu{
+    margin: 0 0 0 32px;
+}
+
+#sidebar-menu ul li ul.sub-menu li a{
+    padding: .4rem 1.5rem .4rem 1.5rem;
+    position: relative;
+}
+
+.vertical-menu .sub-menu li a:before{
+    content: "\f105";
+	font-family: 'Line Awesome Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+}
+
+/* =============================================
+    Working Area
+============================================= */
+
+.whitespace_nowrap{white-space: nowrap;}
+
+.form_2 .col-md-6 > label{
+	-ms-flex: 0 0 130px;
+	flex: 0 0 130px;
+	max-width: 130px;
+    padding-right: 5px;
+}
+
+.form_2 .form-check .form-check-label {
+    margin: 0 9px 0 0;
+}
+
+table tr th,
+table tr td{
+    vertical-align: middle;
+}
+
+.table .table-light{background: #F00;}
+
+.table > :not(caption) > * > *{
+    padding: .6rem .65rem;
+}
+
+.list-inline-item [class*="btn-outline-"]{
+    border-color: transparent;
+    line-height: normal;
+}
+
+.view_mode .col-sm-12.col-md-6{
+    align-items: center;
+}
+
+.view_mode .col-sm-12.col-md-6 label{font-size: 14px;}
+
+.view_mode span.form-control{
+    color: #000;
+    border: none;
+    box-shadow: none;
+}
+
+.accordion-item .accordion-button,
+.accordion-item .card-body{
+    padding: .5rem 1rem;
+}
+
+/* =============================================
+    Responsive
+============================================= */
+
+@media (max-width:520px) {
+    .form_2 .col-md-6 > label{
+        max-width: 100%;
+        flex: 1 0 auto;
+    }
+
+    .form_2.row > *{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Dashboardlongterm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/js/jquery-3.5.1.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/metisMenu.min.js"></script>
+<script src="~/js/simplebar.min.js"></script>
+<script src="~/js/app.js"></script>
+<script src="~/js/amchart/core.js"></script>
+<script src="~/js/amchart/charts.js"></script>
+<script src="~/js/amchart/animated.js"></script>
+<script src="~/js/amchart/chart-data-4.js"></script>
+<script src="~/js/custom-script.js"></script>
+<script type="text/javascript">
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function () {
+                if (oldonload) {
+                    oldonload();
+                }
+            }
+        }
+    }
+    addLoadEvent(setmenu('1'));
+</script>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Dashboard Long Term</h4>
+            <div class="page-title-right">
+                <a href="~/Dashboard/Index" class="btn btn-dark"><i class="la la-angle-left"></i> Back To Index</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="card dashboard_par">
+    <div class="card-body chart_div">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="chart_box" id="chartdiv_4"></div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card card_profit">
+                    <h5 class="card-header">Advisor Making Money For Me</h5>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th>Narnolia</th>
+                                        <td><i class="la la-rupee"></i>20000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Sar</th>
+                                        <td><i class="la la-rupee"></i>15000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card_loss">
+                    <h5 class="card-header">Advisor I Need To Be Cautious About</h5>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th>Jat</th>
+                                        <td><i class="la la-rupee"></i>20000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Self</th>
+                                        <td><i class="la la-rupee"></i>15000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Working Area -->
+                    </div> <!-- container-fluid -->
+                </div>
+

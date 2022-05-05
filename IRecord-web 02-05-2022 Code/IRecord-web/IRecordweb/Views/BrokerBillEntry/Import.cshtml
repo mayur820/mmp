@@ -1,0 +1,70 @@
+﻿@model BAL.BrokerBill
+
+@{
+    ViewBag.Title = "Import";
+}
+@if (ViewBag.Message != null)
+    {
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewBag.Message');
+        };
+    </script>
+    }
+
+
+<h2>Configuration and Import</h2>
+
+@using (Html.BeginForm("Import", "BrokerBillEntry", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Industry</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.BrokerFormat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">  
+                @*@Html.EditorFor(model => model.BrokerFormat, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.BrokerFormat, ViewBag.BrokerFormat as SelectList, "Select Broker Format", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BrokerFormat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.FilePath, htmlAttributes: new { @class = "form-control", type = "file", value = "FilePath" })
+                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table>
+            <tr>
+                <td class="form-group">
+                    <input type="checkbox" id="isDefault" name="isDefault" style="margin-left:88px" />
+                    @*@Html.LabelFor(model => model.isDefault, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                </td>
+                <td class="control-label col-md-15">
+                    <label> Set as permanent default </label> 
+                </td>
+             
+                <td class="form-group">
+
+                    @Html.Label("Pdf Password(If Required)", htmlAttributes: new { @class = "control-label col-md-12" })
+                </td>
+                <td class="col-md-15">
+                    @Html.EditorFor(model => model.PdfPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PdfPassword, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+        <div></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" name="Upload" class="btn btn-primary glyphicon-arrow-up" />
+                <input type="submit" value="Close" name="Close" class="btn btn-danger ui-icon-cancel" />
+
+            </div>
+        </div>
+    </div>
+    }

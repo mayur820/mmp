@@ -1,0 +1,132 @@
+﻿@model IRecordweb.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "Detailaccount";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<div class="display_adds_parent">
+    <div class="display_adds_view_box display_adds_2_col">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Account Master</h1>
+
+                <div class="page-title-right">
+                   @* @if (Session["RoleId"] != null)
+     {
+    if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "MEMBER" || Session["RoleName"].ToString() == "ADVISOR")
+         {
+         @Html.ActionLink("Edit", "EditAccount", new { id = Model.AccountId }, new { @class = "btn btn-primary" })
+         }
+     else
+         {
+         @Html.ActionLink("Edit", "EditAccount", new { id = Model.AccountId }, new { @class = "isdisabled btn btn-primary" })
+         }
+     }*@      
+                     @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-dark" })
+                    </div>
+
+                </div>
+            </div>
+            @{
+                bool status = Model.Active;
+                string Active = status == true ? "Active" : "Inanctive";
+            }
+            <div class="card account_master_par">
+                <div class="card-body">
+                    <div class="row form_2 view_mode">
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Name)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Name)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.OpeningBalance)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.OpeningBalance)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.OpeningCal)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.OpeningCal)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Contactperson)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Contactperson)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Address)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Address)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Emailid)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Emailid)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Mobile)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Mobile)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Telephone)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.Telephone)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.AadharCardNo)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.AadharCardNo)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.GSTIN)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.GSTIN)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.PAN)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.PAN)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.GroupName)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.GroupName)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.Active)</label>
+                            <span class="form-control">@Html.DisplayFor(model => Active)</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                            <span class="form-control">@Html.DisplayFor(model => model.CreatedDate)</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="display_adds display_adds_right text-center">
+            <div class="mobile_adds mb-3">
+                <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+            </div>
+            <div class="desktop_adds">
+                <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+            </div>
+        </div>
+    </div>

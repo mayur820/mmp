@@ -1,0 +1,1126 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+
+<div class="display_ad display_ad_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">User Security</h4>
+
+            <!-- <div class="page-title-right">
+                <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- Working Area Start -->
+@*<div ng-app="myApp" class="wrapper">
+    <div ng-controller="myctrn" ng-init="PageLoad()">*@
+        <div ng-app="myApp" class="card">
+            <div class="card-body" ng-controller="myctrn" ng-init="PageLoad()">
+
+                <div class="user_rights_par">
+                    <!-- Main Level 1 -->
+                    <div class="accordion" id="investor_L_1">
+                        <div class="accordion_title_box accordion-item">
+                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                <div class="arrow_box me-2 collapsed d-flex justify-content-center align-items-center" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"></div>
+                                <a href="#collapseOne" class="accordion-header collapsed" data-bs-toggle="collapse" aria-expanded="false">
+                                    Vishal - Investor
+                                    {{BILLS.userid}}
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-collapse collapse_L_1 collapse" data-bs-parent="#investor_L_1">
+                                <div class="accordion-body">
+                                    <!-- Main Level 2 -->
+                                    <div id="operator_List_1-1">
+                                        <div class="accordion_title_box accordion-item">
+                                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                                <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#operator_L_1_1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                <a class="collapsed" data-bs-toggle="collapse" href="#operator_L_1_1" aria-expanded="false">
+                                                    Chintanbhai - Operator 1-1
+                                                </a>
+                                                <div class="rights_box d-flex flex-wrap align-items-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="view_1">
+                                                        <label class="form-check-label" for="view_1"><span>View</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="edit_1">
+                                                        <label class="form-check-label" for="edit_1"><span>Edit</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="delete_1">
+                                                        <label class="form-check-label" for="delete_1"><span>Delete</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="execute_1">
+                                                        <label class="form-check-label" for="execute_1"><span>Execute</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="operator_L_1_1" class="accordion-collapse collapse_L_2 collapse" data-bs-parent="#operator_List_1-1">
+                                                <div class="accordion-body panel_inner_body">
+
+                                                    <ul class="panel_inner_list d-flex flex-column">
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Entry</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Banking</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                    <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                    <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                    <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                    <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Master</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                    <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                    <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                    <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                    <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="accordion_title_box accordion-item">
+                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#entry_L_1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                            <a class="collapsed" data-bs-toggle="collapse" href="#entry_L_1">
+                                                                Member - Ankit
+                                                            </a>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="entry_L_1" class="accordion-collapse collapse">
+                                                            <div class="panel_inner_body">
+                                                                <!-- Main Level 4 -->
+
+                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Entry</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Banking</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                                <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                                <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                                <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                                <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Master</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                                <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                                <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                                <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                                <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+
+
+                                                                <div id="accordion_L_4-1">
+                                                                    <div class="accordion_title_box accordion-item">
+                                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#banking_view_L_1-1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                            <a class="collapsed" data-bs-toggle="collapse" href="#banking_view_L_1-1">
+                                                                                Shakti
+                                                                            </a>
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="banking_view_L_1-1" class="accordion-collapse collapse">
+                                                                            <div class="panel_inner_body">
+                                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                                        <div class="flex_1">Reports</div>
+                                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 1-2 -->
+                                        <div class="accordion_title_box accordion-item">
+                                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                                <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#operator_L_1_2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                <a class="collapsed" data-bs-toggle="collapse" href="#operator_L_1_2" aria-expanded="false">
+                                                    Sanjay - Operator 1-2
+                                                </a>
+                                                <div class="rights_box d-flex flex-wrap align-items-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="view_1">
+                                                        <label class="form-check-label" for="view_1"><span>View</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="edit_1">
+                                                        <label class="form-check-label" for="edit_1"><span>Edit</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="delete_1">
+                                                        <label class="form-check-label" for="delete_1"><span>Delete</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="execute_1">
+                                                        <label class="form-check-label" for="execute_1"><span>Execute</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="operator_L_1_2" class="accordion-collapse collapse_L_2 collapse" data-bs-parent="#operator_List_1-1">
+                                                <div class="accordion-body panel_inner_body">
+
+                                                    <ul class="panel_inner_list d-flex flex-column">
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Entry</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Banking</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                    <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                    <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                    <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                    <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Master</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                    <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                    <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                    <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                    <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="accordion_title_box accordion-item">
+                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#entry_L_1-2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                            <a class="collapsed" data-bs-toggle="collapse" href="#entry_L_1-2">
+                                                                Member - Ankit
+                                                            </a>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="entry_L_1-2" class="accordion-collapse collapse">
+                                                            <div class="panel_inner_body">
+                                                                <!-- Main Level 4 -->
+
+                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Entry</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Banking</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                                <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                                <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                                <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                                <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Master</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                                <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                                <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                                <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                                <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+
+
+                                                                <div id="accordion_L_4-1">
+                                                                    <div class="accordion_title_box accordion-item">
+                                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#bkv_1-2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                            <a class="collapsed" data-bs-toggle="collapse" href="#bkv_1-2">
+                                                                                Shakti
+                                                                            </a>
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="bkv_1-2" class="accordion-collapse collapse">
+                                                                            <div class="panel_inner_body">
+                                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                                        <div class="flex_1">Reports</div>
+                                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2 -->
+                        <div class="accordion_title_box accordion-item">
+                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                <div class="arrow_box me-2 collapsed d-flex justify-content-center align-items-center" data-bs-toggle="collapse" data-bs-target="#collapseOne_2" aria-expanded="false"></div>
+                                <a href="#collapseOne_2" class="accordion-header collapsed" data-bs-toggle="collapse" aria-expanded="false">
+                                    Pankaj - Investor
+                                </a>
+                            </div>
+                            <div id="collapseOne_2" class="accordion-collapse collapse_L_1 collapse" data-bs-parent="#investor_L_1">
+                                <div class="accordion-body">
+                                    <!-- Main Level 2 -->
+                                    <div id="operator_List_2-1">
+                                        <div class="accordion_title_box accordion-item">
+                                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                                <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#operator_L_2_1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                <a class="collapsed" data-bs-toggle="collapse" href="#operator_L_2_1" aria-expanded="false">
+                                                    Chintanbhai - Operator 2-1
+                                                </a>
+                                                <div class="rights_box d-flex flex-wrap align-items-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="view_1">
+                                                        <label class="form-check-label" for="view_1"><span>View</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="edit_1">
+                                                        <label class="form-check-label" for="edit_1"><span>Edit</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="delete_1">
+                                                        <label class="form-check-label" for="delete_1"><span>Delete</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="execute_1">
+                                                        <label class="form-check-label" for="execute_1"><span>Execute</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="operator_L_2_1" class="accordion-collapse collapse_L_2 collapse" data-bs-parent="#operator_List_2-1">
+                                                <div class="accordion-body panel_inner_body">
+
+                                                    <ul class="panel_inner_list d-flex flex-column">
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Entry</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Banking</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                    <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                    <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                    <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                    <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Master</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                    <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                    <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                    <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                    <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="accordion_title_box accordion-item">
+                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#entry_L_2_1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                            <a class="collapsed" data-bs-toggle="collapse" href="#entry_L_2_1">
+                                                                Member - Ankit
+                                                            </a>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="entry_L_2_1" class="accordion-collapse collapse">
+                                                            <div class="panel_inner_body">
+                                                                <!-- Main Level 4 -->
+
+                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Entry</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Banking</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                                <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                                <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                                <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                                <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Master</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                                <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                                <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                                <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                                <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+
+
+                                                                <div id="accordion_L_4-1">
+                                                                    <div class="accordion_title_box accordion-item">
+                                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#bkv_2_1" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                            <a class="collapsed" data-bs-toggle="collapse" href="#bkv_2_1">
+                                                                                Shakti
+                                                                            </a>
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="bkv_2_1" class="accordion-collapse collapse">
+                                                                            <div class="panel_inner_body">
+                                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                                        <div class="flex_1">Reports</div>
+                                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion_title_box accordion-item">
+                                            <div class="accordion-button d-flex flex-wrap align-items-center">
+                                                <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#operator_L_2_2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                <a class="collapsed" data-bs-toggle="collapse" href="#operator_L_2_2" aria-expanded="false">
+                                                    Sanjay - Operator 2-2
+                                                </a>
+                                                <div class="rights_box d-flex flex-wrap align-items-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="view_1">
+                                                        <label class="form-check-label" for="view_1"><span>View</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="edit_1">
+                                                        <label class="form-check-label" for="edit_1"><span>Edit</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="delete_1">
+                                                        <label class="form-check-label" for="delete_1"><span>Delete</span></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="execute_1">
+                                                        <label class="form-check-label" for="execute_1"><span>Execute</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="operator_L_2_2" class="accordion-collapse collapse_L_2 collapse" data-bs-parent="#operator_List_2-1">
+                                                <div class="accordion-body panel_inner_body">
+
+                                                    <ul class="panel_inner_list d-flex flex-column">
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Entry</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Banking</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                    <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                    <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                    <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                    <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex flex-wrap align-items-center">
+                                                            <div class="flex_1">Master</div>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                    <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                    <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                    <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                    <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="accordion_title_box accordion-item">
+                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#entry_L_2_2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                            <a class="collapsed" data-bs-toggle="collapse" href="#entry_L_2_2">
+                                                                Member - Ankit
+                                                            </a>
+                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="entry_L_2_2" class="accordion-collapse collapse">
+                                                            <div class="panel_inner_body">
+                                                                <!-- Main Level 4 -->
+
+                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Entry</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Banking</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_3">
+                                                                                <label class="form-check-label" for="view_1_3"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_3">
+                                                                                <label class="form-check-label" for="edit_1_3"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_3">
+                                                                                <label class="form-check-label" for="delete_1_3"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_3">
+                                                                                <label class="form-check-label" for="execute_1_3"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                        <div class="flex_1">Master</div>
+                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="view_1_4">
+                                                                                <label class="form-check-label" for="view_1_4"><span>View</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="edit_1_4">
+                                                                                <label class="form-check-label" for="edit_1_4"><span>Edit</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="delete_1_4">
+                                                                                <label class="form-check-label" for="delete_1_4"><span>Delete</span></label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" id="execute_1_4">
+                                                                                <label class="form-check-label" for="execute_1_4"><span>Execute</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+
+
+                                                                <div id="accordion_L_4-1">
+                                                                    <div class="accordion_title_box accordion-item">
+                                                                        <div class="accordion-button px-0 d-flex flex-wrap align-items-center">
+                                                                            <div class="arrow_box collapsed me-2 d-flex justify-content-center align-items-center" data-bs-target="#banking_view_L_2-2" data-bs-toggle="collapse" aria-expanded="false"></div>
+                                                                            <a class="collapsed" data-bs-toggle="collapse" href="#banking_view_L_2-2">
+                                                                                Shakti
+                                                                            </a>
+                                                                            <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                    <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                    <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                    <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                    <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="banking_view_L_2-2" class="accordion-collapse collapse">
+                                                                            <div class="panel_inner_body">
+                                                                                <ul class="panel_inner_list d-flex flex-column">
+                                                                                    <li class="d-flex flex-wrap align-items-center">
+                                                                                        <div class="flex_1">Reports</div>
+                                                                                        <div class="rights_box d-flex flex-wrap align-items-center">
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="view_1_2">
+                                                                                                <label class="form-check-label" for="view_1_2"><span>View</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="edit_1_2">
+                                                                                                <label class="form-check-label" for="edit_1_2"><span>Edit</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="delete_1_2">
+                                                                                                <label class="form-check-label" for="delete_1_2"><span>Delete</span></label>
+                                                                                            </div>
+                                                                                            <div class="form-check">
+                                                                                                <input class="form-check-input" type="checkbox" id="execute_1_2">
+                                                                                                <label class="form-check-label" for="execute_1_2"><span>Execute</span></label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            function myFunction() {
+                var txt;
+                var r = confirm("Do you want to delete record?");
+            }
+
+            $(document).ready(function () {
+                // // Lavel 1
+                // $('.collapse_L_1').on('shown.bs.collapse', function () {
+                //     $(this).prev().addClass('active_lvl_1');
+                // });
+                // $('.collapse_L_1').on('hidden.bs.collapse', function () {
+                //     $(this).prev().removeClass('active_lvl_1');
+                // });
+
+                // // Lavel 2
+                // $('.collapse_L_2').on('shown.bs.collapse', function () {
+                //     $(this).prev().addClass('active_lvl_2');
+                // });
+                // $('.collapse_L_2').on('hidden.bs.collapse', function () {
+                //     $(this).prev().removeClass('active_lvl_2');
+                // });
+            });
+        </script>
+
+        <script src="js/custom-script.js"></script>
+        <script type="text/javascript">
+            function addLoadEvent(func) {
+                var oldonload = window.onload;
+                if (typeof window.onload != 'function') {
+                    window.onload = func;
+                } else {
+                    window.onload = function () {
+                        if (oldonload) {
+                            oldonload();
+                        }
+                    }
+                }
+            }
+            addLoadEvent(setmenu('4'));
+        </script>
+
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/UserSecurityselect.js"></script>

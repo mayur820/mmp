@@ -1,0 +1,134 @@
+﻿@model IEnumerable<IRecordweb.Models.NARRATION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    /* li.pagination-page.ng-scope {
+        MARGIN-LEFT: 15PX;
+        MARGIN-RIGHT: 15PX;
+    }
+
+    .MYPAGECSS {
+        BORDER: 1PX SOLID !important;
+        FLOAT: RIGHT !important;
+        BORDER-RADIUS: 5PX !important;
+    }
+
+    li.pagination-page.ng-scope.active {
+        FONT-WEIGHT: BOLD;
+    } */
+</style>
+
+@*--------*Angular JS* SECTION------*@
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<link rel="stylesheet" href="style.css" />
+
+<div class="display_adds display_adds_top text-center mb-3">
+    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+</div>
+
+<div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h1 class="mb-0">Narration Master</h1>
+
+        <div class="page-title-right">
+            <input type="submit" class="btn btn-primary add-on" value="Add Narration" onclick="location.href='@Url.Action("SaveNarration", "NarrationMaster")'" />
+
+            @*@if (Session["RoleId"] != null)
+                                {
+                                if (Session["RoleName"].ToString() == "ADMIN" || Session["RoleName"].ToString() == "CA" || Session["RoleName"].ToString() == "INVESTOR" || Session["RoleName"].ToString() == "ACCOUNTANT" || Session["RoleName"].ToString() == "ADVISOR")
+                                {
+                            }
+                    else if (Session["RoleName"].ToString() == "OPERATOR")   /*|| Session["RoleName"].ToString() == "MEMBER"*/
+                    {
+                        <input type="submit" class="btn btn-primary isdisabled" value="Add Narration" onclick="location.href='@Url.Action("SaveNarration", "NarrationMaster")'" />
+                    }
+                }*@
+        </div>
+
+    </div>
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()">
+    <div class="card narration_par">
+        <div class="card-body">
+            <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                <div class="float-sm-end">
+                    <uib-pagination class="pagination MYPAGECSS" total-items="Info.length" ng-model="page"
+                                    ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+
+                        <tr>
+                            <th>#</th>
+                            <th>Narration Name <input type="text" class="form-control " ng-model="search.Name" placeholder="Narration Name"></th>
+                            <th>Code <input type="text" class="form-control " ng-model="search.Code" placeholder="Code"></th>
+                            <th>Active <input type="text" class="form-control " ng-model="search.Active" placeholder="Active"></th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in Info | filter:search | limitTo:10:10*(page-1)">
+                            <td>{{$index+1}}</td>
+                            <td>{{data.Name}}</td>
+                            <td>{{data.Code}}</td>
+                            <td>{{data.Active}}</td>
+
+                            <td class="whitespace_nowrap">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="/NarrationMaster/NarrationDetails?Id={{data.NarrationID}}" class="px-2 btn btn-outline-primary"><i class="las la-search font-size-18"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/NarrationMaster/NarrationUpdate?Id={{data.NarrationID}}&&Status=Edit" class="px-2 btn btn-outline-primary"><i class="las la-pencil-alt font-size-18"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/NarrationMaster/NarrationDelete?Id={{data.NarrationID}}&&Status=Delete" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@TempData["Message"]');
+            window.location.href = "/NarrationMaster/Index";
+        };
+    </script>
+}
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+<script src="~/AngScripts/NarrationList.js"></script>

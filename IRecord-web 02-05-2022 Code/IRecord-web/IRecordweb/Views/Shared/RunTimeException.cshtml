@@ -1,0 +1,31 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+
+    ViewBag.Title = "Run Time Exception";
+
+}
+
+<h2>Run Time Exception</h2>
+
+<hgroup class="title">
+
+    <h1 class="error">Error.</h1>
+
+    <h2 class="error">Some thing when Wrong kindly check after few hours</h2>
+    <a href="/Login/LogOut" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Click To Logout And Try Again</a>
+    @if (HttpContext.Current.Session["ErrorText"] != null )
+    {
+        <div>
+            <p>
+                <b>Exception Text:</b> @HttpContext.Current.Session["ErrorText"]<br />
+              
+               
+            </p>
+            <div style="overflow: scroll">
+                <pre>
+                    @HttpContext.Current.Session["LocationError"]
+                </pre>
+            </div>
+        </div>
+    }
+</hgroup>
