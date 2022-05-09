@@ -6,6 +6,7 @@
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/select2.min.css" /> @*05/06/2022*@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="~/js/bootstrap-multiselect.css" rel="stylesheet" />
@@ -17,7 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/Scripts/Multiselect.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<script src="~/js/select2.min.js"></script> @*05/06/2022*@
 <style>
     .isdisabled {
         color: currentColor;
@@ -327,6 +328,9 @@
 
             $("#ScriptName").focus();
 
+            $("#IndustryID").select2(); @* 05 / 06 / 2022 *@
+            $("#SectorName").select2(); @* 05 / 06 / 2022 *@
+
 
         });
     </script>
@@ -370,33 +374,33 @@
 
         });
 
-                   //$(document).ready(function ($) {
-                   //     $('#ddlInvestmentType').multiselect({
-                   //         placeholder: 'Select options',
-                   //         buttonWidth: '500px',
-                   //         includeSelectAllOption: true
+                                   //$(document).ready(function ($) {
+                                   //     $('#ddlInvestmentType').multiselect({
+                                   //         placeholder: 'Select options',
+                                   //         buttonWidth: '500px',
+                                   //         includeSelectAllOption: true
 
-                   //     });
+                                   //     });
 
-                   // });
+                                   // });
 
-                    //$(document).ready(function () {
-                    //    $('#ddlIndustry').chosen();
-                    //   });
+                                    //$(document).ready(function () {
+                                    //    $('#ddlIndustry').chosen();
+                                    //   });
 
-                    //$(document).ready(function () {
-                    //    $('#Multiselect1').select2({
-                    //     selectOnClose: true
-                    //    });
-                    //});
+                                    //$(document).ready(function () {
+                                    //    $('#Multiselect1').select2({
+                                    //     selectOnClose: true
+                                    //    });
+                                    //});
 
-                    //$(document).ready(function () {
-                    //    // alert(111111111111111);
-                    //    var data = document.getElementById('Multiselect').value;
+                                    //$(document).ready(function () {
+                                    //    // alert(111111111111111);
+                                    //    var data = document.getElementById('Multiselect').value;
 
-                    //    $("#Multiselect option:selected").text();
+                                    //    $("#Multiselect option:selected").text();
 
-                    //    $('#Multiselect').select2();
-                    //});
+                                    //    $('#Multiselect').select2();
+                                    //});
     </script>
 }

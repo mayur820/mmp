@@ -18,7 +18,7 @@
 </div>
 
 @using (Html.BeginForm("SaveUploadBhavCopy", "UploadBhavCopy", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+{
     @*@Html.AntiForgeryToken()*@
 
     <div class="card scriptmaster_par">
@@ -38,7 +38,7 @@
                 <div class="col-sm-12 col-md-6 mb-3 d-flex">
                     @Html.LabelFor(model => model.InvestmentType, htmlAttributes: new { @class = "control-label" })
                     <div class="w-100">
-                        @Html.DropDownListFor(model => model.InvestmentType, ViewBag.InvestmentType as SelectList, "Select Investment Type", htmlAttributes: new { @class = "form-control", @onchange = "ColHide()" })
+                        @Html.DropDownListFor(model => model.InvestmentType, ViewBag.InvestmentType as SelectList, "Select Investment Type", htmlAttributes: new { @class = "form-control select2", @onchange = "ColHide()" }) @*05/07/2022*@
                         @Html.ValidationMessageFor(model => model.InvestmentType, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3 d-flex">
 
-                  
+
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3 d-flex">
                     @Html.LabelFor(model => model.UploadFile, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,20 +87,25 @@
 
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/js/select2.min.js"></script> @*05/07/2022*@
+    <link rel="stylesheet" href="~/css/select2.min.css" /> @*05/07/2022*@
 
     @if (ViewBag.Message != null)
-        {
+    {
         <script type="text/javascript">
             window.onload = function () {
                 alert('@ViewBag.Message');
             };
         </script>
-        }
+    }
 
 
     <script>
 
         $(document).ready(function () {
+            $(".select2").select2({  @*05/07/2022*@
+                maximumSelectionLength: 3
+            });
             $("#TransDate").datepicker({
                 dateFormat: "dd-M-yy",
                 changeMonth: true,
@@ -127,25 +132,25 @@
         }
     </script>
     @*<script type="text/javascript">
-        $(function () {
-            $("#DOWNLOAD").click(function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/Home/AjaxMethod",
-                  //  data: '{name: "' + $("#txtName").val() + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
-                    },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
-                    }
+            $(function () {
+                $("#DOWNLOAD").click(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/AjaxMethod",
+                      //  data: '{name: "' + $("#txtName").val() + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
                 });
             });
-        });
-    </script>*@
+        </script>*@
 }

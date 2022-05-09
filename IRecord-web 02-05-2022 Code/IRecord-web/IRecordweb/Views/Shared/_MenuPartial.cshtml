@@ -7,15 +7,12 @@
 
 @*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
 @*<div class="navigation">*@
 <!-- <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.12.4.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script> -->
-
-
 @*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>*@
-
+<script src="~/Scripts/jquery-2.1.1.min.js"></script> @*05/06/2022*@
 <script>
     $(document).ready(function () {
         $('.nav li > .sub-menu').parent().hover(function () {
@@ -30,20 +27,20 @@
 
 </script>
 @*<style>
-    .nav li {
-        list-style: none;
-        padding: 5px 10px;
-        width: 300px;
-    }
+        .nav li {
+            list-style: none;
+            padding: 5px 10px;
+            width: 300px;
+        }
 
-    .nav > li {
-        float: left;
-    }
+        .nav > li {
+            float: left;
+        }
 
-    .nav .sub-menu {
-        display: none;
-    }
-</style>*@
+        .nav .sub-menu {
+            display: none;
+        }
+    </style>*@
 
 
 <!--<style>
@@ -106,14 +103,6 @@
         display: block;
     }
 </style>-->
-
-
-
-
-
-
-
-
 @*<nav>
         <ul class="nav">
             @{
@@ -166,20 +155,20 @@
                     </button>-->
                 <ul class="sub-menu pl-0" aria-expanded="false">
                     @foreach (var e in submenu)
-                        {
+                    {
                         @*if (e.url.ToString() == "" && e.ParentMenuID.ToString() != "")
-                            {
-                            var submenu1 = Model.Where(n => n.MenuID == m.ParentMenuID).ToList();
-                            <li><a href="~/@e.url">@e.Name </a></li>
-                            }
-                        else
-                            {*@
+                                {
+                                var submenu1 = Model.Where(n => n.MenuID == m.ParentMenuID).ToList();
+                                <li><a href="~/@e.url">@e.Name </a></li>
+                                }
+                            else
+                                {*@
                         <li><a href="~/@e.url">@e.Name </a></li>
-                            @*}*@
-                        }
+                        @*}*@
+                    }
                 </ul>
             </li>
-                <!-- </div>-->
+            <!-- </div>-->
         }
         else
 
@@ -193,4 +182,3 @@
     }
 }
 <!-- </div> -->
-

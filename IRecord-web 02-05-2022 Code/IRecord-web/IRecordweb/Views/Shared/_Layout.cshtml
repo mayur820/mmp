@@ -27,288 +27,288 @@
     {
         if (Session["UserID"] != null)
         {
-           
-                <div id="layout-wrapper">
-                    <header id="page-topbar">
-                        <div class="navbar-header">
-                            <div class="d-flex desk_search">
-                                <!-- LOGO -->
-                                <div class="navbar-brand-box">
-                                    <a href="#" class="logo logo-light">
-                                        <span class="logo-sm">
-                                            <img src="~/Content/images/logo-sm.png" alt="" height="54">
-                                        </span>
-                                        <span class="logo-lg">
-                                            <img class="logo" src="~/Content/images/logo2.png" height="54" />
-                                        </span>
-                                    </a>
-                                </div>
 
-                                <button type="button" class="btn btn-sm px-3 font-size-22 header-item waves-effect vertical-menu-btn">
-                                    <i class="la la-bars"></i>
-                                </button>
+            <div id="layout-wrapper">
+                <header id="page-topbar">
+                    <div class="navbar-header">
+                        <div class="d-flex desk_search">
+                            <!-- LOGO -->
+                            <div class="navbar-brand-box">
+                                <a href="#" class="logo logo-light">
+                                    <span class="logo-sm">
+                                        <img src="~/Content/images/logo-sm.png" alt="" height="54">
+                                    </span>
+                                    <span class="logo-lg">
+                                        <img class="logo" src="~/Content/images/logo2.png" height="54" />
+                                    </span>
+                                </a>
+                            </div>
 
-                                <!-- App Search-->
-                                <div class="app-search d-none d-lg-block">
-                                    <div class="position-relative">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                        <span class="uil-search"></span>
-                                    </div>
+                            <button type="button" class="btn btn-sm px-3 font-size-22 header-item waves-effect vertical-menu-btn">
+                                <i class="la la-bars"></i>
+                            </button>
+
+                            <!-- App Search-->
+                            <div class="app-search d-none d-lg-block">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="uil-search"></span>
                                 </div>
                             </div>
-                            @{
+                        </div>
+                        @{
 
-                                string FinancialYear = "";
-                                try
+                            string FinancialYear = "";
+                            try
 
 
+                            {
+                                if (Session["Role_Type"] == "System")
                                 {
-                                    if(Session["Role_Type"] == "System")
-                                    {
-                                        Session["FinFromDate"] = "";
-                                        Session["FinToDate"] = "";
-                                        Session["MemberName"] = "";
-                                    }
-                                    else
-                                    {
-                                        DataTable dt = (Session["Dt_FinancialYear"] as DataTable);
-                                        FinancialYear = dt.Rows[0]["FromDate"].ToString() + " To " + dt.Rows[0]["ToDate"].ToString();
-                                        Session["FinFromDate"] = dt.Rows[0]["FromDate"].ToString();
-                                        Session["FinToDate"] = dt.Rows[0]["ToDate"].ToString();
-                                        Session["MemberName"] = dt.Rows[0]["MemberName"].ToString();
-                                    }
-
+                                    Session["FinFromDate"] = "";
+                                    Session["FinToDate"] = "";
+                                    Session["MemberName"] = "";
                                 }
-                                catch
+                                else
                                 {
-                                    FinancialYear = "Not Seleted.. !";
+                                    DataTable dt = (Session["Dt_FinancialYear"] as DataTable);
+                                    FinancialYear = dt.Rows[0]["FromDate"].ToString() + " To " + dt.Rows[0]["ToDate"].ToString();
+                                    Session["FinFromDate"] = dt.Rows[0]["FromDate"].ToString();
+                                    Session["FinToDate"] = dt.Rows[0]["ToDate"].ToString();
+                                    Session["MemberName"] = dt.Rows[0]["MemberName"].ToString();
                                 }
+
                             }
+                            catch
+                            {
+                                FinancialYear = "Not Seleted.. !";
+                            }
+                        }
 
-                            <div class="d-flex">
-                                <div class="d-flex top_date_parent">
-                                    <div class="d-flex desk_search justify-content-center flex-column ms-auto me-0">
-                                        <span>Financial Year:</span>
-                                        <strong>@FinancialYear</strong>
-                                    </div>
-                                    <div class="d-flex align-items-center ms-3">
-                                        <div class="" id="new_date"></div>
-                                    </div>
+                        <div class="d-flex">
+                            <div class="d-flex top_date_parent">
+                                <div class="d-flex desk_search justify-content-center flex-column ms-auto me-0">
+                                    <span>Financial Year:</span>
+                                    <strong>@FinancialYear</strong>
                                 </div>
-                                <div class="dropdown d-none d-lg-inline-block ms-1">
-                                    <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                                        <i class="las la-arrows-alt"></i>
-                                    </button>
+                                <div class="d-flex align-items-center ms-3">
+                                    <div class="" id="new_date"></div>
                                 </div>
+                            </div>
+                            <div class="dropdown d-none d-lg-inline-block ms-1">
+                                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                                    <i class="las la-arrows-alt"></i>
+                                </button>
+                            </div>
 
-                                <div class="dropdown d-inline-block noti_box">
-                                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="las la-bell"></i>
-                                        <span class="badge bg-danger rounded-pill">3</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
-                                        <div class="p-3">
-                                            <div class="row align-items-center">
-                                                <div class="col">
-                                                    <h5 class="m-0 font-size-16"> Notifications </h5>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#!" class="small"> Mark all as read</a>
-                                                </div>
+                            <div class="dropdown d-inline-block noti_box">
+                                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="las la-bell"></i>
+                                    <span class="badge bg-danger rounded-pill">3</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                                    <div class="p-3">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h5 class="m-0 font-size-16"> Notifications </h5>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a href="#!" class="small"> Mark all as read</a>
                                             </div>
                                         </div>
-                                        <div data-simplebar="" style="max-height: 230px;">
-                                            <a href="" class="text-reset notification-item">
-                                                <div class="d-flex align-items-start">
-                                                    <div class="avatar-xs me-3">
-                                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                            <i class="uil-shopping-basket"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        <h6 class="mt-0 mb-1">Your order is placed</h6>
-                                                        <div class="font-size-12 text-muted">
-                                                            <p class="mb-1">If several languages coalesce the grammar</p>
-                                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                                        </div>
+                                    </div>
+                                    <div data-simplebar="" style="max-height: 230px;">
+                                        <a href="" class="text-reset notification-item">
+                                            <div class="d-flex align-items-start">
+                                                <div class="avatar-xs me-3">
+                                                    <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                        <i class="uil-shopping-basket"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                                    <div class="font-size-12 text-muted">
+                                                        <p class="mb-1">If several languages coalesce the grammar</p>
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <div class="p-2 border-top d-grid">
-                                            <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-                                                <i class="uil-arrow-circle-right me-1"></i> View More..
-                                            </a>
-                                        </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 border-top d-grid">
+                                        <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                            <i class="uil-arrow-circle-right me-1"></i> View More..
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="dropdown d-inline-block">
+                            <div class="dropdown d-inline-block">
 
-                                    <button type="button" class="d-flex align-items-center btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="rounded-circle header-profile-user" src="~/Content/images/avatar.jpg" alt="Header Avatar" />
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
-                                            <small>Welcome :</small>
-                                            @{
-                                                try
-                                                {
-                                                    <small>@Session["SUBSC_OPR_NAME"].ToString()</small>
-
-                                                }
-                                                catch
-                                                {
-
-                                                }
+                                <button type="button" class="d-flex align-items-center btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="rounded-circle header-profile-user" src="~/Content/images/avatar.jpg" alt="Header Avatar" />
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
+                                        <small>Welcome :</small>
+                                        @{
+                                            try
+                                            {
+                                                <small>@Session["SUBSC_OPR_NAME"].ToString()</small>
 
                                             }
-
-                                            @using Microsoft.AspNet.Identity
-                                            @if (Request.IsAuthenticated == true || Request.IsAuthenticated == false)
+                                            catch
                                             {
 
-                                                using (Html.BeginForm("LogOut", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                                                {
-
-                                                    try
-                                                    {
-                                                        @Html.ActionLink(" " + HttpContext.Current.Session["MemberName"].ToString() + "!", "LoginDashBoard", "Login", routeValues: null, htmlAttributes: new { title = "Login" })
-                                                    }
-                                                    catch { }
-
-                                                }
                                             }
-                                        </span>
-                                        <i class="las la-angle-down d-xl-inline-block font-size-15"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
-                                        <!-- <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
-                                        <a class="dropdown-item" href="#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">My Wallet</span></a>
-                                        <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Settings</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
-                                        <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock screen</span></a> -->
-                                        @using (Html.BeginForm("LogOut", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                                        {
-                                            @*@Html.AntiForgeryToken()*@
-                                            <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="las la-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
-                                            <a class="dropdown-item" href="/PaymantGetway/PaymentCheckOut"><i class="las la-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Go to Payment</span></a>
+
                                         }
-                                    </div>
+
+                                        @using Microsoft.AspNet.Identity
+                                        @if (Request.IsAuthenticated == true || Request.IsAuthenticated == false)
+                                        {
+
+                                            using (Html.BeginForm("LogOut", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                            {
+
+                                                try
+                                                {
+                                                    @Html.ActionLink(" " + HttpContext.Current.Session["MemberName"].ToString() + "!", "LoginDashBoard", "Login", routeValues: null, htmlAttributes: new { title = "Login" })
+                                                }
+                                                catch { }
+
+                                            }
+                                        }
+                                    </span>
+                                    <i class="las la-angle-down d-xl-inline-block font-size-15"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <!-- item-->
+                                    <!-- <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
+                                    <a class="dropdown-item" href="#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">My Wallet</span></a>
+                                    <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Settings</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
+                                    <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock screen</span></a> -->
+                                    @using (Html.BeginForm("LogOut", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @*@Html.AntiForgeryToken()*@
+                                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="las la-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
+                                        <a class="dropdown-item" href="/PaymantGetway/PaymentCheckOut"><i class="las la-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Go to Payment</span></a>
+                                    }
                                 </div>
-
                             </div>
-                        </div>
-                    </header>
 
-                    <div class="vertical-menu">
-                        <div class="back_overlay"></div>
-                        <!-- LOGO -->
-                        <div class="navbar-brand-box">
-                            <a href="#" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="~/Content/images/logo-sm.png" alt="" height="54">
-                                </span>
-                                <span class="logo-lg">
-                                    <img class="logo" src="~/Content/images/logo2.png" height="54" />
-                                </span>
-                            </a>
-                        </div>
-
-                        <button type="button" class="btn btn-sm px-3 font-size-22 header-item waves-effect vertical-menu-btn">
-                            <i class="la la-bars"></i>
-                        </button>
-
-                        <div data-simplebar="" class="sidebar-menu-scroll">
-
-                            <!--- Sidemenu -->
-                            <div id="sidebar-menu">
-                                <!-- Left Menu Start -->
-                                <!-- <div class="navbar navbar-inverse navbar-fixed-top">
-                                <div class="container">
-                                    <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
-                                        @Html.ActionLink("iRecord", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                                    </div>
-
-                                    <div class="navbar-collapse collapse">-->
-                                <ul class="metismenu list-unstyled" id="side-menu">
-                                    <li>
-                                        <a href='@Url.Action("Index", "Home")'>
-                                            <i class="la la-home"></i>
-                                            <span>Home</span>
-                                        </a>
-                                        @*@Html.ActionLink("<i class='la la-sitemap'></i> Home", "Index", "Home")*@
-                                    </li>
-
-                                    <li>
-
-                                        @if (Session["UserID"] != null)
-                                        {
-                                                Html.RenderAction("Menu", "Menu", new { area = "" });      //For dynamic menu bind
-                                        }
-                                    </li>
-                                    @* End Here  *@
-                                </ul>
-                                @*<div>
-                                          @{Html.RenderAction("GenerateMenu", "Menu");}    //For dynamic menu bind
-                                    </div>*@
-
-
-                                @* @Html.Partial("_LoginPartial") *@
-                                <!-- </div>
-                                    </div>
-                                </div> -->
-                                <!-- <ul class="metismenu list-unstyled" id="side-menu">
-                                    <li>
-                                        <a href="dashboard.html">
-                                            <i class="la la-home"></i>
-                                            <span>Dashboard</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                            <i class="la la-sitemap"></i>
-                                            <span>Masters</span>
-                                        </a>
-                                        <ul class="sub-menu" aria-expanded="false">
-                                            <li><a href="scripts-master.html">Script Master</a></li>
-                                            <li><a href="family-master.html">Family Master</a></li>
-                                            <li><a href="member-master.html">Member Master</a></li>
-                                            <li><a href="group-master.html">Group Master</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> -->
-
-                            </div>
-                            <!-- Sidebar -->
                         </div>
                     </div>
-                    <!-- Left Sidebar End -->
+                </header>
 
+                <div class="vertical-menu">
+                    <div class="back_overlay"></div>
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="#" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/Content/images/logo-sm.png" alt="" height="54">
+                            </span>
+                            <span class="logo-lg">
+                                <img class="logo" src="~/Content/images/logo2.png" height="54" />
+                            </span>
+                        </a>
+                    </div>
 
-                    <div class="main-content">
-                        <div class="page-content">
-                            <div class="container-fluid">
+                    <button type="button" class="btn btn-sm px-3 font-size-22 header-item waves-effect vertical-menu-btn">
+                        <i class="la la-bars"></i>
+                    </button>
 
-                                @RenderBody()
+                    <div data-simplebar="" class="sidebar-menu-scroll">
 
-                            </div>
-                        </div>
-                        <footer class="footer">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        &copy; @DateTime.Now.Year - Developed By iRecord
-                                    </div>
+                        <!--- Sidemenu -->
+                        <div id="sidebar-menu">
+                            <!-- Left Menu Start -->
+                            <!-- <div class="navbar navbar-inverse navbar-fixed-top">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    @Html.ActionLink("iRecord", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                                 </div>
-                            </div>
-                        </footer>
+
+                                <div class="navbar-collapse collapse">-->
+                            <ul class="metismenu list-unstyled" id="side-menu">
+                                <li>
+                                    <a href='@Url.Action("Index", "Home")'>
+                                        <i class="la la-home"></i>
+                                        <span>Home</span>
+                                    </a>
+                                    @*@Html.ActionLink("<i class='la la-sitemap'></i> Home", "Index", "Home")*@
+                                </li>
+
+                                <li>
+
+                                    @if (Session["UserID"] != null)
+                                    {
+                                        Html.RenderAction("Menu", "Menu", new { area = "" });      //For dynamic menu bind
+                                    }
+                                </li>
+                                @* End Here  *@
+                            </ul>
+                            @*<div>
+                                      @{Html.RenderAction("GenerateMenu", "Menu");}    //For dynamic menu bind
+                                </div>*@
+
+
+                            @* @Html.Partial("_LoginPartial") *@
+                            <!-- </div>
+                                </div>
+                            </div> -->
+                            <!-- <ul class="metismenu list-unstyled" id="side-menu">
+                                <li>
+                                    <a href="dashboard.html">
+                                        <i class="la la-home"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="la la-sitemap"></i>
+                                        <span>Masters</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="scripts-master.html">Script Master</a></li>
+                                        <li><a href="family-master.html">Family Master</a></li>
+                                        <li><a href="member-master.html">Member Master</a></li>
+                                        <li><a href="group-master.html">Group Master</a></li>
+                                    </ul>
+                                </li>
+                            </ul> -->
+
+                        </div>
+                        <!-- Sidebar -->
                     </div>
                 </div>
-                <div class="rightbar-overlay"></div>
+                <!-- Left Sidebar End -->
+
+
+                <div class="main-content">
+                    <div class="page-content">
+                        <div class="container-fluid">
+
+                            @RenderBody()
+
+                        </div>
+                    </div>
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    &copy; @DateTime.Now.Year - Developed By iRecord
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            <div class="rightbar-overlay"></div>
         }
         else
         {
@@ -324,7 +324,8 @@
     <script src="~/Scripts/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.v4.js"></script>
     <script src="~/Scripts/metisMenu.min.js"></script>
-    <script src="~/Scripts/simplebar.min.js"></script>
+    @*<script src="~/Scripts/simplebar.min.js"></script>*@
+    <script src="~/js/simplebar.min.js"></script>@*05/05/2022*@
     <script src="~/Scripts/app.js"></script>
 
     <script src="~/Scripts/chosen.jquery.js"></script>

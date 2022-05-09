@@ -8,6 +8,9 @@
 <script src="~/AngScripts/angular.js"></script>
 <script src="~/AngScripts/ngStorage.min.js"></script>
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<script src="~/js/select2.min.js"></script> @*05/05/2022*@
+<link rel="stylesheet" href="~/css/select2.min.css" /> @*05/05/2022*@
+
 @*---------*Angular JS* SECTION-----*@
 <link rel="stylesheet" href="~/css/loader-1.css">
 <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" class="display_adds_parent">
@@ -132,5 +135,20 @@
 
     <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
     <script src="~/AngScripts/OpeningStock.js"></script>
+    <script src="~/js/select2.min.js"></script>  @*05/05/2022*@
+    <link rel="stylesheet" href="~/css/select2.min.css" /> @*05/05/2022*@
 
 }
+
+<script>
+
+    $(document).ready(function () {
+        $("#ddlSegment").select2();
+        $("#ddlBroker").select2();
+        $("#Demat_Ac_Id").select2();
+        $("#ddlHoldingType").select2();
+        $("#ddlConsultant").select2();
+        @* 05 / 05 / 2022 *@
+
+    });
+</script>

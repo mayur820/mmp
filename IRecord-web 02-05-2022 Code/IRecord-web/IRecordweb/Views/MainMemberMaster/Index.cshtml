@@ -3,11 +3,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*--------*Angular JS* SECTION------*@
-<script src="~/AngScripts/jquery-3.6.0.js"></script>
-<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+@*<script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>*@
+
 <script src="~/AngScripts/angular.js"></script>
 <script src="~/AngScripts/ngStorage.min.js"></script>
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<script src="~/js/select2.min.js"></script>  @*05/05/2022*@
+<link rel="stylesheet" href="~/css/select2.min.css" /> @*05/05/2022*@
+@*<script src="~/Scripts/jquery-2.1.1.min.js"></script>*@
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script> @*05/05/2022*@
+<script src="~/AngScripts/MainMemberMaster.js"></script>@*05/05/2022*@
 @*---------*Angular JS* SECTION-----*@
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 @*<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>*@
@@ -86,14 +92,14 @@
                                     </div>
                                 </div>
                                 @*<div class="page-title-right">
-                                    <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-soft-info disabled"><i class="las la-plus font-size-18"></i> Add New</a>
-                                </div>*@
+                                        <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-soft-info disabled"><i class="las la-plus font-size-18"></i> Add New</a>
+                                    </div>*@
                             }
                             else
                             {
                                 @*<div class="page-title-right">
-                                    <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
-                                </div>*@
+                                        <a href="#modal_add" data-bs-toggle="modal" class="px-2 btn btn-primary"><i class="las la-plus font-size-18"></i> Add New</a>
+                                    </div>*@
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="las la-plus font-size-18"></i> Add New <i class="las la-angle-down"></i>
@@ -156,11 +162,11 @@
                                 <td class="">
                                     <div class="input-group tbl_int_grp flex-nowrap">
                                         @*<select class="form-select select2">
-                                            <option>-- Select Operator --</option>
-                                            <option>Assigned Operator 1</option>
-                                            <option>Assigned Operator 2</option>
-                                            <option>Assigned Operator 3</option>
-                                        </select>*@
+                                                <option>-- Select Operator --</option>
+                                                <option>Assigned Operator 1</option>
+                                                <option>Assigned Operator 2</option>
+                                                <option>Assigned Operator 3</option>
+                                            </select>*@
                                         <select id="OperatorID" ng-model="details.OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-select select2 wd_buy_sell" ng-change="update(details)">
                                             <option ng-option value="">-- Select Operator --</option>
                                         </select>
@@ -353,7 +359,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 mb-3 d-flex">
                                 <label class="mb-0">Operator <span class="text-danger">*</span>:</label>
-                                <select id="OperatorID" ng-model="OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-control">
+                                <select id="OperatorID" ng-model="OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-control select2">
                                     @*class="form-select select2 wd_buy_sell"*@
                                     <option ng-option value="">-- Select Operator --</option>
                                 </select>
@@ -525,8 +531,8 @@
                             <div class="col-sm-12 col-md-6 mb-3 d-flex">
                                 <label class="mb-0">Operator <span class="text-danger">*</span>:</label>
                                 <select id="OperatorID" ng-model="OperatorID" ng-options="x.ID as x.NAME for x in FILLOperator" class="form-control">-->
-                                    @*class="form-select select2 wd_buy_sell"*@
-                                    <!--<option ng-option value="">-- Select Operator --</option>
+                            @*class="form-select select2 wd_buy_sell"*@
+                            <!--<option ng-option value="">-- Select Operator --</option>
                                 </select>
                             </div>-->
                             <div class="col-sm-12 col-md-6 mb-3 d-flex" style="display:none">
@@ -554,6 +560,9 @@
 
 <script>
     $(document).ready(function () {
+        $(".select2").select2({          @* 05 / 05 / 2022 *@
+            maximumSelectionLength: 3
+        });
         $('#show_password').hover(function show() {
             //Change the attribute to text
             $('#Password').attr('type', 'text');
@@ -572,6 +581,3 @@
 
 //}
 </script>
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-<script src="~/AngScripts/MainMemberMaster.js"></script>

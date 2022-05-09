@@ -75,13 +75,16 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 @section Scripts {
-
+    <link rel="stylesheet" href="~/css/select2.min.css" />  @*05/05/2022*@
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/js/select2.min.js"></script>  @*05/05/2022*@
+
     <script>
 
         $(document).ready(function () {
 
+            $("#UGroupName").select2(); //05/05/2022
             $("#UGroupName").focus();
         });
     </script>
