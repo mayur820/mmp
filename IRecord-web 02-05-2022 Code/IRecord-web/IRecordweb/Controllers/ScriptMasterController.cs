@@ -103,15 +103,15 @@ namespace IRecordweb.Controllers
             Console.WriteLine(response.Content);
             DataSet data = JsonConvert.DeserializeObject<DataSet>(response.Content);
             List<MTYPE> list = new List<MTYPE>();
-            foreach (DataRow dr in data.Tables[0].Rows)
-            {
-                MTYPE item = new MTYPE();
-                item.TypeId = Convert.ToInt32(dr["TypeId"].ToString());
-                item.Code = dr["Code"].ToString();
-                item.Name = dr["Name"].ToString();
-                item.Active = Convert.ToBoolean(dr["Active"].ToString());
-                list.Add(item);
-            }
+            //foreach (DataRow dr in data.Tables[0].Rows)
+            //{
+            //    MTYPE item = new MTYPE();
+            //    item.TypeId = Convert.ToInt32(dr["TypeId"].ToString());
+            //    item.Code = dr["Code"].ToString();
+            //    item.Name = dr["Name"].ToString();
+            //    item.Active = Convert.ToBoolean(dr["Active"].ToString());
+            //    list.Add(item);
+            //}
             return list;
         }
         public List<INDUSTRY> GetIndustry()
@@ -126,13 +126,13 @@ namespace IRecordweb.Controllers
             Console.WriteLine(response.Content);
             DataSet data = JsonConvert.DeserializeObject<DataSet>(response.Content);
             List<INDUSTRY> list = new List<INDUSTRY>();
-            foreach (DataRow dr in data.Tables[0].Rows)
-            {
-                INDUSTRY item = new INDUSTRY();
-                item.IndustryID = Convert.ToInt32(dr["IndustryID"].ToString());
-                item.Name = dr["Name"].ToString();
-                list.Add(item);
-            }
+            //foreach (DataRow dr in data.Tables[0].Rows)
+            //{
+            //    INDUSTRY item = new INDUSTRY();
+            //    item.IndustryID = Convert.ToInt32(dr["IndustryID"].ToString());
+            //    item.Name = dr["Name"].ToString();
+            //    list.Add(item);
+            //}
             return list;
         }
         public List<SECTOR> GetSector1()
@@ -147,13 +147,13 @@ namespace IRecordweb.Controllers
             Console.WriteLine(response.Content);
             DataSet data = JsonConvert.DeserializeObject<DataSet>(response.Content);
             List<SECTOR> list = new List<SECTOR>();
-            foreach (DataRow dr in data.Tables[0].Rows)
-            {
-                SECTOR item = new SECTOR();
-                item.SectorID = Convert.ToInt32(dr["SectorID"].ToString());
-                item.Name = dr["Name"].ToString();
-                list.Add(item);
-            }
+            //foreach (DataRow dr in data.Tables[0].Rows)
+            //{
+            //    SECTOR item = new SECTOR();
+            //    item.SectorID = Convert.ToInt32(dr["SectorID"].ToString());
+            //    item.Name = dr["Name"].ToString();
+            //    list.Add(item);
+            //}
             return list;
         }
         public List<SCRIPT> GetScriptInvestment(int ID)

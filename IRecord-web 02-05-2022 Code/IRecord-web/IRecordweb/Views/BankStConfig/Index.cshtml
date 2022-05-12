@@ -4,29 +4,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
-    <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="/css/select2.min.css" />
-    <link rel="stylesheet" href="/css/line-awesome.min.css" />
-    <link rel="stylesheet" href="/css/theme-color.css" />
-    <link rel="stylesheet" href="/css/app.min.css" />
-    <link rel="stylesheet" href="/css/custom-body.css" />
-    <script src="~/AngScripts/jquery-3.6.0.js"></script>
-    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
-    <script src="~/AngScripts/angular.js"></script>
-    <script src="~/AngScripts/ngStorage.min.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
-    <link rel="stylesheet" href="~/css/loader-1.css">
-    <style>
-        .isdisabled {
-            color: currentColor;
-            cursor: not-allowed;
-            opacity: 0.5;
-            text-decoration: none;
-            pointer-events: none;
-        }
+<link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+<link rel="stylesheet" href="/css/line-awesome.min.css" />
+<link rel="stylesheet" href="/css/theme-color.css" />
+<link rel="stylesheet" href="/css/app.min.css" />
+<link rel="stylesheet" href="/css/custom-body.css" />
+ 
 
-       /* li.pagination-page.ng-scope {
+<script src="~/AngScripts/jquery-3.6.0.js"></script>
+<script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+<script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<script src="~/js/select2.min.js"></script>
+<link rel="stylesheet" href="~/css/select2.min.css" />
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-datepicker.min.js"></script>
+
+<script src="../js/metisMenu.min.js"></script>
+<script src="../js/simplebar.min.js"></script>
+<script src="../js/app.js"></script>
+<style>
+    .isdisabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+    /* li.pagination-page.ng-scope {
             MARGIN-LEFT: 15PX;
             MARGIN-RIGHT: 15PX;
         }
@@ -40,490 +49,482 @@
         li.pagination-page.ng-scope.active {
             FONT-WEIGHT: BOLD;
         } */
-    </style>
+</style>
 
-    <div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="">
-      
-            <div id="layout-wrapper" class="w-100">
+<div ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="">
 
-                <div class="display_adds_parent">
-                    <div class="display_adds_view_box display_adds_2_col">
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0">Bank Format Config</h4>
-                                    @*<div class="page-title-right">
-                                        <a href="/BrokerBillEntry/BrokerBillList" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
-                                    </div>*@
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end page title -->
-                        <!-- Working Area Start -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row form_2">
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlbankFormat" class="mb-0">Select Bank:</label>
-                                        <select id="ddlbank" ng-model="ddlbank" ng-options="v.ID as v.NAME for v in bank" ng-change="GetAllBANKFORMATE()" class="form-select select2">
-                                            <option ng-option value="">Select Bank</option>
-                                        </select>
+    <div id="layout-wrapper" class="w-100">
 
-
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlbankFormat" class="mb-0">Select Bank Format:</label>
-                                        <select id="ddlbankFormat" ng-model="ddlbankFormat" ng-options="v.ID as v.NAME for v in bankformates" class="form-select select2">
-                                            <option ng-option value="">Select Bank Format</option>
-                                        </select>
-
-
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddl_Format_Type" class="mb-0">Format Type:</label>
-                                        <select id="ddl_Format_Type" ng-model="ddl_Format_Type" ng-change="fnchangeformattype()" class="form-select select2">
-                                            <option value="" selected="selected">Select Format Type</option>
-                                            <option value="1">Contain Different Dr/CR </option>
-                                            <option value="2"> Contain Dr/CR in Single Column</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_Starting_Row" class="mb-0">Starting Row</label>
-                                        <input type="number" id="txt_Starting_Row" ng-model="txt_Starting_Row" class="form-control" placeholder="Enter Table Start Row" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddl_Date" class="mb-0">Date:</label>
-                                        <select id="ddl_Date" ng-model="ddl_Date" class="form-select select2">
-                                            <option value="" selected="selected">Select Col in Excel</option>
-                                            <option value="Col_0">A </option>
-                                            <option value="Col_1">B </option>
-                                            <option value="Col_2">C </option>
-                                            <option value="Col_3">D </option>
-                                            <option value="Col_4">E </option>
-                                            <option value="Col_5">F </option>
-                                            <option value="Col_6">G </option>
-                                            <option value="Col_7">H </option>
-                                            <option value="Col_8">I </option>
-                                            <option value="Col_9">J </option>
-                                            <option value="Col_10">K </option>
-                                            <option value="Col_11">L </option>
-                                            <option value="Col_12">M </option>
-                                            <option value="Col_13">N </option>
-                                            <option value="Col_14">O </option>
-                                            <option value="Col_15">P </option>
-                                            <option value="Col_16">Q </option>
-                                            <option value="Col_17">R </option>
-                                            <option value="Col_18">S </option>
-                                            <option value="Col_19">T </option>
-                                            <option value="Col_20">U </option>
-                                            <option value="Col_21">V </option>
-                                            <option value="Col_22">W </option>
-                                            <option value="Col_23">X </option>
-                                            <option value="Col_24">Y </option>
-                                            <option value="Col_25">Z </option>
-
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddl_Account" class="mb-0">Account:</label>
-                                        <select id="ddl_Account" ng-model="ddl_Account" class="form-select select2">
-                                            <option value="" selected="selected">Select Col in Excel</option>
-                                            <option value="Col_0">A </option>
-                                            <option value="Col_1">B </option>
-                                            <option value="Col_2">C </option>
-                                            <option value="Col_3">D </option>
-                                            <option value="Col_4">E </option>
-                                            <option value="Col_5">F </option>
-                                            <option value="Col_6">G </option>
-                                            <option value="Col_7">H </option>
-                                            <option value="Col_8">I </option>
-                                            <option value="Col_9">J </option>
-                                            <option value="Col_10">K </option>
-                                            <option value="Col_11">L </option>
-                                            <option value="Col_12">M </option>
-                                            <option value="Col_13">N </option>
-                                            <option value="Col_14">O </option>
-                                            <option value="Col_15">P </option>
-                                            <option value="Col_16">Q </option>
-                                            <option value="Col_17">R </option>
-                                            <option value="Col_18">S </option>
-                                            <option value="Col_19">T </option>
-                                            <option value="Col_20">U </option>
-                                            <option value="Col_21">V </option>
-                                            <option value="Col_22">W </option>
-                                            <option value="Col_23">X </option>
-                                            <option value="Col_24">Y </option>
-                                            <option value="Col_25">Z </option>
-
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddl_Cheque" class="mb-0">Cheque:</label>
-                                        <select id="ddl_Cheque" ng-model="ddl_Cheque" class="form-select select2">
-                                            <option value="" selected="selected">Select Col in Excel</option>
-                                            <option value="Col_0">A </option>
-                                            <option value="Col_1">B </option>
-                                            <option value="Col_2">C </option>
-                                            <option value="Col_3">D </option>
-                                            <option value="Col_4">E </option>
-                                            <option value="Col_5">F </option>
-                                            <option value="Col_6">G </option>
-                                            <option value="Col_7">H </option>
-                                            <option value="Col_8">I </option>
-                                            <option value="Col_9">J </option>
-                                            <option value="Col_10">K </option>
-                                            <option value="Col_11">L </option>
-                                            <option value="Col_12">M </option>
-                                            <option value="Col_13">N </option>
-                                            <option value="Col_14">O </option>
-                                            <option value="Col_15">P </option>
-                                            <option value="Col_16">Q </option>
-                                            <option value="Col_17">R </option>
-                                            <option value="Col_18">S </option>
-                                            <option value="Col_19">T </option>
-                                            <option value="Col_20">U </option>
-                                            <option value="Col_21">V </option>
-                                            <option value="Col_22">W </option>
-                                            <option value="Col_23">X </option>
-                                            <option value="Col_24">Y </option>
-                                            <option value="Col_25">Z </option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddl_Narration" class="mb-0">Narration:</label>
-                                        <select id="ddl_Narration" ng-model="ddl_Narration" class="form-select select2">
-                                            <option value="" selected="selected">Select Col in Excel</option>
-                                            <option value="Col_0">A </option>
-                                            <option value="Col_1">B </option>
-                                            <option value="Col_2">C </option>
-                                            <option value="Col_3">D </option>
-                                            <option value="Col_4">E </option>
-                                            <option value="Col_5">F </option>
-                                            <option value="Col_6">G </option>
-                                            <option value="Col_7">H </option>
-                                            <option value="Col_8">I </option>
-                                            <option value="Col_9">J </option>
-                                            <option value="Col_10">K </option>
-                                            <option value="Col_11">L </option>
-                                            <option value="Col_12">M </option>
-                                            <option value="Col_13">N </option>
-                                            <option value="Col_14">O </option>
-                                            <option value="Col_15">P </option>
-                                            <option value="Col_16">Q </option>
-                                            <option value="Col_17">R </option>
-                                            <option value="Col_18">S </option>
-                                            <option value="Col_19">T </option>
-                                            <option value="Col_20">U </option>
-                                            <option value="Col_21">V </option>
-                                            <option value="Col_22">W </option>
-                                            <option value="Col_23">X </option>
-                                            <option value="Col_24">Y </option>
-                                            <option value="Col_25">Z </option>
-
-                                        </select>
-                                    </div>
-                                    <div id="divtype1">
-                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                            <label for="ddl_Debit" class="mb-0">Debit:</label>
-                                            <select id="ddl_Debit" ng-model="ddl_Debit" class="form-select select2">
-                                                <option value="" selected="selected">Select Col in Excel</option>
-                                                <option value="Col_0">A </option>
-                                                <option value="Col_1">B </option>
-                                                <option value="Col_2">C </option>
-                                                <option value="Col_3">D </option>
-                                                <option value="Col_4">E </option>
-                                                <option value="Col_5">F </option>
-                                                <option value="Col_6">G </option>
-                                                <option value="Col_7">H </option>
-                                                <option value="Col_8">I </option>
-                                                <option value="Col_9">J </option>
-                                                <option value="Col_10">K </option>
-                                                <option value="Col_11">L </option>
-                                                <option value="Col_12">M </option>
-                                                <option value="Col_13">N </option>
-                                                <option value="Col_14">O </option>
-                                                <option value="Col_15">P </option>
-                                                <option value="Col_16">Q </option>
-                                                <option value="Col_17">R </option>
-                                                <option value="Col_18">S </option>
-                                                <option value="Col_19">T </option>
-                                                <option value="Col_20">U </option>
-                                                <option value="Col_21">V </option>
-                                                <option value="Col_22">W </option>
-                                                <option value="Col_23">X </option>
-                                                <option value="Col_24">Y </option>
-                                                <option value="Col_25">Z </option>
-
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                            <label for="ddl_Credit" class="mb-0">Credit:</label>
-                                            <select id="ddl_Credit" ng-model="ddl_Credit" class="form-select select2">
-                                                <option value="" selected="selected">Select Col in Excel</option>
-                                                <option value="Col_0">A </option>
-                                                <option value="Col_1">B </option>
-                                                <option value="Col_2">C </option>
-                                                <option value="Col_3">D </option>
-                                                <option value="Col_4">E </option>
-                                                <option value="Col_5">F </option>
-                                                <option value="Col_6">G </option>
-                                                <option value="Col_7">H </option>
-                                                <option value="Col_8">I </option>
-                                                <option value="Col_9">J </option>
-                                                <option value="Col_10">K </option>
-                                                <option value="Col_11">L </option>
-                                                <option value="Col_12">M </option>
-                                                <option value="Col_13">N </option>
-                                                <option value="Col_14">O </option>
-                                                <option value="Col_15">P </option>
-                                                <option value="Col_16">Q </option>
-                                                <option value="Col_17">R </option>
-                                                <option value="Col_18">S </option>
-                                                <option value="Col_19">T </option>
-                                                <option value="Col_20">U </option>
-                                                <option value="Col_21">V </option>
-                                                <option value="Col_22">W </option>
-                                                <option value="Col_23">X </option>
-                                                <option value="Col_24">Y </option>
-                                                <option value="Col_25">Z </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="divdrcr" style="display:none;">
-                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                            <label for="ddl_Dr_Cr" class="mb-0">Dr_Cr:</label>
-                                            <select id="ddl_Dr_Cr" ng-model="ddl_Dr_Cr" class="form-select select2">
-                                                <option value="" selected="selected">Select Col in Excel</option>
-                                                <option value="Col_0">A </option>
-                                                <option value="Col_1">B </option>
-                                                <option value="Col_2">C </option>
-                                                <option value="Col_3">D </option>
-                                                <option value="Col_4">E </option>
-                                                <option value="Col_5">F </option>
-                                                <option value="Col_6">G </option>
-                                                <option value="Col_7">H </option>
-                                                <option value="Col_8">I </option>
-                                                <option value="Col_9">J </option>
-                                                <option value="Col_10">K </option>
-                                                <option value="Col_11">L </option>
-                                                <option value="Col_12">M </option>
-                                                <option value="Col_13">N </option>
-                                                <option value="Col_14">O </option>
-                                                <option value="Col_15">P </option>
-                                                <option value="Col_16">Q </option>
-                                                <option value="Col_17">R </option>
-                                                <option value="Col_18">S </option>
-                                                <option value="Col_19">T </option>
-                                                <option value="Col_20">U </option>
-                                                <option value="Col_21">V </option>
-                                                <option value="Col_22">W </option>
-                                                <option value="Col_23">X </option>
-                                                <option value="Col_24">Y </option>
-                                                <option value="Col_25">Z </option>
-
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                            <label for="ddl_Amount" class="mb-0">Amount:</label>
-                                            <select id="ddl_Amount" ng-model="ddl_Amount" class="form-select select2">
-                                                <option value="" selected="selected">Select Col in Excel</option>
-                                                <option value="Col_0">A </option>
-                                                <option value="Col_1">B </option>
-                                                <option value="Col_2">C </option>
-                                                <option value="Col_3">D </option>
-                                                <option value="Col_4">E </option>
-                                                <option value="Col_5">F </option>
-                                                <option value="Col_6">G </option>
-                                                <option value="Col_7">H </option>
-                                                <option value="Col_8">I </option>
-                                                <option value="Col_9">J </option>
-                                                <option value="Col_10">K </option>
-                                                <option value="Col_11">L </option>
-                                                <option value="Col_12">M </option>
-                                                <option value="Col_13">N </option>
-                                                <option value="Col_14">O </option>
-                                                <option value="Col_15">P </option>
-                                                <option value="Col_16">Q </option>
-                                                <option value="Col_17">R </option>
-                                                <option value="Col_18">S </option>
-                                                <option value="Col_19">T </option>
-                                                <option value="Col_20">U </option>
-                                                <option value="Col_21">V </option>
-                                                <option value="Col_22">W </option>
-                                                <option value="Col_23">X </option>
-                                                <option value="Col_24">Y </option>
-                                                <option value="Col_25">Z </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="text-center mt-3 mb-3">
-                                    <button ng-click="FnReset()" type="button" class="btn btn-secondary">Reset</button>
-                                    <button ng-click="FnFinalSubmit()" type="button" class="btn btn-primary">{{btntext}}</button>
-                                    <div style="display:none;" class="loader-wrapper" id="loader-1">
-                                        <div id="loader"></div>
-                                    </div>
-                                </div>  
-
-                                        <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
-                                            <div class="float-sm-end">
-                                                <uib-pagination class="pagination MYPAGECSS" total-items="MultimodelDATA.length" ng-model="page"
-                                                                ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
-                                            </div>
-                                        </div>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-hover sr-table table-bordered mb-0">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>BANKNAME <input type="text" class="form-control " ng-model="search.BANKNAME" placeholder="BANKNAME"></th>
-                                                        <th>STARTING_ROW <input type="text" class="form-control " ng-model="search.STARTING_ROW" placeholder="STARTING_ROW"></th>
-                                                        <th>DATE <input type="text" class="form-control " ng-model="search.DATE" placeholder="DATE"></th>
-                                                        <th>ACCOUNT <input type="text" class="form-control " ng-model="search.ACCOUNT" placeholder="ACCOUNT"></th>
-                                                        <th>CHEQUE <input type="text" class="form-control " ng-model="search.CHEQUE" placeholder="CHEQUE"></th>
-                                                        <th>DEBIT <input type="text" class="form-control " ng-model="search.DEBIT" placeholder="DEBIT"></th>
-                                                        <th>CREDIT <input type="text" class="form-control " ng-model="search.CREDIT" placeholder="CREDIT"></th>
-                                                        <th>NARRATION <input type="text" class="form-control " ng-model="search.NARRATION" placeholder="NARRATION"></th>
-                                                        <th>FORMATE_TYPE <input type="text" class="form-control " ng-model="search.FORMATE_TYPE" placeholder="FORMATE_TYPE"></th>
-                                                        <th>DR_CR <input type="text" class="form-control " ng-model="search.DR_CR" placeholder="DR_CR"></th>
-                                                        <th>AMOUNT <input type="text" class="form-control " ng-model="search.AMOUNT" placeholder="AMOUNT"></th>
-                                                        <th>Action </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="data in MultimodelDATA | filter:search | limitTo:10:10*(page-1)">
-                                                        <td>{{$index+1}}</td>
-                                                        <td>{{data.BANKNAME}}</td>
-                                                        <td>{{data.STARTING_ROW}}</td>
-                                                        <td>{{data.DATE}}</td>
-                                                        <td>{{data.ACCOUNT}}</td>
-                                                        <td>{{data.CHEQUE}}</td>
-                                                        <td>{{data.DEBIT}}</td>
-                                                        <td>{{data.CREDIT}}</td>
-                                                        <td>{{data.NARRATION}}</td>
-                                                        <td>{{data.FORMATE_TYPE}}</td>
-                                                        <td>{{data.DR_CR}}</td>
-                                                        <td>{{data.AMOUNT}}</td>
-                                                        <td>
-                                                            <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
-                                                        </td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    
-                                </div>
-                        </div>
-                    </div>
-                    <div class="display_adds display_adds_right text-center">
-                        <div class="mobile_adds mb-3">
-                            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
-                        </div>
-                        <div class="desktop_adds">
-                            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+        <div class="display_adds_parent">
+            <div class="display_adds_view_box display_adds_2_col">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Bank Format Config</h4>
+                            @*<div class="page-title-right">
+                                    <a href="/BrokerBillEntry/BrokerBillList" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
+                                </div>*@
                         </div>
                     </div>
                 </div>
-            </div> 
-        <!-- container-fluid -->
-            <!-- End Page-content -->
-
-            <!-- end main content-->
-
-        <!-- END layout-wrapper -->
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
-
-
-        <!-- Modal 1 -->
-        <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Add Demat</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                <!-- end page title -->
+                <!-- Working Area Start -->
+                <div class="card">
+                    <div class="card-body">
                         <div class="row form_2">
                             <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                <label class="mb-0">Demat <span class="text-danger">*</span>:</label>
-                                <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Demat A/c Name" />
+                                <label for="ddlbankFormat" class="mb-0">Select Bank:</label>
+                                <select id="ddlbank" ng-model="ddlbank" ng-options="v.ID as v.NAME for v in bank" ng-change="GetAllBANKFORMATE()" class="form-select select2">
+                                    <option ng-option value="">Select Bank</option>
+                                </select>
+
+
+
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddlbankFormat" class="mb-0">Select Bank Format:</label>
+                                <select id="ddlbankFormat" ng-model="ddlbankFormat" ng-options="v.ID as v.NAME for v in bankformates" class="form-select select2">
+                                    <option ng-option value="">Select Bank Format</option>
+                                </select>
+
+
+
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddl_Format_Type" class="mb-0">Format Type:</label>
+                                <select id="ddl_Format_Type" ng-model="ddl_Format_Type" ng-change="fnchangeformattype()" class="form-select select2">
+                                    <option value="" selected="selected">Select Format Type</option>
+                                    <option value="1">Contain Different Dr/CR </option>
+                                    <option value="2"> Contain Dr/CR in Single Column</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="txt_Starting_Row" class="mb-0">Starting Row</label>
+                                <input type="number" id="txt_Starting_Row" ng-model="txt_Starting_Row" class="form-control" placeholder="Enter Table Start Row" />
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddl_Date" class="mb-0">Date:</label>
+                                <select id="ddl_Date" ng-model="ddl_Date" class="form-select select2">
+                                    <option value="" selected="selected">Select Col in Excel</option>
+                                    <option value="Col_0">A </option>
+                                    <option value="Col_1">B </option>
+                                    <option value="Col_2">C </option>
+                                    <option value="Col_3">D </option>
+                                    <option value="Col_4">E </option>
+                                    <option value="Col_5">F </option>
+                                    <option value="Col_6">G </option>
+                                    <option value="Col_7">H </option>
+                                    <option value="Col_8">I </option>
+                                    <option value="Col_9">J </option>
+                                    <option value="Col_10">K </option>
+                                    <option value="Col_11">L </option>
+                                    <option value="Col_12">M </option>
+                                    <option value="Col_13">N </option>
+                                    <option value="Col_14">O </option>
+                                    <option value="Col_15">P </option>
+                                    <option value="Col_16">Q </option>
+                                    <option value="Col_17">R </option>
+                                    <option value="Col_18">S </option>
+                                    <option value="Col_19">T </option>
+                                    <option value="Col_20">U </option>
+                                    <option value="Col_21">V </option>
+                                    <option value="Col_22">W </option>
+                                    <option value="Col_23">X </option>
+                                    <option value="Col_24">Y </option>
+                                    <option value="Col_25">Z </option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddl_Account" class="mb-0">Account:</label>
+                                <select id="ddl_Account" ng-model="ddl_Account" class="form-select select2">
+                                    <option value="" selected="selected">Select Col in Excel</option>
+                                    <option value="Col_0">A </option>
+                                    <option value="Col_1">B </option>
+                                    <option value="Col_2">C </option>
+                                    <option value="Col_3">D </option>
+                                    <option value="Col_4">E </option>
+                                    <option value="Col_5">F </option>
+                                    <option value="Col_6">G </option>
+                                    <option value="Col_7">H </option>
+                                    <option value="Col_8">I </option>
+                                    <option value="Col_9">J </option>
+                                    <option value="Col_10">K </option>
+                                    <option value="Col_11">L </option>
+                                    <option value="Col_12">M </option>
+                                    <option value="Col_13">N </option>
+                                    <option value="Col_14">O </option>
+                                    <option value="Col_15">P </option>
+                                    <option value="Col_16">Q </option>
+                                    <option value="Col_17">R </option>
+                                    <option value="Col_18">S </option>
+                                    <option value="Col_19">T </option>
+                                    <option value="Col_20">U </option>
+                                    <option value="Col_21">V </option>
+                                    <option value="Col_22">W </option>
+                                    <option value="Col_23">X </option>
+                                    <option value="Col_24">Y </option>
+                                    <option value="Col_25">Z </option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddl_Cheque" class="mb-0">Cheque:</label>
+                                <select id="ddl_Cheque" ng-model="ddl_Cheque" class="form-select select2">
+                                    <option value="" selected="selected">Select Col in Excel</option>
+                                    <option value="Col_0">A </option>
+                                    <option value="Col_1">B </option>
+                                    <option value="Col_2">C </option>
+                                    <option value="Col_3">D </option>
+                                    <option value="Col_4">E </option>
+                                    <option value="Col_5">F </option>
+                                    <option value="Col_6">G </option>
+                                    <option value="Col_7">H </option>
+                                    <option value="Col_8">I </option>
+                                    <option value="Col_9">J </option>
+                                    <option value="Col_10">K </option>
+                                    <option value="Col_11">L </option>
+                                    <option value="Col_12">M </option>
+                                    <option value="Col_13">N </option>
+                                    <option value="Col_14">O </option>
+                                    <option value="Col_15">P </option>
+                                    <option value="Col_16">Q </option>
+                                    <option value="Col_17">R </option>
+                                    <option value="Col_18">S </option>
+                                    <option value="Col_19">T </option>
+                                    <option value="Col_20">U </option>
+                                    <option value="Col_21">V </option>
+                                    <option value="Col_22">W </option>
+                                    <option value="Col_23">X </option>
+                                    <option value="Col_24">Y </option>
+                                    <option value="Col_25">Z </option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                <label for="ddl_Narration" class="mb-0">Narration:</label>
+                                <select id="ddl_Narration" ng-model="ddl_Narration" class="form-select select2">
+                                    <option value="" selected="selected">Select Col in Excel</option>
+                                    <option value="Col_0">A </option>
+                                    <option value="Col_1">B </option>
+                                    <option value="Col_2">C </option>
+                                    <option value="Col_3">D </option>
+                                    <option value="Col_4">E </option>
+                                    <option value="Col_5">F </option>
+                                    <option value="Col_6">G </option>
+                                    <option value="Col_7">H </option>
+                                    <option value="Col_8">I </option>
+                                    <option value="Col_9">J </option>
+                                    <option value="Col_10">K </option>
+                                    <option value="Col_11">L </option>
+                                    <option value="Col_12">M </option>
+                                    <option value="Col_13">N </option>
+                                    <option value="Col_14">O </option>
+                                    <option value="Col_15">P </option>
+                                    <option value="Col_16">Q </option>
+                                    <option value="Col_17">R </option>
+                                    <option value="Col_18">S </option>
+                                    <option value="Col_19">T </option>
+                                    <option value="Col_20">U </option>
+                                    <option value="Col_21">V </option>
+                                    <option value="Col_22">W </option>
+                                    <option value="Col_23">X </option>
+                                    <option value="Col_24">Y </option>
+                                    <option value="Col_25">Z </option>
+
+                                </select>
+                            </div>
+                            <div id="divtype1">
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddl_Debit" class="mb-0">Debit:</label>
+                                    <select id="ddl_Debit" ng-model="ddl_Debit" class="form-select select2">
+                                        <option value="" selected="selected">Select Col in Excel</option>
+                                        <option value="Col_0">A </option>
+                                        <option value="Col_1">B </option>
+                                        <option value="Col_2">C </option>
+                                        <option value="Col_3">D </option>
+                                        <option value="Col_4">E </option>
+                                        <option value="Col_5">F </option>
+                                        <option value="Col_6">G </option>
+                                        <option value="Col_7">H </option>
+                                        <option value="Col_8">I </option>
+                                        <option value="Col_9">J </option>
+                                        <option value="Col_10">K </option>
+                                        <option value="Col_11">L </option>
+                                        <option value="Col_12">M </option>
+                                        <option value="Col_13">N </option>
+                                        <option value="Col_14">O </option>
+                                        <option value="Col_15">P </option>
+                                        <option value="Col_16">Q </option>
+                                        <option value="Col_17">R </option>
+                                        <option value="Col_18">S </option>
+                                        <option value="Col_19">T </option>
+                                        <option value="Col_20">U </option>
+                                        <option value="Col_21">V </option>
+                                        <option value="Col_22">W </option>
+                                        <option value="Col_23">X </option>
+                                        <option value="Col_24">Y </option>
+                                        <option value="Col_25">Z </option>
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddl_Credit" class="mb-0">Credit:</label>
+                                    <select id="ddl_Credit" ng-model="ddl_Credit" class="form-select select2">
+                                        <option value="" selected="selected">Select Col in Excel</option>
+                                        <option value="Col_0">A </option>
+                                        <option value="Col_1">B </option>
+                                        <option value="Col_2">C </option>
+                                        <option value="Col_3">D </option>
+                                        <option value="Col_4">E </option>
+                                        <option value="Col_5">F </option>
+                                        <option value="Col_6">G </option>
+                                        <option value="Col_7">H </option>
+                                        <option value="Col_8">I </option>
+                                        <option value="Col_9">J </option>
+                                        <option value="Col_10">K </option>
+                                        <option value="Col_11">L </option>
+                                        <option value="Col_12">M </option>
+                                        <option value="Col_13">N </option>
+                                        <option value="Col_14">O </option>
+                                        <option value="Col_15">P </option>
+                                        <option value="Col_16">Q </option>
+                                        <option value="Col_17">R </option>
+                                        <option value="Col_18">S </option>
+                                        <option value="Col_19">T </option>
+                                        <option value="Col_20">U </option>
+                                        <option value="Col_21">V </option>
+                                        <option value="Col_22">W </option>
+                                        <option value="Col_23">X </option>
+                                        <option value="Col_24">Y </option>
+                                        <option value="Col_25">Z </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="divdrcr" style="display:none;">
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddl_Dr_Cr" class="mb-0">Dr_Cr:</label>
+                                    <select id="ddl_Dr_Cr" ng-model="ddl_Dr_Cr" class="form-select select2">
+                                        <option value="" selected="selected">Select Col in Excel</option>
+                                        <option value="Col_0">A </option>
+                                        <option value="Col_1">B </option>
+                                        <option value="Col_2">C </option>
+                                        <option value="Col_3">D </option>
+                                        <option value="Col_4">E </option>
+                                        <option value="Col_5">F </option>
+                                        <option value="Col_6">G </option>
+                                        <option value="Col_7">H </option>
+                                        <option value="Col_8">I </option>
+                                        <option value="Col_9">J </option>
+                                        <option value="Col_10">K </option>
+                                        <option value="Col_11">L </option>
+                                        <option value="Col_12">M </option>
+                                        <option value="Col_13">N </option>
+                                        <option value="Col_14">O </option>
+                                        <option value="Col_15">P </option>
+                                        <option value="Col_16">Q </option>
+                                        <option value="Col_17">R </option>
+                                        <option value="Col_18">S </option>
+                                        <option value="Col_19">T </option>
+                                        <option value="Col_20">U </option>
+                                        <option value="Col_21">V </option>
+                                        <option value="Col_22">W </option>
+                                        <option value="Col_23">X </option>
+                                        <option value="Col_24">Y </option>
+                                        <option value="Col_25">Z </option>
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                    <label for="ddl_Amount" class="mb-0">Amount:</label>
+                                    <select id="ddl_Amount" ng-model="ddl_Amount" class="form-select select2">
+                                        <option value="" selected="selected">Select Col in Excel</option>
+                                        <option value="Col_0">A </option>
+                                        <option value="Col_1">B </option>
+                                        <option value="Col_2">C </option>
+                                        <option value="Col_3">D </option>
+                                        <option value="Col_4">E </option>
+                                        <option value="Col_5">F </option>
+                                        <option value="Col_6">G </option>
+                                        <option value="Col_7">H </option>
+                                        <option value="Col_8">I </option>
+                                        <option value="Col_9">J </option>
+                                        <option value="Col_10">K </option>
+                                        <option value="Col_11">L </option>
+                                        <option value="Col_12">M </option>
+                                        <option value="Col_13">N </option>
+                                        <option value="Col_14">O </option>
+                                        <option value="Col_15">P </option>
+                                        <option value="Col_16">Q </option>
+                                        <option value="Col_17">R </option>
+                                        <option value="Col_18">S </option>
+                                        <option value="Col_19">T </option>
+                                        <option value="Col_20">U </option>
+                                        <option value="Col_21">V </option>
+                                        <option value="Col_22">W </option>
+                                        <option value="Col_23">X </option>
+                                        <option value="Col_24">Y </option>
+                                        <option value="Col_25">Z </option>
+
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+
+                        <div class="text-center mt-3 mb-3">
+                            <button ng-click="FnReset()" type="button" class="btn btn-secondary">Reset</button>
+                            <button ng-click="FnFinalSubmit()" type="button" class="btn btn-primary">{{btntext}}</button>
+                            <div style="display:none;" class="loader-wrapper" id="loader-1">
+                                <div id="loader"></div>
+                            </div>
+                        </div>
+
+                        <div class="pagination_box w-100 mb-3 d-sm-flex justify-content-end">
+                            <div class="float-sm-end">
+                                <uib-pagination class="pagination MYPAGECSS" total-items="MultimodelDATA.length" ng-model="page"
+                                                ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover sr-table table-bordered mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>BANKNAME <input type="text" class="form-control " ng-model="search.BANKNAME" placeholder="BANKNAME"></th>
+                                        <th>STARTING_ROW <input type="text" class="form-control " ng-model="search.STARTING_ROW" placeholder="STARTING_ROW"></th>
+                                        <th>DATE <input type="text" class="form-control " ng-model="search.DATE" placeholder="DATE"></th>
+                                        <th>ACCOUNT <input type="text" class="form-control " ng-model="search.ACCOUNT" placeholder="ACCOUNT"></th>
+                                        <th>CHEQUE <input type="text" class="form-control " ng-model="search.CHEQUE" placeholder="CHEQUE"></th>
+                                        <th>DEBIT <input type="text" class="form-control " ng-model="search.DEBIT" placeholder="DEBIT"></th>
+                                        <th>CREDIT <input type="text" class="form-control " ng-model="search.CREDIT" placeholder="CREDIT"></th>
+                                        <th>NARRATION <input type="text" class="form-control " ng-model="search.NARRATION" placeholder="NARRATION"></th>
+                                        <th>FORMATE_TYPE <input type="text" class="form-control " ng-model="search.FORMATE_TYPE" placeholder="FORMATE_TYPE"></th>
+                                        <th>DR_CR <input type="text" class="form-control " ng-model="search.DR_CR" placeholder="DR_CR"></th>
+                                        <th>AMOUNT <input type="text" class="form-control " ng-model="search.AMOUNT" placeholder="AMOUNT"></th>
+                                        <th>Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in MultimodelDATA | filter:search | limitTo:10:10*(page-1)">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{data.BANKNAME}}</td>
+                                        <td>{{data.STARTING_ROW}}</td>
+                                        <td>{{data.DATE}}</td>
+                                        <td>{{data.ACCOUNT}}</td>
+                                        <td>{{data.CHEQUE}}</td>
+                                        <td>{{data.DEBIT}}</td>
+                                        <td>{{data.CREDIT}}</td>
+                                        <td>{{data.NARRATION}}</td>
+                                        <td>{{data.FORMATE_TYPE}}</td>
+                                        <td>{{data.DR_CR}}</td>
+                                        <td>{{data.AMOUNT}}</td>
+                                        <td>
+                                            <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Modal 2 -->
-        <div class="modal fade" id="modal_broker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Add Broker</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row form_2">
-                            <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                <label class="mb-0">Broker <span class="text-danger">*</span>:</label>
-                                <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Broker Name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
-                    </div>
+            <div class="display_adds display_adds_right text-center">
+                <div class="mobile_adds mb-3">
+                    <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
+                </div>
+                <div class="desktop_adds">
+                    <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" />
                 </div>
             </div>
         </div>
     </div>
+    <!-- container-fluid -->
+    <!-- End Page-content -->
+    <!-- end main content-->
+    <!-- END layout-wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-    <script src="../js/jquery-3.5.1.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
 
-    <script src="../js/metisMenu.min.js"></script>
-    <script src="../js/simplebar.min.js"></script>
-    <script src="../js/app.js"></script>
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Demat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Demat <span class="text-danger">*</span>:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Demat A/c Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal_broker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Broker</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form_2">
+                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                            <label class="mb-0">Broker <span class="text-danger">*</span>:</label>
+                            <input type="text" id="family_name" name="family_name" class="form-control" placeholder="Enter Broker Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="../js/bootstrap-datepicker.min.js"></script>
-    <script src="../js/select2.min.js"></script>
-    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/OpeningStock.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <link rel="stylesheet" href="~/css/select2.min.css" />
+
+}
+<script>
         $.noConflict();
         jQuery(document).ready(function ($) {
             $('#txt_Date').attr('readonly', true);
-            $("#txt_Date").datepicker({
+            @*$("#txt_Date").datepicker({
                 dateFormat: "dd-mm-yy",
                 minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
                 maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
                 changeMonth: true,
                 changeYear: true
-            });
-
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
+            });*@
             $(".select2").select2({
                 maximumSelectionLength: 3
             });
@@ -532,11 +533,10 @@
             });
 
         });
-    </script>
+</script>
+ 
+<script src="~/AngScripts/BankFormatConfig.js"></script>
+<script src="../js/custom-script.js"></script>
 
-    <script src="../js/custom-script.js"></script>
-
-    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-    <script src="~/AngScripts/BankFormatConfig.js"></script>
 
 

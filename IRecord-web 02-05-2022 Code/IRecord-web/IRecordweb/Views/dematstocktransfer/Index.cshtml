@@ -3,28 +3,47 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+<link rel="stylesheet" href="/css/line-awesome.min.css" />
+<link rel="stylesheet" href="/css/theme-color.css" />
+<link rel="stylesheet" href="/css/app.min.css" />
+<link rel="stylesheet" href="/css/custom-body.css" />
+
+
 <script src="~/AngScripts/jquery-3.6.0.js"></script>
 <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
 <script src="~/AngScripts/angular.js"></script>
+<script src="~/AngScripts/ngStorage.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<script src="~/js/select2.min.js"></script>
+<link rel="stylesheet" href="~/css/select2.min.css" />
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-datepicker.min.js"></script>
+
+<script src="../js/metisMenu.min.js"></script>
+<script src="../js/simplebar.min.js"></script>
+<script src="../js/app.js"></script>
 <title>Demat Stock Transfer :: iRecord</title>
 
 <div ng-app="myApp" class="display_adds_parent">
     <div ng-controller="myctrn" ng-init="PageLoad()" class="display_adds_view_box display_adds_2_col">
-        
+
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
                     <h1 class="mb-0">Demat Stock Transfer</h1>
 
                     <!-- <div class="page-title-right">
-                    <a href="javascript:;" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to Index</a>
-                </div> -->
+                        <a href="javascript:;" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to Index</a>
+                    </div> -->
 
                 </div>
             </div>
         </div>
         <!-- end page title -->
-
         <!-- Working Area Start -->
         <div class="card">
             <div class="card-body">
@@ -58,11 +77,11 @@
                             <label class="mb-0">From Demat Account:</label>
                             <div class="input-group tbl_int_grp">
                                 @*<select class="form-select select2">
-                            <option>-- Select Demat --</option>
-                            <option>Demat 1</option>
-                            <option>Demat 2</option>
-                            <option>Demat 3</option>
-                        </select>*@
+                                        <option>-- Select Demat --</option>
+                                        <option>Demat 1</option>
+                                        <option>Demat 2</option>
+                                        <option>Demat 3</option>
+                                    </select>*@
                                 <select id="ddl_from_Demat" ng-model="detail.ddl_from_Demat_id" ng-options="x.ID as x.NAME for x in FILLALLDEMATE" ng-change="FILLGRIDVIEW()" class="form-select select2">
                                     <option ng-option value="">-- Select Demat --</option>
 
@@ -76,11 +95,11 @@
                             <label class="mb-0">To Demat Account:</label>
                             <div class="input-group tbl_int_grp">
                                 @*<select class="form-select select2">
-                            <option>-- Select Demat --</option>
-                            <option>Demat 1</option>
-                            <option>Demat 2</option>
-                            <option>Demat 3</option>
-                        </select>*@
+                                        <option>-- Select Demat --</option>
+                                        <option>Demat 1</option>
+                                        <option>Demat 2</option>
+                                        <option>Demat 3</option>
+                                    </select>*@
                                 <select id="ddl_to_Demat" ng-model="detail.ddl_to_Demat_id" ng-options="x.ID as x.NAME for x in FILLALLDEMATE" class="form-select select2">
                                     <option ng-option value="">-- Select Demat --</option>
 
@@ -198,7 +217,7 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
     <div class="display_adds display_adds_right text-center">
         <div class="mobile_adds mb-3">
@@ -209,5 +228,22 @@
         </div>
     </div>
 </div>
-<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
 <script src="~/AngScripts/DemateStockTransfer.js"></script>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/OpeningStock.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <link rel="stylesheet" href="~/css/select2.min.css" />
+}
+<script>
+    $(document).ready(function () {
+
+        $(".select2").select2({
+            maximumSelectionLength: 3
+        });
+    });
+</script>

@@ -385,7 +385,7 @@ namespace IRecordweb.Controllers
         {
             ACCOUNT _Account = new ACCOUNT();
             // ViewBag.Name = new SelectList(AllBrokerList().ToList(), dataValueField: "ID", dataTextField: "Name");
-            ViewBag.GroupID = new SelectList(GroupList1().ToList(), dataValueField: "GroupID", dataTextField: "GroupName");
+          //  ViewBag.GroupID = new SelectList(GroupList1().ToList(), dataValueField: "GroupID", dataTextField: "GroupName");
 
             if (VarAction == "WithOutLayout")
             {

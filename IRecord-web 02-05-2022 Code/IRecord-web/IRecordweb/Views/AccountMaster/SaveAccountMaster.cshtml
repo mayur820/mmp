@@ -32,7 +32,7 @@
                             @Html.LabelFor(model => model.GroupID, htmlAttributes: new { @class = "control-label" })
                             <div class="w-100">
                                 @*, new { @onchange = "toggleDIvDisplay(this.value)" }*@
-                                @Html.DropDownListFor(model => model.GroupID, ViewBag.GroupID as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-select select2", @onchange = "GetGroupDatabyID()"  })
+                                @*@Html.DropDownListFor(model => model.GroupID, ViewBag.GroupID as SelectList, "---Select Group---", htmlAttributes: new { @class = "form-select select2", @onchange = "GetGroupDatabyID()"  })*@
                                 @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
                             </div>
                         </div>

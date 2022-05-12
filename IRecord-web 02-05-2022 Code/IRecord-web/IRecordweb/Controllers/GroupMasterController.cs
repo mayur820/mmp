@@ -416,13 +416,13 @@ namespace IRecordweb.Controllers
             Console.WriteLine(response.Content);
             DataSet data = JsonConvert.DeserializeObject<DataSet>(response.Content);
             List<GROUP> list = new List<GROUP>();
-            foreach (DataRow dr in data.Tables[0].Rows)
-            {
-                GROUP item = new GROUP();
-                item.UGroupID = Convert.ToInt32(dr["UGroupID"].ToString());
-                item.UGroupName = dr["UGroupName"].ToString();
-                list.Add(item);
-            }
+            //foreach (DataRow dr in data.Tables[0].Rows)
+            //{
+            //    GROUP item = new GROUP();
+            //    item.UGroupID = Convert.ToInt32(dr["UGroupID"].ToString());
+            //    item.UGroupName = dr["UGroupName"].ToString();
+            //    list.Add(item);
+            //}
             return list;
         }
 

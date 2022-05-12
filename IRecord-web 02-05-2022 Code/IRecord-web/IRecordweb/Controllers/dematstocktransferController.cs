@@ -102,7 +102,7 @@ namespace IRecordweb.Controllers
             }
         public JsonResult GetAllConsultant()
             {
-            String strConnString = ConfigurationManager.ConnectionStrings["IrecordwebConnectionNew"].ConnectionString;
+            String strConnString = ConfigurationManager.ConnectionStrings["IrecordwebConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
 
