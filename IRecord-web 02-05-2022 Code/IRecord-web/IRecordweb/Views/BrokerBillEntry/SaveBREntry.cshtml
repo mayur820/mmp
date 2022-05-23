@@ -3,23 +3,30 @@
     ViewBag.Title = "SaveBREntry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="~/css/bootstrap.min.v4.css" />
-    <link rel="stylesheet" href="~/css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="~/css/select2.min.css" />
-    <link rel="stylesheet" href="~/css/line-awesome.min.css" />
-    <link rel="stylesheet" href="~/css/theme-color.css" />
-    <link rel="stylesheet" href="~/css/app.min.css" />
-    <link rel="stylesheet" href="~/css/custom-body.css" />
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
-    <title>Consultant Master :: iRecord</title>*@
+<link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
+<link rel="stylesheet" href="/css/line-awesome.min.css" />
+<link rel="stylesheet" href="/css/theme-color.css" />
+<link rel="stylesheet" href="/css/app.min.css" />
+<link rel="stylesheet" href="/css/custom-body.css" />
+
+
 <script src="~/AngScripts/jquery-3.6.0.js"></script>
 <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
 <script src="~/AngScripts/angular.js"></script>
 <script src="~/AngScripts/ngStorage.min.js"></script>
-<link rel="stylesheet" href="~/css/loader-1.css">
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+<script src="~/js/select2.min.js"></script>
+<link rel="stylesheet" href="~/css/select2.min.css" />
+<script src="../js/popper.min.js"></script>
+
+
+<script src="../js/metisMenu.min.js"></script>
+<script src="../js/simplebar.min.js"></script>
+<script src="../js/app.js"></script>
 <style>
     .modal-dialog {
         width: 100%;
@@ -34,17 +41,28 @@
         border-radius: 0;
     }
 
-    @@media (min-width: 1200px) 
-    {
+    @@media (min-width: 1200px) {
         .modal-xl {
             max-width: 100% !important;
         }
     }
-  
 </style>
 @section Scripts {
 
 
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    <script src="~/AngScripts/OpeningStock.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <link rel="stylesheet" href="~/css/select2.min.css" />
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 }
 
 <body class="inner_body">
@@ -190,7 +208,7 @@
                                     <div class="col-sm-12 col-md-6 mb-3 d-flex">
                                         <label for="ChkSetAsDefault" class="mb-0">Set as Default:</label>
                                         <input type="checkbox" class="form-check-input" id="ChkSetAsDefault" ng-model="SaveBREntry.ChkSetAsDefault">
-                                      
+
 
                                     </div>
                                     <div class="col-sm-12 text-center mt-3">
@@ -265,9 +283,9 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                 <div class="modal-content">
                     @*<div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">verify pdf</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>*@
+                            <h5 class="modal-title" id="staticBackdropLabel">verify pdf</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>*@
                     <div class="modal-body">
                         <div style="
     height: 580px !important;
@@ -283,7 +301,7 @@
 
 
                         </div>
-                      
+
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -335,13 +353,13 @@
         $.noConflict();
         jQuery(document).ready(function ($) {
             $('#txt_Date').attr('readonly', true);
-            $("#txt_Date").datepicker({
+            @*$("#txt_Date").datepicker({
                 dateFormat: "dd-M-yy",
                 minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
                 maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
                 changeMonth: true,
                 changeYear: true
-            });
+            });*@
 
         });
     </script>

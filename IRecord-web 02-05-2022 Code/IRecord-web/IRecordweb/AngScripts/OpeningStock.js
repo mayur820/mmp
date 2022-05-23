@@ -98,7 +98,7 @@ app.controller("myctrn", function ($scope, $http, $localStorage, $sessionStorage
     }
     $scope.GetAllDemate = function () {
         fnGetDataUsingGetRequestWithModel("/OpeningStock/GetAllDemate", "Demates", $scope, $http);
-        console.log($scope.Demates)
+        //console.log($scope.Demates)
     }
     $scope.GetAllBroker = function () {
         fnGetDataUsingGetRequestWithModel("/OpeningStock/GetAllBroker", "Brokers", $scope, $http);

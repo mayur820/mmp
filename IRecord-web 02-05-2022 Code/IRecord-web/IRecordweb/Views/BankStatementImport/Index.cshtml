@@ -25,28 +25,26 @@
 </style>
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
-<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<link rel="stylesheet" href="/css/line-awesome.min.css" />
-<link rel="stylesheet" href="/css/theme-color.css" />
-<link rel="stylesheet" href="/css/app.min.css" />
-<link rel="stylesheet" href="/css/custom-body.css" />
-
-
+@*--------*Angular JS* SECTION------*@
 <script src="~/AngScripts/jquery-3.6.0.js"></script>
 <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
 <script src="~/AngScripts/angular.js"></script>
 <script src="~/AngScripts/ngStorage.min.js"></script>
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
-<script src="~/js/select2.min.js"></script>
-<link rel="stylesheet" href="~/css/select2.min.css" />
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-datepicker.min.js"></script>
-
+@*---------*Angular JS* SECTION-----*@
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
 <script src="../js/metisMenu.min.js"></script>
-<script src="../js/simplebar.min.js"></script>
-<script src="../js/app.js"></script>
+<script src="~/js/select2.min.js"></script>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<link href="~/Content/theme-color.css" rel="stylesheet" />
+<link href="~/Content/app.min.css" rel="stylesheet" />
+<link href="~/Content/custom-body.css" rel="stylesheet" />
+
+
 <div class="display_adds_parent">
     <div class="display_adds_view_box display_adds_2_col">
 
@@ -146,114 +144,110 @@
 
 
 @section Scripts {
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="../js/custom-script.js"></script>
     <script src="~/AngScripts/OpeningStock.js"></script>
-    <script src="~/js/select2.min.js"></script>
-    <link rel="stylesheet" href="~/css/select2.min.css" />
-}
-<script>
-    $("#BankNameId").change(function () {
+    <script>
 
-        var ddlCustomers = $("#BankConfig");
-        ddlCustomers.empty();
-        ddlCustomers.append("<option value=''>--Please Select--</option>");
-
-        $.get("/BankStatementImport/ViewFormate", { BankId: $("#BankNameId").val() },
-            function (data) {
-
-                $.each(data, function (index, row) {
-                    ddlCustomers.append("<option value='" + row.TypeId + "'>" + row.Name + "</option>")
-                });
-            });
-
-
-        //$.ajax({    //create an ajax request to display.php
-        //    type: "GET",
-        //    url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(),
-        //    dataType: "json",   //expect html to be returned
-        //    success: function (response) {
-        //        alert(response);
-        //      //  $("#responsecontainer").html(response);
-        //        //alert(response);
-        //    }
-        //});
-
-
-
-        //$.ajax({
-        //    type: "get", url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(), dataType: "json", contentType: "application/json", success: function (res) {
-        //        $.each(res.d, function (data, value) {
-
-        //            ddlCustomers.append($("<option></option>").val(value.ID).html(value.NAME));
-        //        })
-        //    }
-
-        //});
-
-    });
-
-
-    // PopulateDropDownList();
-
-    function PopulateDropDownList() {
-        //Build an array containing Customer records.
-        var customers = [
-            { CustomerId: 1, Name: "John Hammond", Country: "United States" },
-            { CustomerId: 2, Name: "Mudassar Khan", Country: "India" },
-            { CustomerId: 3, Name: "Suzanne Mathews", Country: "France" },
-            { CustomerId: 4, Name: "Robert Schidner", Country: "Russia" }
-        ];
-
-        var ddlCustomers = $("#BankConfig");
-        ddlCustomers.empty();
-        ddlCustomers.append("<option value=''>--Please Select--</option>");
-        $(customers).each(function () {
-            var option = $("<option />");
-
-            //Set Customer Name in Text part.
-            option.html(this.Name);
-
-            //Set Customer CustomerId in Value part.
-            option.val(this.CustomerId);
-
-            //Add the Option element to DropDownList.
-            ddlCustomers.append(option);
-        });
-    }
-</script>
-
-<script>
-    $(document).ready(function () {
-        $("#BankNameId").focus();
-        $(".select2").select2({
-            maximumSelectionLength: 3
-        });
-    });
-</script>
-<script>
-        $.noConflict();
+              $.noConflict();
         jQuery(document).ready(function ($) {
 
             var StartDate =@Session["FinFromDate"].ToString();
             var EndDate = @Session["FinToDate"].ToString();
            // alert(EndDate);
-            $("#FromDate1").datepicker({
+            $("#FromDate").datepicker({
                 dateFormat: "dd-mm-yy",
                 minDate : StartDate,
                 maxDate : EndDate,
                 changeMonth: true,
                 changeYear: true
             });
-            $("#ToDate1").datepicker({
-                dateFormat: "dd-mm-yy",
-                minDate : StartDate,
-                maxDate : EndDate,
-                changeMonth: true,
-                changeYear: true
-            });
+            //$("#ToDate1").datepicker({
+            //    dateFormat: "dd-mm-yy",
+            //    minDate : StartDate,
+            //    maxDate : EndDate,
+            //    changeMonth: true,
+            //    changeYear: true
+            //});
         });
-</script>
+            $("#BankNameId").focus();
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+
+        $("#BankNameId").change(function () {
+
+            var ddlCustomers = $("#BankConfig");
+            ddlCustomers.empty();
+            ddlCustomers.append("<option value=''>--Please Select--</option>");
+
+            $.get("/BankStatementImport/ViewFormate", { BankId: $("#BankNameId").val() },
+                function (data) {
+
+                    $.each(data, function (index, row) {
+                        ddlCustomers.append("<option value='" + row.TypeId + "'>" + row.Name + "</option>")
+                    });
+                });
+
+
+            //$.ajax({    //create an ajax request to display.php
+            //    type: "GET",
+            //    url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(),
+            //    dataType: "json",   //expect html to be returned
+            //    success: function (response) {
+            //        alert(response);
+            //      //  $("#responsecontainer").html(response);
+            //        //alert(response);
+            //    }
+            //});
+
+
+
+            //$.ajax({
+            //    type: "get", url: "BankStatementImport/ViewFormate?BankId=" + $("#BankNameId").val(), dataType: "json", contentType: "application/json", success: function (res) {
+            //        $.each(res.d, function (data, value) {
+
+            //            ddlCustomers.append($("<option></option>").val(value.ID).html(value.NAME));
+            //        })
+            //    }
+
+            //});
+
+        });
+
+
+        // PopulateDropDownList();
+
+        function PopulateDropDownList() {
+            //Build an array containing Customer records.
+            var customers = [
+                { CustomerId: 1, Name: "John Hammond", Country: "United States" },
+                { CustomerId: 2, Name: "Mudassar Khan", Country: "India" },
+                { CustomerId: 3, Name: "Suzanne Mathews", Country: "France" },
+                { CustomerId: 4, Name: "Robert Schidner", Country: "Russia" }
+            ];
+
+            var ddlCustomers = $("#BankConfig");
+            ddlCustomers.empty();
+            ddlCustomers.append("<option value=''>--Please Select--</option>");
+            $(customers).each(function () {
+                var option = $("<option />");
+
+                //Set Customer Name in Text part.
+                option.html(this.Name);
+
+                //Set Customer CustomerId in Value part.
+                option.val(this.CustomerId);
+
+                //Add the Option element to DropDownList.
+                ddlCustomers.append(option);
+            });
+            }
+
+    </script>
+
 }

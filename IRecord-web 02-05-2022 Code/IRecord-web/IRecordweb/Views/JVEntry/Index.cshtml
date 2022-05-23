@@ -4,36 +4,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="/css/bootstrap.min.v4.css" />
-<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<link rel="stylesheet" href="/css/line-awesome.min.css" />
-<link rel="stylesheet" href="/css/theme-color.css" />
-<link rel="stylesheet" href="/css/app.min.css" />
-<link rel="stylesheet" href="/css/custom-body.css" />
-
-
+@*--------*Angular JS* SECTION------*@
 <script src="~/AngScripts/jquery-3.6.0.js"></script>
 <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
 <script src="~/AngScripts/angular.js"></script>
 <script src="~/AngScripts/ngStorage.min.js"></script>
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
-<script src="~/js/select2.min.js"></script>
-<link rel="stylesheet" href="~/css/select2.min.css" />
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-datepicker.min.js"></script>
+@*---------*Angular JS* SECTION-----*@
+<script src="~/AngularDataFunction/AngularDataFunction.js"></script>
+@*<script src="../js/metisMenu.min.js"></script>*@
 
-<script src="../js/metisMenu.min.js"></script>
-<script src="../js/simplebar.min.js"></script>
-<script src="../js/app.js"></script>
-<script>
-    $.noConflict();
-    jQuery(document).ready(function ($) {
-        $(function () {
-            $("#txt_Date").datepicker();
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<link href="~/Content/theme-color.css" rel="stylesheet" />
+<link href="~/Content/app.min.css" rel="stylesheet" />
+<link href="~/Content/custom-body.css" rel="stylesheet" />
+
+@*<script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $(function () {
+                $("#txt_Date").datepicker();
+            });
         });
-    });
-</script>
+    </script>*@
 @{
     if (Request.QueryString["TrnsNo"] != null)
     {
@@ -349,60 +345,58 @@
 
         });
     </script>*@
-<script>
-    $(document).ready(function () {
-        $(".select2").select2({
-            maximumSelectionLength: 3
-        });
-        $(".select2-hide_search").select2({
-            minimumResultsForSearch: Infinity
+
+@*<script src="~/js_new/custom-script.js"></script>*@
+@*<script src="~/js/jquery-3.5.1.min.js"></script>*@
+
+@section Scripts {
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="~/js/select2.min.js"></script>
+    <script src="../js/custom-script.js"></script>
+
+    <script>
+        $.noConflict();
+        jQuery(document).ready(function ($) {
+            $(".select2").select2({
+                maximumSelectionLength: 3
+            });
+            $(".select2-hide_search").select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('#txt_date').attr('readonly', true);
+        $(function () {
+            $("#txt_date").datepicker({
+                dateFormat: "dd-M-yy",
+                @*minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
+                maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,*@
+                changeMonth: true,
+                changeYear: true
+            });
+            });
         });
 
-    });
-</script>
-<script src="~/js_new/custom-script.js"></script>
-<script type="text/javascript">
-    function addLoadEvent(func) {
-        var oldonload = window.onload;
-        if (typeof window.onload != 'function') {
-            window.onload = func;
-        } else {
-            window.onload = function () {
-                if (oldonload) {
-                    oldonload();
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function () {
+                    if (oldonload) {
+                        oldonload();
+                    }
                 }
             }
         }
-    }
-    addLoadEvent(setmenu('7'));
-    addLoadEvent(setentrymenu('1'));
-</script>
+        addLoadEvent(setmenu('7'));
+        addLoadEvent(setentrymenu('1'));
 
-@section Scripts {
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-    <script src="~/AngScripts/OpeningStock.js"></script>
-    <script src="~/js/select2.min.js"></script>
-    <link rel="stylesheet" href="~/css/select2.min.css" />
+    </script>
+    <script src="~/AngScripts/JVEntry.js"></script>
 
 }
-
-<script src="~/AngScripts/JVEntry.js"></script>
-
-<script>
-        $.noConflict();
-        jQuery(document).ready(function ($) {
-            $('#txt_date').attr('readonly', true);
-        $(function () {
-            @*$("#txt_date").datepicker({
-                dateFormat: "dd-M-yy",
-                minDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinFromDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
-                maxDate: new Date(@Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Year, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Month - 1, @Convert.ToDateTime(Convert.ToDateTime(Session["FinToDate"].ToString()).ToString("yyyy/MM/dd")).Day) ,
-                changeMonth: true,
-                changeYear: true
-            });*@
-            });
-        });
-</script>
