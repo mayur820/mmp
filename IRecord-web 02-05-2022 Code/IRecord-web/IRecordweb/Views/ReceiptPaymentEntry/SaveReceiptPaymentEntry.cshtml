@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 @*--------*Angular JS* SECTION------*@
 <script src="~/AngScripts/jquery-3.6.0.js"></script>
 <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
@@ -12,7 +13,6 @@
 @*---------*Angular JS* SECTION-----*@
 <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
 <script src="../js/metisMenu.min.js"></script>
-
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -242,20 +242,14 @@
 </div>
 @section Scripts {
 
-
-    <script src="~/AngScripts/jquery-3.6.0.js"></script>
-    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-    <script src="~/AngScripts/OpeningStock.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
     <script src="~/js/select2.min.js"></script>
-    <link rel="stylesheet" href="~/css/select2.min.css" />
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-datepicker.min.js"></script>
-    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">*@
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="../js/custom-script.js"></script>
+    <script src="~/AngScripts/OpeningStock.js"></script>
 }
 @if (ViewBag.Message != null)
 {
@@ -267,14 +261,14 @@
 }
 
 <script>
-        $(document).ready(function () {
-            $("#txt_Date").datepicker({
-                dateFormat: "dd-M-yyyy",
-                changeMonth: true,
-                changeYear: true,
-            });
+    $(document).ready(function () {
+        $("#txt_Date").datepicker({
+            dateFormat: "dd-M-yy",
+            changeMonth: true,
+            changeYear: true,
         });
-    </script>
+    });
+</script>
 
 @*<script>
         $(function () {

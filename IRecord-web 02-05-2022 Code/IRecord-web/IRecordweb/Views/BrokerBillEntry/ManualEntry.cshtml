@@ -58,377 +58,384 @@
 </head>
 <body class="inner_body">
     <form ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="" method="POST" action="">
-        <div id="layout-wrapper">
+      
 
 
-            <div class="container-fluid">
+    </form>
 
-                <div class="display_adds_parent">
-                    <div class="display_adds_view_box display_adds_2_col">
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0">Broker Bill</h4>
-                                    <div class="page-title-right">
-                                        <a href="/BrokerBillEntry/BrokerBillList" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
+    <div ng-app="myApp" class="card">
+        <div ng-controller="myctrn" ng-init="PageLoad()" class="card-body">
+            <div id="layout-wrapper">
+
+
+                <div class="container-fluid">
+
+                    <div class="display_adds_parent">
+                        <div class="display_adds_view_box display_adds_2_col">
+                            <!-- start page title -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                                        <h4 class="mb-0">Broker Bill</h4>
+                                        <div class="page-title-right">
+                                            <a href="/BrokerBillEntry/BrokerBillList" class="px-2 btn btn-dark"><i class="las la-angle-left font-size-18"></i> Back to List</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end page title -->
-                        <!-- Working Area Start -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row form_2">
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlSegment" class="mb-0">Segment:</label>
-                                        <select id="ddlSegment" ng-model="ddlSegment" ng-change="changeSegment()" class="form-select select2">
+                            <!-- end page title -->
+                            <!-- Working Area Start -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row form_2">
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlSegment" class="mb-0">Segment:</label>
+                                            <select id="ddlSegment" ng-model="ddlSegment" ng-change="changeSegment()" class="form-select select2">
 
-                                            <option value="" selected="selected">Select Segment Type</option>
-                                            <option value="0">Equity</option>
-                                            <option value="1">F & O</option>
-                                            <option value="3">MCX</option>
-                                            <option value="4">Currency</option>
-                                            <option value="5">NCDEX</option>
+                                                <option value="" selected="selected">Select Segment Type</option>
+                                                <option value="0">Equity</option>
+                                                <option value="1">F & O</option>
+                                                <option value="3">MCX</option>
+                                                <option value="4">Currency</option>
+                                                <option value="5">NCDEX</option>
 
 
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_Date" class="mb-0">Date:</label>
-                                        <input id="txt_Date" ng-model="txtDate" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlBroker" class="mb-0">Broker:</label>
-                                        <div class="input-group tbl_int_grp">
-                                            <select id="ddlBroker" ng-model="ddlBroker" ng-options="v.ID as v.NAME for v in Brokers" ng-change="bindbills()" class="form-select select2">
-                                                <option ng-option value="">Select Broker</option>
                                             </select>
-                                            <a style="min-width: 80px;" href="#modal_broker" class="btn btn-outline-primary" data-bs-toggle="modal">
-                                                <i class="la la-plus"></i> Add
-                                            </a>
                                         </div>
-                                    </div>
-                                    <div id="div_demate" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="Demat_Ac_Id" class="mb-0">Demat:</label>
-                                        <div class="input-group tbl_int_grp">
-                                            <select id="Demat_Ac_Id" ng-model="Demat_Ac_Id" class="form-select select2">
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_Date" class="mb-0">Date:</label>
+                                            <input id="txt_Date" ng-model="txtDate" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlBroker" class="mb-0">Broker:</label>
+                                            <div class="input-group tbl_int_grp">
+                                                <select id="ddlBroker" ng-model="ddlBroker" ng-options="v.ID as v.NAME for v in Brokers" ng-change="bindbills()" class="form-select select2">
+                                                    <option ng-option value="">Select Broker</option>
+                                                </select>
+                                                <a style="min-width: 80px;" href="#modal_broker" class="btn btn-outline-primary" data-bs-toggle="modal">
+                                                    <i class="la la-plus"></i> Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div id="div_demate" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="Demat_Ac_Id" class="mb-0">Demat:</label>
+                                            <div class="input-group tbl_int_grp">
+                                                <select id="Demat_Ac_Id" ng-model="Demat_Ac_Id" class="form-select select2">
 
-                                                <option ng-option value="">Select Demat A/c</option>
-                                                <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                                                    <option ng-option value="">Select Demat A/c</option>
+                                                    <option data-ng-repeat="Demate in  Demates" class="option" value="{{Demate.ID}}">{{Demate.NAME}}</option>
+                                                </select>
+                                                <a style="min-width: 80px;" href="#modal_add" class="btn btn-outline-primary" data-bs-toggle="modal">
+                                                    <i class="la la-plus"></i> Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_SettlementNo" class="mb-0">Settlement No:</label>
+                                            <input type="text" id="txt_SettlementNo" ng-model="txt_SettlementNo" class="form-control" placeholder="Enter Settlement No" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_BillNo" class="mb-0">Bill No:</label>
+                                            <input type="text" id="txt_BillNo" ng-model="txt_BillNo" class="form-control" placeholder="Enter Bill No" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlConsultant" class="mb-0">Consultant:</label>
+                                            <select id="ddlConsultant" ng-model="ddlConsultant" ng-options="v.ID as v.NAME for v in Consultants" class="form-control select2">
+                                                <option ng-option value="">Select Consultant</option>
                                             </select>
-                                            <a style="min-width: 80px;" href="#modal_add" class="btn btn-outline-primary" data-bs-toggle="modal">
-                                                <i class="la la-plus"></i> Add
-                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_SettlementNo" class="mb-0">Settlement No:</label>
-                                        <input type="text" id="txt_SettlementNo" ng-model="txt_SettlementNo" class="form-control" placeholder="Enter Settlement No" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_BillNo" class="mb-0">Bill No:</label>
-                                        <input type="text" id="txt_BillNo" ng-model="txt_BillNo" class="form-control" placeholder="Enter Bill No" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlConsultant" class="mb-0">Consultant:</label>
-                                        <select id="ddlConsultant" ng-model="ddlConsultant" ng-options="v.ID as v.NAME for v in Consultants" class="form-control select2">
-                                            <option ng-option value="">Select Consultant</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlScript_Id" class="mb-0">Script Name:</label>
-                                        <select id="ddlScript_Id" ng-model="ddlScript_Id" class="form-select select2">
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlScript_Id" class="mb-0">Script Name:</label>
+                                            <select id="ddlScript_Id" ng-model="ddlScript_Id" class="form-select select2">
 
-                                            <option ng-option value="">Select Script</option>
-                                            <option data-ng-repeat="data in  scriptmaster" class="option" value="{{data.ID}}">{{data.NAME}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="Type" class="mb-0">Type:</label>
-                                        <select id="Type" ng-model="Type" class="form-control select2">
-                                            <option value="">Select Type</option>
-                                            <option value="Sold">Sold</option>
-                                            <option value="Bought">Bought</option>
-                                        </select>
-                                    </div>
-                                    <div id="div_ExpiryDate" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_BillNo" class="mb-0">Expiry Date:</label>
-                                        <input type="text" id="txt_ExpiryDate" ng-model="txt_ExpiryDate" class="form-control datepicker" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
-                                    </div>
-                                    <div id="div_StockType" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlStockType" class="mb-0">Stock Type:</label>
-                                        <select id="ddlStockType" ng-model="ddlStockType" class="form-control select2">
-                                            <option value="">Select Stock Type</option>
-                                            <option value=" "></option>
-                                            <option value="BF">BF</option>
-                                            <option value="CF">CF</option>
-                                        </select>
-                                    </div>
-                                    <div id="div_OptionType" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlOptionType" class="mb-0">Option Type:</label>
-                                        <select id="ddlOptionType" ng-model="ddlOptionType" class="form-control select2" ng-change="StrikeShow()">
-                                            <option value="">Select Option Type</option>
-                                            <option value=" "></option>
-                                            <option value="CA-CALL">CA-CALL</option>
-                                            <option value="PA-PUT">PA-PUT</option>
-                                            <option value="CE-CALL">CE-CALL</option>
-                                            <option value="PA-PUT">PE-PUT</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div id="div_HoldingType" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="ddlHoldingType" class="mb-0">Holding Type:</label>
-                                        <select id="ddlHoldingType" ng-model="ddlHoldingType" class="form-control select2">
-                                            <option value="">Select Holding Type</option>
-                                            <option value="0">I-Share Invenstment</option>
-                                            <option value="1">T-Stock In Trade</option>
-                                        </select>
-                                    </div>
-
-                                    <div id="divIntraDays" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="chk_intraday" class="mb-0">Intra Day?:</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input ml-0" ng-model="chk_intraday" type="checkbox" id="chk_intraday">
-                                            <label class="form-check-label" for="check_1"></label>
+                                                <option ng-option value="">Select Script</option>
+                                                <option data-ng-repeat="data in  scriptmaster" class="option" value="{{data.ID}}">{{data.NAME}}</option>
+                                            </select>
                                         </div>
-                                    </div>
-
-
-                                    <div id="div_StrikePrice" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_StrikePrice" class="mb-0">Strike Price:</label>
-                                        <input type="text" id="txt_StrikePrice" ng-model="txt_StrikePrice" class="form-control" placeholder="Enter Strike Price" />
-                                    </div>
-                                    <div id="div_Lot" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_Lot" class="mb-0">Lot:</label>
-                                        <input type="text" id="txt_Lot" ng-model="txt_Lot" class="form-control" ng-change="fn_AllCalculation()" placeholder="Enter Lot" autocomplete="off" />
-                                    </div>
-                                    <div id="div_LotNo" class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_LotNo" class="mb-0">Lot Qty:</label>
-                                        <input type="text" id="txt_LotNo" ng-model="txt_LotNo" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Lot Qty" autocomplete="off" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_Quantity" class="mb-0">Quantity:</label>
-                                        <input type="text" id="txt_Quantity" ng-change="fn_AllCalculation()" ng-model="txt_Quantity" class="form-control" placeholder="Enter Quantity" autocomplete="off" />
-                                    </div>
-                                    <div id="divdemo" class="displayNO col-sm-12 col-md-6 mb-3 d-flex">
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_GrossRate" class="mb-0">Gross Rate:</label>
-                                        <input type="text" id="txt_GrossRate" ng-change="fn_AllCalculation()" ng-model="txt_GrossRate" class="form-control" placeholder="Enter Gross Rate" autocomplete="off" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_GrossAmount" class="mb-0">Gross Amount:</label>
-                                        <input type="text" id="txt_GrossAmount" ng-change="fn_AllCalculation()" ng-model="txt_GrossAmount" class="form-control" placeholder="Enter Gross Amount" autocomplete="off" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_BrokerageperUnit" class="mb-0">Brokerage per Unit:</label>
-                                        <input type="text" id="txt_BrokerageperUnit" ng-change="fn_AllCalculation()" ng-model="txt_BrokerageperUnit" class="form-control" placeholder="Enter Brokerage per Unit" autocomplete="off" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_BrokerageAmount" class="mb-0">Brokerage Amount:</label>
-                                        <input type="text" id="txt_BrokerageAmount" ng-change="fn_AllCalculation()" ng-model="txt_BrokerageAmount" class="form-control" placeholder="Enter Brokerage Amount" autocomplete="off" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_NetRate" class="mb-0">Net Rate:</label>
-                                        <input type="text" id="txt_NetRate" ng-model="txt_NetRate" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Net Rate" autocomplete="off" />  @*ng-change="fn_NetRate()"*@
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 mb-3 d-flex">
-                                        <label for="txt_NetAmount" class="mb-0">Net Amount:</label>
-                                        <input type="text" id="txt_NetAmount" ng-model="txt_NetAmount" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Net Amount" autocomplete="off" />
-                                    </div>
-
-
-                                    <div class="col-sm-12">
-                                        <div class="text-center mt-3 mb-3">
-                                            <a href="javascript:;" ng-click="FnAdd()" class="px-2 btn btn-outline-primary"><i class="las la-plus font-size-18"></i> Add</a>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="Type" class="mb-0">Type:</label>
+                                            <select id="Type" ng-model="Type" class="form-control select2">
+                                                <option value="">Select Type</option>
+                                                <option value="Sold">Sold</option>
+                                                <option value="Bought">Bought</option>
+                                            </select>
                                         </div>
-                                        <div class="table-responsive ">
-                                            <table id="TBL_Equity" class="table table-hover sr-table table-bordered mb-0">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Script Name</th>
-                                                        <th>Intra Day?</th>
-                                                        <th>Type</th>
-                                                        <th>Quantity</th>
-                                                        <th>Gross Rate</th>
-                                                        <th>Gross Amount</th>
-                                                        <th>Brokerage per Unit</th>
-                                                        <th>Brokerage Amount</th>
-                                                        <th>Net Rate</th>
-                                                        <th>Net Amount</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="data in Multimodel">
-                                                        <td>{{$index+1}}</td>
-                                                        <td>{{data.Scripttext}}</td>
-                                                        @*<td>{{data.chk_intraday}}</td>*@
-                                                        <td><input class="form-check-input ml-0" ng-model="data.chk_intraday" type="checkbox" id="chk_intraday1"></td>
-                                                        <td>{{data.Type}}</td>
-                                                        <td>{{data.txt_Quantity}}</td>
-                                                        <td>{{data.txt_GrossRate}}</td>
-                                                        <td>{{data.txt_GrossAmount}}</td>
-                                                        <td>{{data.txt_BrokerageperUnit}}</td>
-                                                        <td>{{data.txt_BrokerageAmount}}</td>
-                                                        <td>{{data.txt_NetRate}}</td>
-                                                        <td>{{data.txt_NetAmount}}</td>
-                                                        <td>
-                                                            <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
-                                                        </td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
+                                        <div id="div_ExpiryDate" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_BillNo" class="mb-0">Expiry Date:</label>
+                                            <input type="text" id="txt_ExpiryDate" ng-model="txt_ExpiryDate" class="form-control datepicker" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+                                        </div>
+                                        <div id="div_StockType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlStockType" class="mb-0">Stock Type:</label>
+                                            <select id="ddlStockType" ng-model="ddlStockType" class="form-control select2">
+                                                <option value="">Select Stock Type</option>
+                                                <option value=" "></option>
+                                                <option value="BF">BF</option>
+                                                <option value="CF">CF</option>
+                                            </select>
+                                        </div>
+                                        <div id="div_OptionType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlOptionType" class="mb-0">Option Type:</label>
+                                            <select id="ddlOptionType" ng-model="ddlOptionType" class="form-control select2" ng-change="StrikeShow()">
+                                                <option value="">Select Option Type</option>
+                                                <option value=" "></option>
+                                                <option value="CA-CALL">CA-CALL</option>
+                                                <option value="PA-PUT">PA-PUT</option>
+                                                <option value="CE-CALL">CE-CALL</option>
+                                                <option value="PA-PUT">PE-PUT</option>
+                                            </select>
+                                        </div>
 
 
+                                        <div id="div_HoldingType" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="ddlHoldingType" class="mb-0">Holding Type:</label>
+                                            <select id="ddlHoldingType" ng-model="ddlHoldingType" class="form-control select2">
+                                                <option value="">Select Holding Type</option>
+                                                <option value="0">I-Share Invenstment</option>
+                                                <option value="1">T-Stock In Trade</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="divIntraDays" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="chk_intraday" class="mb-0">Intra Day?:</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input ml-0" ng-model="chk_intraday" type="checkbox" id="chk_intraday">
+                                                <label class="form-check-label" for="check_1"></label>
+                                            </div>
+                                        </div>
 
 
-                                            <table id="TBL_Other" class="table table-hover sr-table table-bordered mb-0">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Script Name</th>
-                                                        <th>Type</th>
-                                                        <th>Stock Type</th>
-                                                        <th>Option Type</th>
-                                                        <th>Expiry Date</th>
-                                                        <th>Strike Price</th>
-                                                        <th>Lot</th>
-                                                        <th>Lot Qty</th>
-                                                        <th>Quantity</th>
-                                                        <th>Gross Rate</th>
-                                                        <th>Gross Amount</th>
-                                                        <th>Brokerage per Unit</th>
-                                                        <th>Brokerage Amount</th>
-                                                        <th>Net Rate</th>
-                                                        <th>Net Amount</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="data in Multimodel">
-                                                        <td>{{$index+1}}</td>
-                                                        <td>{{data.Scripttext}}</td>
-                                                        <td>{{data.Type}}</td>
-                                                        <td>{{data.StockTypetext}}</td>
-                                                        <td>{{data.OptionTypetext}}</td>
-                                                        <td>{{data.ExpiryDate}}</td>
-                                                        <td>{{data.StrikePrice}}</td>
-                                                        <td>{{data.Lott}}</td>
-                                                        <td>{{data.LotQty}}</td>
-                                                        <td>{{data.txt_Quantity}}</td>
-                                                        <td>{{data.txt_GrossRate}}</td>
-                                                        <td>{{data.txt_GrossAmount}}</td>
-                                                        <td>{{data.txt_BrokerageperUnit}}</td>
-                                                        <td>{{data.txt_BrokerageAmount}}</td>
-                                                        <td>{{data.txt_NetRate}}</td>
-                                                        <td>{{data.txt_NetAmount}}</td>
-                                                        <td>
-                                                            <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
-                                                        </td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
+                                        <div id="div_StrikePrice" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_StrikePrice" class="mb-0">Strike Price:</label>
+                                            <input type="text" id="txt_StrikePrice" ng-model="txt_StrikePrice" class="form-control" placeholder="Enter Strike Price" />
+                                        </div>
+                                        <div id="div_Lot" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_Lot" class="mb-0">Lot:</label>
+                                            <input type="text" id="txt_Lot" ng-model="txt_Lot" class="form-control" ng-change="fn_AllCalculation()" placeholder="Enter Lot" autocomplete="off" />
+                                        </div>
+                                        <div id="div_LotNo" class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_LotNo" class="mb-0">Lot Qty:</label>
+                                            <input type="text" id="txt_LotNo" ng-model="txt_LotNo" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Lot Qty" autocomplete="off" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_Quantity" class="mb-0">Quantity:</label>
+                                            <input type="text" id="txt_Quantity" ng-change="fn_AllCalculation()" ng-model="txt_Quantity" class="form-control" placeholder="Enter Quantity" autocomplete="off" />
+                                        </div>
+                                        <div id="divdemo" class="displayNO col-sm-12 col-md-6 mb-3 d-flex">
 
                                         </div>
-                                    </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_GrossRate" class="mb-0">Gross Rate:</label>
+                                            <input type="text" id="txt_GrossRate" ng-change="fn_AllCalculation()" ng-model="txt_GrossRate" class="form-control" placeholder="Enter Gross Rate" autocomplete="off" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_GrossAmount" class="mb-0">Gross Amount:</label>
+                                            <input type="text" id="txt_GrossAmount" ng-change="fn_AllCalculation()" ng-model="txt_GrossAmount" class="form-control" placeholder="Enter Gross Amount" autocomplete="off" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_BrokerageperUnit" class="mb-0">Brokerage per Unit:</label>
+                                            <input type="text" id="txt_BrokerageperUnit" ng-change="fn_AllCalculation()" ng-model="txt_BrokerageperUnit" class="form-control" placeholder="Enter Brokerage per Unit" autocomplete="off" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_BrokerageAmount" class="mb-0">Brokerage Amount:</label>
+                                            <input type="text" id="txt_BrokerageAmount" ng-change="fn_AllCalculation()" ng-model="txt_BrokerageAmount" class="form-control" placeholder="Enter Brokerage Amount" autocomplete="off" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_NetRate" class="mb-0">Net Rate:</label>
+                                            <input type="text" id="txt_NetRate" ng-model="txt_NetRate" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Net Rate" autocomplete="off" />  @*ng-change="fn_NetRate()"*@
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 mb-3 d-flex">
+                                            <label for="txt_NetAmount" class="mb-0">Net Amount:</label>
+                                            <input type="text" id="txt_NetAmount" ng-model="txt_NetAmount" ng-change="fn_AllCalculation()" class="form-control" placeholder="Enter Net Amount" autocomplete="off" />
+                                        </div>
 
-                                    @* Expense Block - Start *@
-                                    <div class="row mt-5">
-                                        <div class="col-sm-12 col-md-6">
 
-                                            <div class="table-responsive exp_addless tblExpense">
-                                                <table class="table sar-table table-hover table-bordered mb-0  tblExpense">
-                                                    <thead>
+                                        <div class="col-sm-12">
+                                            <div class="text-center mt-3 mb-3">
+                                                <a href="javascript:;" ng-click="FnAdd()" class="px-2 btn btn-outline-primary"><i class="las la-plus font-size-18"></i> Add</a>
+                                            </div>
+                                            <div class="table-responsive ">
+                                                <table id="TBL_Equity" class="table table-hover sr-table table-bordered mb-0">
+                                                    <thead class="table-light">
                                                         <tr>
-                                                            <th>Expenses Name</th>
-                                                            <th>Amount</th>
-                                                            <th>Add/Less</th>
+                                                            <th>#</th>
+                                                            <th>Script Name</th>
+                                                            <th>Intra Day?</th>
+                                                            <th>Type</th>
+                                                            <th>Quantity</th>
+                                                            <th>Gross Rate</th>
+                                                            <th>Gross Amount</th>
+                                                            <th>Brokerage per Unit</th>
+                                                            <th>Brokerage Amount</th>
+                                                            <th>Net Rate</th>
+                                                            <th>Net Amount</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="tblExpense">
-                                                        <tr ng-repeat="Exp in  Expense">
-                                                            @*<td class="whitespace_nowrap">{{Exp.EXP_NAME}}</td>*@
+                                                    <tbody>
+                                                        <tr ng-repeat="data in Multimodel">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{data.Scripttext}}</td>
+                                                            @*<td>{{data.chk_intraday}}</td>*@
+                                                            <td><input class="form-check-input ml-0" ng-model="data.chk_intraday" type="checkbox" id="chk_intraday1"></td>
+                                                            <td>{{data.Type}}</td>
+                                                            <td>{{data.txt_Quantity}}</td>
+                                                            <td>{{data.txt_GrossRate}}</td>
+                                                            <td>{{data.txt_GrossAmount}}</td>
+                                                            <td>{{data.txt_BrokerageperUnit}}</td>
+                                                            <td>{{data.txt_BrokerageAmount}}</td>
+                                                            <td>{{data.txt_NetRate}}</td>
+                                                            <td>{{data.txt_NetAmount}}</td>
                                                             <td>
-                                                                {{Exp.EXP_NAME}}
+                                                                <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
                                                             </td>
-                                                            <td>
-                                                                <input type="text" class="form-control" ng-change="Calculate_total_exp()" ng-model="Exp.AMOUNT" placeholder="Amount" />
-                                                            </td>
-                                                            <td class="d-flex justify-content-center">
-                                                                <select id="ddlOptionType" ng-model="Exp.ADDLESS" class="form-control">
-                                                                    <option value="A" selected>Add</option>
-                                                                    <option value="L">Less</option>
-                                                                </select>
-                                                            </td>
+
                                                         </tr>
 
                                                     </tbody>
                                                 </table>
+
+
+
+
+                                                <table id="TBL_Other" class="table table-hover sr-table table-bordered mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Script Name</th>
+                                                            <th>Type</th>
+                                                            <th>Stock Type</th>
+                                                            <th>Option Type</th>
+                                                            <th>Expiry Date</th>
+                                                            <th>Strike Price</th>
+                                                            <th>Lot</th>
+                                                            <th>Lot Qty</th>
+                                                            <th>Quantity</th>
+                                                            <th>Gross Rate</th>
+                                                            <th>Gross Amount</th>
+                                                            <th>Brokerage per Unit</th>
+                                                            <th>Brokerage Amount</th>
+                                                            <th>Net Rate</th>
+                                                            <th>Net Amount</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="data in Multimodel">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{data.Scripttext}}</td>
+                                                            <td>{{data.Type}}</td>
+                                                            <td>{{data.StockTypetext}}</td>
+                                                            <td>{{data.OptionTypetext}}</td>
+                                                            <td>{{data.ExpiryDate}}</td>
+                                                            <td>{{data.StrikePrice}}</td>
+                                                            <td>{{data.Lott}}</td>
+                                                            <td>{{data.LotQty}}</td>
+                                                            <td>{{data.txt_Quantity}}</td>
+                                                            <td>{{data.txt_GrossRate}}</td>
+                                                            <td>{{data.txt_GrossAmount}}</td>
+                                                            <td>{{data.txt_BrokerageperUnit}}</td>
+                                                            <td>{{data.txt_BrokerageAmount}}</td>
+                                                            <td>{{data.txt_NetRate}}</td>
+                                                            <td>{{data.txt_NetAmount}}</td>
+                                                            <td>
+                                                                <a href="javascript:;" ng-click="FndeleteItems(data)" class="px-2 btn btn-outline-danger"><i class="las la-trash-alt font-size-18"></i></a>
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
                                             </div>
                                         </div>
-                                    </div>
-                                    @* Expense Block - End *@
 
-                                    <div class="mt-4 final_label">
-                                        <ul class="d-flex justify-content-center flex-wrap">
-                                            <li id="Eqvar1" class="d-flex align-content-center"><span class="px-1">Share's Investment</span><strong>{{TotalInInvestment}}</strong></li>
-                                            <li id="Eqvar2" class="d-flex align-content-center"><span class="px-1">Stock in Trade</span><strong>{{TotalInTrade}}</strong></li>
-                                            <li class="d-flex align-content-center"><span class="px-1">Brokerage</span><strong>{{TotalOfBrokAmt}}</strong></li>
-                                            <li class="d-flex align-content-center"><span class="px-1">Expenses</span><strong>{{TotalExpenses}}</strong></li>
-                                            <li class="d-flex align-content-center"><span class="px-1">Gross Amount</span><strong>{{TotalGrossAmount}}</strong></li>
-                                            <li class="d-flex align-content-center"><span class="px-1">Net Amount</span><strong>{{TotalFinal}}</strong></li>
+                                        @* Expense Block - Start *@
+                                        <div class="row mt-5">
+                                            <div class="col-sm-12 col-md-6">
 
-                                        </ul>
-                                    </div>
+                                                <div class="table-responsive exp_addless tblExpense">
+                                                    <table class="table sar-table table-hover table-bordered mb-0  tblExpense">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Expenses Name</th>
+                                                                <th>Amount</th>
+                                                                <th>Add/Less</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tblExpense">
+                                                            <tr ng-repeat="Exp in  Expense">
+                                                                @*<td class="whitespace_nowrap">{{Exp.EXP_NAME}}</td>*@
+                                                                <td>
+                                                                    {{Exp.EXP_NAME}}
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" class="form-control" ng-change="Calculate_total_exp()" ng-model="Exp.AMOUNT" placeholder="Amount" />
+                                                                </td>
+                                                                <td class="d-flex justify-content-center">
+                                                                    <select id="ddlOptionType" ng-model="Exp.ADDLESS" class="form-control">
+                                                                        <option value="A" selected>Add</option>
+                                                                        <option value="L">Less</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
 
-                                    <div class="col-sm-12 text-center mt-3">
-                                        <button ng-click="FnReset()" type="button" class="btn btn-secondary">Reset</button>
-                                        <button ng-click="FnFinalSubmit()" type="button" class="btn btn-primary">{{btntext}}</button>
-                                        <div style="display:none;" class="loader-wrapper" id="loader-1">
-                                            <div id="loader"></div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @* Expense Block - End *@
+
+                                        <div class="mt-4 final_label">
+                                            <ul class="d-flex justify-content-center flex-wrap">
+                                                <li id="Eqvar1" class="d-flex align-content-center"><span class="px-1">Share's Investment</span><strong>{{TotalInInvestment}}</strong></li>
+                                                <li id="Eqvar2" class="d-flex align-content-center"><span class="px-1">Stock in Trade</span><strong>{{TotalInTrade}}</strong></li>
+                                                <li class="d-flex align-content-center"><span class="px-1">Brokerage</span><strong>{{TotalOfBrokAmt}}</strong></li>
+                                                <li class="d-flex align-content-center"><span class="px-1">Expenses</span><strong>{{TotalExpenses}}</strong></li>
+                                                <li class="d-flex align-content-center"><span class="px-1">Gross Amount</span><strong>{{TotalGrossAmount}}</strong></li>
+                                                <li class="d-flex align-content-center"><span class="px-1">Net Amount</span><strong>{{TotalFinal}}</strong></li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-12 text-center mt-3">
+                                            <button ng-click="FnReset()" type="button" class="btn btn-secondary">Reset</button>
+                                            <button ng-click="FnFinalSubmit()" type="button" class="btn btn-primary">{{btntext}}</button>
+                                            <div style="display:none;" class="loader-wrapper" id="loader-1">
+                                                <div id="loader"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="display_adds display_adds_right text-center">
-                        <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" class="mobile_adds mb-3" alt="" />
-                        <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" class="desktop_adds" alt="" />
-                        <!-- <img src="https://via.placeholder.com/160x600.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" /> -->
-                    </div>
-                </div>
-            </div> <!-- container-fluid -->
-            <!-- End Page-content -->
-
-
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> <i class="las la-copyright"></i> iRecord.
+                        <div class="display_adds display_adds_right text-center">
+                            <img src="https://via.placeholder.com/970x90.png/007BFF/FFFFFF?text=Irecord+Ads" class="mobile_adds mb-3" alt="" />
+                            <img src="https://via.placeholder.com/160x601.png/007BFF/FFFFFF?text=Irecord+Ads" class="desktop_adds" alt="" />
+                            <!-- <img src="https://via.placeholder.com/160x600.png/007BFF/FFFFFF?text=Irecord+Ads" alt="" /> -->
                         </div>
                     </div>
-                </div>
-            </footer>
+                </div> <!-- container-fluid -->
+                <!-- End Page-content -->
 
-            <!-- end main content-->
 
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> <i class="las la-copyright"></i> iRecord.
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+                <!-- end main content-->
+
+            </div>
+            <!-- END layout-wrapper -->
+            <!-- Right bar overlay-->
+            <div class="rightbar-overlay"></div>
         </div>
-        <!-- END layout-wrapper -->
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
-
 
         <!-- Modal 1 -->
         <div class="modal fade" id="modal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -476,7 +483,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 
     @section Scripts {
         <script src="~/AngScripts/jquery-3.6.0.js"></script>

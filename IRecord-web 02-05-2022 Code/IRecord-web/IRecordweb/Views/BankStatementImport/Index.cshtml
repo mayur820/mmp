@@ -5,7 +5,6 @@
 }
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="#">
-<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"> -->
 <!-- <link rel="stylesheet" href="~/css/bootstrap.min.v4.css">
@@ -33,8 +32,7 @@
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
 @*---------*Angular JS* SECTION-----*@
 <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-<script src="../js/metisMenu.min.js"></script>
-<script src="~/js/select2.min.js"></script>
+@*<script src="../js/metisMenu.min.js"></script>*@
 
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
@@ -144,16 +142,19 @@
 
 
 @section Scripts {
+    <script src="~/AngScripts/jquery-3.6.0.js"></script>
     @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
     @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="~/js/select2.min.js"></script>
     <script src="../js/custom-script.js"></script>
+
     <script src="~/AngScripts/OpeningStock.js"></script>
     <script>
 
-              $.noConflict();
+             // $.noConflict();
         jQuery(document).ready(function ($) {
 
             var StartDate =@Session["FinFromDate"].ToString();
@@ -173,7 +174,6 @@
             //    changeMonth: true,
             //    changeYear: true
             //});
-        });
             $("#BankNameId").focus();
             $(".select2").select2({
                 maximumSelectionLength: 3
@@ -219,6 +219,7 @@
 
         });
 
+        });
 
         // PopulateDropDownList();
 
