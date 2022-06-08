@@ -5,18 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - iRecord</title>
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")*@
 
-    <link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
-    <link href="~/Content/line-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/theme-color.css" rel="stylesheet" />
-    <link href="~/Content/app.min.css" rel="stylesheet" />
-    <link href="~/Content/custom-body.css" rel="stylesheet" />
-
-    <!--<link href="~/Content/MyStyle.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />-->
+    @Styles.Render("~/Content/basiccss")
+    @*<link href="~/Content/MyStyle.css" rel="stylesheet" />*@
     @*--For Multiselect dropdown*@
 
 
@@ -319,14 +310,10 @@
     {
         @RenderBody()
     }
-
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script src="~/Scripts/popper.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.v4.js"></script>
-    <script src="~/Scripts/metisMenu.min.js"></script>
-    @*<script src="~/Scripts/simplebar.min.js"></script>*@
-    <script src="~/js/simplebar.min.js"></script>@*05/05/2022*@
-    <script src="~/Scripts/app.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/basescript")
+    @Scripts.Render("~/bundles/basescript1")
 
     <script src="~/Scripts/chosen.jquery.js"></script>
     @RenderSection("scripts", required: false)
