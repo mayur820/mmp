@@ -13,25 +13,7 @@
 
 
     <title>Consultant Master :: iRecord</title>
-
-    @*--------*Angular JS* SECTION------*@
-    <script src="~/AngScripts/jquery-3.6.0.js"></script>
-    <script src="~/AngScripts/jquery-3.6.0.min.js"></script>
-    <script src="~/AngScripts/angular.js"></script>
-    <script src="~/AngScripts/ngStorage.min.js"></script>
-    @*<script src="~/AngScripts/ngStorage.min.js"></script>*@
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
-    @*---------*Angular JS* SECTION-----*@
-    <script src="~/AngularDataFunction/AngularDataFunction.js"></script>
-    <script src="../js/metisMenu.min.js"></script>
-
-    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.v4.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link href="~/Content/select2.min.css" rel="stylesheet" />
-    <link href="~/Content/theme-color.css" rel="stylesheet" />
-    <link href="~/Content/app.min.css" rel="stylesheet" />
-    <link href="~/Content/custom-body.css" rel="stylesheet" />
+ 
 
     <style>
         /*.ui-datepicker {
@@ -57,12 +39,6 @@
     </style>
 </head>
 <body class="inner_body">
-    <form ng-app="myApp" ng-controller="myctrn" ng-init="PageLoad()" id="" class="" method="POST" action="">
-      
-
-
-    </form>
-
     <div ng-app="myApp" class="card">
         <div ng-controller="myctrn" ng-init="PageLoad()" class="card-body">
             <div id="layout-wrapper">
@@ -486,13 +462,9 @@
     </div>
 
     @section Scripts {
-        <script src="~/AngScripts/jquery-3.6.0.js"></script>
-        @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+     
         <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
-        @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
-        @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
-        <script src="~/js/select2.min.js"></script>
         <script src="../js/custom-script.js"></script>
         @if (ViewBag.Message != null)
         {
